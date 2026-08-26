@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = 'pt' as const;
+const t = useTranslations(lang);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const terms = (await getCollection('glossario')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'pt'));
+---
+
+<BaseLayout lang={lang} title={t('glossario.title')} description={t('glossario.subtitle')}>
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <header class="mb-8">
+      <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">{t('glossario.title')}</h1>
+      <p class="mt-2 text-ink-700">{t('glossario.subtitle')}</p>
+    </header>
+
+    <input
+      id="glossary-search"
+      type="search"
+      placeholder={t('glossario.searchPlaceholder')}
+      class="w-full rounded border border-ink-200 px-4 py-2.5 text-ink-950 placeholder:text-ink-400 focus:border-ember-500 focus:outline-none"
+      aria-label={t('glossario.searchPlaceholder')}
+    />
+
+    <ul id="glossary-list" class="mt-6 divide-y divide-ink-100">
+      {terms.map((term) => (
+        <li data-term-name={term.data.term.toLowerCase()} data-term-def={term.data.shortDefinition.toLowerCase()}>
+          <a href={`${base}/${lang}/glossario/${term.id}/`} class="block py-4 hover:bg-ink-50">
+            <p class="text-xs font-semibold uppercase tracking-wider text-ember-600">{term.data.category}</p>
+            <h2 class="mt-1 font-serif-editorial text-xl font-bold text-ink-950">{term.data.term}</h2>
+            <p class="mt-1 text-sm text-ink-600">{term.data.shortDefinition}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <p id="glossary-empty" class="mt-6 hidden text-ink-500">{t('glossario.noResults')}</p>
+
+    <AdSlot placement="in-article" class="mt-10" />
+  </div>
+</BaseLayout>
+
+<script>
+  const input = document.getElementById('glossary-search') as HTMLInputElement | null;
+  const items = Array.from(document.querySelectorAll<HTMLLIElement>('#glossary-list > li'));
+  const emptyState = document.getElementById('glossary-empty');
+
+  input?.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    for (const item of items) {
+      const matches =
+        !query ||
+        item.dataset.termName?.includes(query) ||
+        item.dataset.termDef?.includes(query);
+      item.hidden = !matches;
+      if (matches) visibleCount++;
+    }
+
+    emptyState?.classList.toggle('hidden', visibleCount !== 0);
+  });
+</script>

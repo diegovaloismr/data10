@@ -1,0 +1,59 @@
+---
+// Gráfico de barras comparando xG (gols esperados) x gols reais em 10 partidas.
+// Dados fictícios (mock) — servem de base para plugar dados reais depois.
+const matches = ['J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J8', 'J9', 'J10'];
+const xgValues = [1.2, 0.8, 2.1, 1.5, 0.6, 1.9, 1.1, 2.4, 0.9, 1.7];
+const goalsValues = [2, 0, 3, 1, 1, 2, 1, 1, 0, 3];
+
+const chartData = JSON.stringify({ matches, xgValues, goalsValues });
+---
+
+<div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="xg-per-match" data-chart-payload={chartData}>
+  <canvas height="280" role="img" aria-label="Gráfico de barras comparando xG e gols reais em dez partidas"></canvas>
+</div>
+
+<script>
+  import Chart from 'chart.js/auto';
+
+  const wrappers = document.querySelectorAll<HTMLElement>('[data-chart="xg-per-match"]');
+
+  for (const wrapper of wrappers) {
+    const canvas = wrapper.querySelector('canvas');
+    const payload = wrapper.dataset.chartPayload;
+    if (!canvas || !payload) continue;
+
+    const { matches, xgValues, goalsValues } = JSON.parse(payload);
+
+    new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: matches,
+        datasets: [
+          {
+            label: 'xG (gols esperados)',
+            data: xgValues,
+            backgroundColor: '#7686a8',
+            borderRadius: 4,
+          },
+          {
+            label: 'Gols reais',
+            data: goalsValues,
+            backgroundColor: '#d1590f',
+            borderRadius: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#101a30', font: { family: 'Inter' } } },
+        },
+        scales: {
+          x: { ticks: { color: '#3d517d' }, grid: { display: false } },
+          y: { ticks: { color: '#3d517d' }, grid: { color: '#e6eaf3' }, beginAtZero: true },
+        },
+      },
+    });
+  }
+</script>

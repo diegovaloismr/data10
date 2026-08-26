@@ -1,0 +1,67 @@
+---
+// Radar comparando o perfil estatístico de dois meio-campistas fictícios.
+// Dados fictícios (mock) — servem de base para plugar dados reais depois.
+const metrics = ['Passes progressivos', 'Desarmes', 'xA por 90min', 'Duelos vencidos (%)', 'Interceptações', 'Chances criadas'];
+const playerA = { name: 'Jogador A', values: [82, 65, 78, 70, 60, 74] };
+const playerB = { name: 'Jogador B', values: [58, 88, 45, 82, 90, 40] };
+
+const chartData = JSON.stringify({ metrics, playerA, playerB });
+---
+
+<div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="player-radar" data-chart-payload={chartData}>
+  <canvas height="320" role="img" aria-label="Radar comparando o perfil estatístico de dois jogadores"></canvas>
+</div>
+
+<script>
+  import Chart from 'chart.js/auto';
+
+  const wrappers = document.querySelectorAll<HTMLElement>('[data-chart="player-radar"]');
+
+  for (const wrapper of wrappers) {
+    const canvas = wrapper.querySelector('canvas');
+    const payload = wrapper.dataset.chartPayload;
+    if (!canvas || !payload) continue;
+
+    const { metrics, playerA, playerB } = JSON.parse(payload);
+
+    new Chart(canvas, {
+      type: 'radar',
+      data: {
+        labels: metrics,
+        datasets: [
+          {
+            label: playerA.name,
+            data: playerA.values,
+            borderColor: '#d1590f',
+            backgroundColor: 'rgba(209, 89, 15, 0.2)',
+            pointBackgroundColor: '#d1590f',
+          },
+          {
+            label: playerB.name,
+            data: playerB.values,
+            borderColor: '#29395e',
+            backgroundColor: 'rgba(41, 57, 94, 0.2)',
+            pointBackgroundColor: '#29395e',
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#101a30', font: { family: 'Inter' } } },
+        },
+        scales: {
+          r: {
+            angleLines: { color: '#e6eaf3' },
+            grid: { color: '#e6eaf3' },
+            pointLabels: { color: '#3d517d', font: { size: 11 } },
+            ticks: { display: false },
+            suggestedMin: 0,
+            suggestedMax: 100,
+          },
+        },
+      },
+    });
+  }
+</script>

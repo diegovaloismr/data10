@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TranslationPending from '../../../components/TranslationPending.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('glossario.title')} description={t('glossario.subtitle')}>
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <header class="mb-8">
+      <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">{t('glossario.title')}</h1>
+      <p class="mt-2 text-ink-700">{t('glossario.subtitle')}</p>
+    </header>
+    <TranslationPending lang={lang} />
+  </div>
+</BaseLayout>

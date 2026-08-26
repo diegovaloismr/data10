@@ -1,0 +1,60 @@
+---
+// Linha do tempo mostrando a evolução do PPDA de uma equipe ao longo da temporada.
+// Dados fictícios (mock) — servem de base para plugar dados reais depois.
+const rounds = Array.from({ length: 12 }, (_, i) => `R${i + 1}`);
+const ppdaValues = [11.2, 10.8, 12.1, 9.6, 9.1, 8.7, 8.9, 8.2, 7.8, 8.5, 7.6, 7.2];
+
+const chartData = JSON.stringify({ rounds, ppdaValues });
+---
+
+<div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="metric-evolution" data-chart-payload={chartData}>
+  <canvas height="260" role="img" aria-label="Gráfico de linha mostrando a evolução do PPDA ao longo das rodadas da temporada"></canvas>
+</div>
+
+<script>
+  import Chart from 'chart.js/auto';
+
+  const wrappers = document.querySelectorAll<HTMLElement>('[data-chart="metric-evolution"]');
+
+  for (const wrapper of wrappers) {
+    const canvas = wrapper.querySelector('canvas');
+    const payload = wrapper.dataset.chartPayload;
+    if (!canvas || !payload) continue;
+
+    const { rounds, ppdaValues } = JSON.parse(payload);
+
+    new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: rounds,
+        datasets: [
+          {
+            label: 'PPDA (passes por ação defensiva)',
+            data: ppdaValues,
+            borderColor: '#b3450c',
+            backgroundColor: 'rgba(179, 69, 12, 0.12)',
+            tension: 0.3,
+            fill: true,
+            pointBackgroundColor: '#b3450c',
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#101a30', font: { family: 'Inter' } } },
+        },
+        scales: {
+          x: { ticks: { color: '#3d517d' }, grid: { display: false } },
+          y: {
+            ticks: { color: '#3d517d' },
+            grid: { color: '#e6eaf3' },
+            reverse: false,
+            title: { display: true, text: 'PPDA (menor = pressão mais intensa)', color: '#3d517d' },
+          },
+        },
+      },
+    });
+  }
+</script>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'pt' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('footer.terms')} description="Termos de Uso do Data10." noIndex>
+  <article class="prose-article mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <div class="mb-8 rounded border border-ember-400 bg-ember-100 px-4 py-3 text-sm text-ink-900">
+      <strong>Aviso:</strong> este é um texto placeholder/genérico, gerado para deixar a estrutura do site
+      pronta. Revise com atenção (idealmente com apoio jurídico) antes de publicar o site oficialmente.
+    </div>
+
+    <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">Termos de Uso</h1>
+    <p class="text-sm text-ink-500">Última atualização: [preencher data ao revisar]</p>
+
+    <h2>1. Aceitação dos termos</h2>
+    <p>
+      Ao acessar e utilizar o Data10, você concorda com estes Termos de Uso. Caso não concorde com algum
+      ponto, recomendamos não utilizar o site.
+    </p>
+
+    <h2>2. Sobre o conteúdo</h2>
+    <p>
+      O conteúdo publicado no Data10 tem finalidade informativa e educacional, relacionado à ciência de
+      dados aplicada ao esporte. Não se trata de aconselhamento profissional, financeiro ou de apostas
+      esportivas de qualquer natureza.
+    </p>
+
+    <h2>3. Dados e métricas apresentados</h2>
+    <p>
+      Alguns conteúdos do site, especialmente na seção de Dashboards, podem utilizar dados fictícios (mock
+      data) para fins ilustrativos, claramente identificados como tal. Quando dados reais forem utilizados,
+      buscaremos indicar a fonte sempre que possível — ainda assim, não garantimos precisão absoluta ou
+      atualização em tempo real das informações apresentadas.
+    </p>
+
+    <h2>4. Propriedade intelectual</h2>
+    <p>
+      Textos, gráficos e demais materiais originais publicados no Data10 são de propriedade do site, salvo
+      quando indicado o contrário. A reprodução de conteúdo sem autorização prévia não é permitida, exceto
+      para uso pessoal e não comercial com a devida citação da fonte.
+    </p>
+
+    <h2>5. Publicidade (futuro)</h2>
+    <p>
+      O Data10 reserva o direito de veicular publicidade no site no futuro, incluindo, mas não se limitando
+      a, anúncios via Google AdSense. O uso continuado do site após a ativação de publicidade implica
+      concordância com a exibição desses anúncios, sujeita à nossa Política de Privacidade.
+    </p>
+
+    <h2>6. Limitação de responsabilidade</h2>
+    <p>
+      O Data10 não se responsabiliza por decisões tomadas com base no conteúdo publicado no site, incluindo
+      decisões relacionadas a apostas, análises táticas profissionais ou contratações esportivas. Todo o
+      conteúdo deve ser interpretado como material informativo e educacional.
+    </p>
+
+    <h2>7. Alterações nestes termos</h2>
+    <p>
+      Estes Termos de Uso podem ser atualizados periodicamente. A versão vigente sempre estará disponível
+      nesta página.
+    </p>
+
+    <h2>8. Contato</h2>
+    <p>
+      Dúvidas sobre estes termos podem ser enviadas para [preencher e-mail de contato ao revisar esta
+      página].
+    </p>
+  </article>
+</BaseLayout>

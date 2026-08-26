@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://diegovaloismr.github.io/data10/sitemap-index.xml

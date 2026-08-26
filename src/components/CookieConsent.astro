@@ -1,0 +1,80 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  privacyHref: string;
+}
+
+const { lang, privacyHref } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div id="cookie-consent" class="cookie-consent" hidden>
+  <div class="mx-auto flex max-w-4xl flex-col gap-3 p-4 text-sm sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-ink-100">
+      {t('cookies.message')}
+      {' '}
+      <a href={privacyHref} class="underline underline-offset-2 hover:text-ember-400">{t('cookies.linkText')}</a>.
+    </p>
+    <div class="flex shrink-0 gap-2">
+      <button id="cookie-decline" type="button" class="rounded border border-ink-600 px-3 py-1.5 text-ink-100 hover:border-ink-400">
+        {t('cookies.decline')}
+      </button>
+      <button id="cookie-accept" type="button" class="rounded bg-ember-500 px-3 py-1.5 font-medium text-white hover:bg-ember-600">
+        {t('cookies.accept')}
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-consent {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 50;
+    background-color: var(--color-ink-900);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+  }
+</style>
+
+<script>
+  // Componente leve em JS vanilla (sem lib externa) para o aviso de cookies.
+  // A preferência é salva em localStorage; ajuste a chave/estilo livremente.
+  const STORAGE_KEY = 'data10-cookie-consent';
+
+  const banner = document.getElementById('cookie-consent');
+  const acceptBtn = document.getElementById('cookie-accept');
+  const declineBtn = document.getElementById('cookie-decline');
+
+  function hasConsentDecision(): boolean {
+    try {
+      return localStorage.getItem(STORAGE_KEY) !== null;
+    } catch {
+      return true; // se localStorage estiver bloqueado, não insiste no banner
+    }
+  }
+
+  function saveConsent(value: 'accepted' | 'declined') {
+    try {
+      localStorage.setItem(STORAGE_KEY, value);
+    } catch {
+      /* localStorage indisponível (modo privado etc.) — ignora silenciosamente */
+    }
+  }
+
+  if (banner && !hasConsentDecision()) {
+    banner.hidden = false;
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    saveConsent('accepted');
+    if (banner) banner.hidden = true;
+  });
+
+  declineBtn?.addEventListener('click', () => {
+    saveConsent('declined');
+    if (banner) banner.hidden = true;
+  });
+</script>

@@ -1,0 +1,18 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div class="rounded-lg border border-dashed border-ink-300 bg-ink-50 px-6 py-10 text-center">
+  <p class="text-ink-700">{t('common.translationPending')}</p>
+  <a href={`${base}/pt/`} class="mt-4 inline-block text-sm font-medium text-ember-600 hover:underline">
+    Ver conteúdo em Português →
+  </a>
+</div>

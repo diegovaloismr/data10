@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'pt' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('sobre.title')} description={t('sobre.subtitle')}>
+  <article class="prose-article mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">{t('sobre.title')}</h1>
+    <p class="mt-2 text-lg text-ink-600">{t('sobre.subtitle')}</p>
+
+    <p>
+      O <strong>Data10</strong> nasceu de uma pergunta simples: por que a maior parte da cobertura esportiva ainda
+      trata dados como um detalhe técnico, quando eles já são parte central de como clubes, treinadores e
+      analistas profissionais tomam decisões?
+    </p>
+
+    <p>
+      Nosso objetivo é traduzir conceitos de ciência de dados aplicada ao esporte — hoje com foco em futebol,
+      mas com estrutura pronta para outras modalidades no futuro — em conteúdo acessível, sem perder rigor
+      técnico. Acreditamos que entender métricas como xG, PPDA ou os fundamentos de machine learning aplicado
+      a scouting não deveria ser um privilégio de quem trabalha dentro de departamentos de análise de clubes.
+    </p>
+
+    <h2>O que você encontra por aqui</h2>
+    <ul>
+      <li><strong>Blog</strong>: artigos explicando conceitos, metodologias e aplicações práticas de dados no esporte.</li>
+      <li><strong>Glossário</strong>: um dicionário de termos técnicos, para consulta rápida sempre que uma sigla ou conceito novo aparecer.</li>
+      <li><strong>Dashboards</strong>: visualizações interativas que tornam esses conceitos mais tangíveis.</li>
+    </ul>
+
+    <h2>Um projeto em construção</h2>
+    <p>
+      O Data10 é um projeto independente, em constante evolução. Novos artigos, termos e dashboards são
+      adicionados regularmente, e a estrutura já está preparada para conteúdo em inglês e espanhol nos
+      próximos passos.
+    </p>
+  </article>
+</BaseLayout>

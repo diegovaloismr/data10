@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import XgPerMatchChart from '../../../components/charts/XgPerMatchChart.astro';
+import PlayerRadarChart from '../../../components/charts/PlayerRadarChart.astro';
+import MetricEvolutionChart from '../../../components/charts/MetricEvolutionChart.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('dashboards.title')} description={t('dashboards.subtitle')}>
+  <div class="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
+    <header class="mb-4">
+      <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">{t('dashboards.title')}</h1>
+      <p class="mt-2 text-ink-700">{t('dashboards.subtitle')}</p>
+    </header>
+
+    <p class="mb-10 rounded border border-ink-200 bg-ink-50 px-4 py-3 text-sm text-ink-600">
+      {t('dashboards.mockDataNotice')}
+    </p>
+
+    <section class="mb-12">
+      <h2 class="font-serif-editorial text-2xl font-bold text-ink-950">{t('dashboards.xgTitle')}</h2>
+      <p class="mt-2 mb-4 text-ink-700">{t('dashboards.xgBody')}</p>
+      <XgPerMatchChart />
+    </section>
+
+    <AdSlot placement="in-article" class="mb-12" />
+
+    <section class="mb-12">
+      <h2 class="font-serif-editorial text-2xl font-bold text-ink-950">{t('dashboards.radarTitle')}</h2>
+      <p class="mt-2 mb-4 text-ink-700">{t('dashboards.radarBody')}</p>
+      <PlayerRadarChart />
+    </section>
+
+    <section class="mb-4">
+      <h2 class="font-serif-editorial text-2xl font-bold text-ink-950">{t('dashboards.evolutionTitle')}</h2>
+      <p class="mt-2 mb-4 text-ink-700">{t('dashboards.evolutionBody')}</p>
+      <MetricEvolutionChart />
+    </section>
+  </div>
+</BaseLayout>

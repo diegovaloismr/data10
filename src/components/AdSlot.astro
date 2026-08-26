@@ -1,0 +1,44 @@
+---
+/**
+ * Espaço reservado para anúncios (ex: Google AdSense).
+ *
+ * Por enquanto não carrega nenhum script de anúncio real — apenas reserva
+ * o espaço no layout para que a inserção futura do AdSense (ou de outra
+ * rede) não exija redesenho. Em produção o slot fica vazio/invisível; em
+ * modo dev exibe um placeholder discreto para facilitar o design ao redor.
+ *
+ * Quando for ativar o AdSense de verdade, insira o <script> e o <ins> do
+ * AdSense diretamente aqui dentro, mantendo o wrapper e as classes.
+ */
+interface Props {
+  placement: 'sidebar' | 'in-article' | 'footer';
+  class?: string;
+}
+
+const { placement, class: className = '' } = Astro.props;
+
+const labels: Record<Props['placement'], string> = {
+  sidebar: 'Anúncio · Sidebar',
+  'in-article': 'Anúncio · No meio do artigo',
+  footer: 'Anúncio · Rodapé',
+};
+
+const sizeClasses: Record<Props['placement'], string> = {
+  sidebar: 'min-h-[250px]',
+  'in-article': 'min-h-[100px]',
+  footer: 'min-h-[90px]',
+};
+---
+
+{/*
+  Em produção o wrapper não reserva altura (fica realmente invisível, sem
+  buraco no layout) até que um anúncio real seja inserido dentro dele.
+  Em dev, mostramos um placeholder com altura só para dar noção de espaço.
+*/}
+<div class:list={['ad-slot', className]} data-ad-placement={placement} aria-hidden="true">
+  {import.meta.env.DEV && (
+    <div class:list={['flex items-center justify-center rounded border border-dashed border-ink-200 bg-ink-50 text-xs uppercase tracking-wide text-ink-400', sizeClasses[placement]]}>
+      {labels[placement]}
+    </div>
+  )}
+</div>

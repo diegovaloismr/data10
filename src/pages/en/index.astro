@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TranslationPending from '../../components/TranslationPending.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout lang={lang} title={t('site.name')} description={t('home.heroSubtitle')}>
+  <section class="border-b border-ink-100 bg-ink-950 text-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+      <p class="text-sm font-semibold uppercase tracking-widest text-ember-400">{t('site.tagline')}</p>
+      <h1 class="mt-4 max-w-2xl font-serif-editorial text-4xl font-bold leading-tight sm:text-5xl">
+        {t('home.heroTitle')}
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-ink-200">{t('home.heroSubtitle')}</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href={`${base}/en/blog/`} class="rounded bg-ember-500 px-5 py-3 font-medium text-white hover:bg-ember-600">
+          {t('home.heroCta')}
+        </a>
+        <a href={`${base}/en/glossario/`} class="rounded border border-ink-600 px-5 py-3 font-medium text-ink-100 hover:border-ink-400">
+          {t('home.heroCtaSecondary')}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+    <TranslationPending lang={lang} />
+  </section>
+</BaseLayout>

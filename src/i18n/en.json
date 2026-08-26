@@ -1,0 +1,85 @@
+{
+  "site": {
+    "name": "Data10",
+    "tagline": "Data science applied to sports"
+  },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "glossario": "Glossary",
+    "dashboards": "Dashboards",
+    "sobre": "About"
+  },
+  "home": {
+    "heroTitle": "The numbers behind the game",
+    "heroSubtitle": "Analysis, dashboards and a full glossary of data science applied to football — built for readers who want more than the final score.",
+    "heroCta": "Read the articles",
+    "heroCtaSecondary": "Explore the glossary",
+    "latestPosts": "Latest articles",
+    "seeAllPosts": "See all articles",
+    "glossarioTeaserTitle": "Not sure what xG means?",
+    "glossarioTeaserBody": "Our glossary gathers, in plain language, the main statistics and machine learning concepts used in modern sports analytics.",
+    "glossarioTeaserCta": "Browse the glossary",
+    "dashboardsTeaserTitle": "Data in motion",
+    "dashboardsTeaserBody": "Explore interactive visualizations of performance metrics — from xG per match to radar comparisons between players.",
+    "dashboardsTeaserCta": "See dashboards"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Articles about data science, statistics and machine learning in sports.",
+    "readMore": "Read article",
+    "minRead": "min read",
+    "publishedOn": "Published on",
+    "updatedOn": "Updated on",
+    "by": "by",
+    "backToBlog": "Back to blog",
+    "relatedTerms": "Related glossary terms",
+    "empty": "No articles published yet."
+  },
+  "glossario": {
+    "title": "Glossary",
+    "subtitle": "The core terms of sports data science, explained clearly.",
+    "searchPlaceholder": "Search a term (e.g. xG, PPDA, overfitting)...",
+    "noResults": "No terms found.",
+    "relatedPosts": "Related articles",
+    "relatedTerms": "Related terms",
+    "backToGlossario": "Back to glossary",
+    "example": "Practical example"
+  },
+  "dashboards": {
+    "title": "Dashboards",
+    "subtitle": "Interactive visualizations with sample data — a foundation for plugging in real data soon.",
+    "mockDataNotice": "The data shown below is fictional (mock data), used only to illustrate how the dashboard works.",
+    "xgTitle": "xG per match",
+    "xgBody": "Comparison between xG (expected goals) and actual goals scored across a sequence of ten matches. When actual goals sit well above xG, it signals above-expected efficiency (or luck); when below, it points to wasted clear chances.",
+    "radarTitle": "Player comparison radar",
+    "radarBody": "Multi-dimensional comparison between two midfielders across metrics such as progressive passes, tackles, expected assists and duels won. The radar makes each player's profile easy to see beyond the naked eye.",
+    "evolutionTitle": "Metric evolution over the season",
+    "evolutionBody": "Time series showing the evolution of a team's PPDA (passes per defensive action) across match days, indicating how intense the team's pressing has been in recent matches."
+  },
+  "sobre": {
+    "title": "About Data10",
+    "subtitle": "Why we built this project"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "madeWith": "An independent sports data science project."
+  },
+  "cookies": {
+    "message": "We use cookies to improve your experience and, in the future, to show relevant ads. Read our",
+    "linkText": "Privacy Policy",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has been moved.",
+    "cta": "Back to Home"
+  },
+  "common": {
+    "translationPending": "Translation coming soon. For now, this content is only available in Portuguese.",
+    "languageSwitcher": "Language"
+  }
+}

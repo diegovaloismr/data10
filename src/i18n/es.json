@@ -1,0 +1,85 @@
+{
+  "site": {
+    "name": "Data10",
+    "tagline": "Ciencia de datos aplicada al deporte"
+  },
+  "nav": {
+    "home": "Inicio",
+    "blog": "Blog",
+    "glossario": "Glosario",
+    "dashboards": "Dashboards",
+    "sobre": "Acerca de"
+  },
+  "home": {
+    "heroTitle": "Los números detrás del juego",
+    "heroSubtitle": "Análisis, dashboards y un glosario completo de ciencia de datos aplicada al fútbol — para quienes quieren ir más allá del resultado del partido.",
+    "heroCta": "Leer los artículos",
+    "heroCtaSecondary": "Explorar el glosario",
+    "latestPosts": "Últimos artículos",
+    "seeAllPosts": "Ver todos los artículos",
+    "glossarioTeaserTitle": "¿No sabes qué es el xG?",
+    "glossarioTeaserBody": "Nuestro glosario reúne, en lenguaje claro, los principales conceptos de estadística y machine learning usados en el análisis deportivo moderno.",
+    "glossarioTeaserCta": "Consultar el glosario",
+    "dashboardsTeaserTitle": "Datos en movimiento",
+    "dashboardsTeaserBody": "Explora visualizaciones interactivas con métricas de rendimiento — desde xG por partido hasta comparaciones radar entre jugadores.",
+    "dashboardsTeaserCta": "Ver dashboards"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artículos sobre ciencia de datos, estadística y machine learning en el deporte.",
+    "readMore": "Leer artículo",
+    "minRead": "min de lectura",
+    "publishedOn": "Publicado el",
+    "updatedOn": "Actualizado el",
+    "by": "por",
+    "backToBlog": "Volver al blog",
+    "relatedTerms": "Términos relacionados en el glosario",
+    "empty": "Todavía no hay artículos publicados."
+  },
+  "glossario": {
+    "title": "Glosario",
+    "subtitle": "Los principales términos de ciencia de datos deportiva, explicados con claridad.",
+    "searchPlaceholder": "Buscar un término (ej: xG, PPDA, overfitting)...",
+    "noResults": "No se encontraron términos.",
+    "relatedPosts": "Artículos relacionados",
+    "relatedTerms": "Términos relacionados",
+    "backToGlossario": "Volver al glosario",
+    "example": "Ejemplo práctico"
+  },
+  "dashboards": {
+    "title": "Dashboards",
+    "subtitle": "Visualizaciones interactivas con datos de ejemplo — base para conectar datos reales próximamente.",
+    "mockDataNotice": "Los datos mostrados a continuación son ficticios (mock data), usados solo para ilustrar el funcionamiento del dashboard.",
+    "xgTitle": "xG por partido",
+    "xgBody": "Comparación entre el xG (goles esperados) y los goles realmente marcados en una secuencia de diez partidos. Cuando los goles reales superan ampliamente el xG, indica eficiencia por encima de lo esperado (o suerte); cuando quedan por debajo, indica desperdicio de ocasiones claras.",
+    "radarTitle": "Radar de comparación entre jugadores",
+    "radarBody": "Comparación multidimensional entre dos centrocampistas en métricas como pases progresivos, entradas, xG asistido y duelos ganados. El radar ayuda a visualizar rápidamente el perfil de cada jugador.",
+    "evolutionTitle": "Evolución de una métrica durante la temporada",
+    "evolutionBody": "Serie temporal que muestra la evolución del PPDA (pases por acción defensiva) de un equipo a lo largo de las jornadas, indicando la intensidad de la presión del equipo en los últimos partidos."
+  },
+  "sobre": {
+    "title": "Acerca de Data10",
+    "subtitle": "Por qué creamos este proyecto"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Uso",
+    "madeWith": "Un proyecto independiente de ciencia de datos deportiva."
+  },
+  "cookies": {
+    "message": "Usamos cookies para mejorar tu experiencia y, en el futuro, para mostrar anuncios relevantes. Lee nuestra",
+    "linkText": "Política de Privacidad",
+    "accept": "Aceptar",
+    "decline": "Rechazar"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "body": "La página que buscas no existe o fue movida.",
+    "cta": "Volver al inicio"
+  },
+  "common": {
+    "translationPending": "Traducción disponible próximamente. Por ahora, este contenido solo está disponible en portugués.",
+    "languageSwitcher": "Idioma"
+  }
+}

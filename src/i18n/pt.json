@@ -1,0 +1,85 @@
+{
+  "site": {
+    "name": "Data10",
+    "tagline": "Ciência de dados aplicada ao esporte"
+  },
+  "nav": {
+    "home": "Início",
+    "blog": "Blog",
+    "glossario": "Glossário",
+    "dashboards": "Dashboards",
+    "sobre": "Sobre"
+  },
+  "home": {
+    "heroTitle": "Números que explicam o jogo",
+    "heroSubtitle": "Análises, dashboards e um glossário completo de ciência de dados aplicada ao futebol — feito para quem quer ir além do resultado da partida.",
+    "heroCta": "Ler os artigos",
+    "heroCtaSecondary": "Explorar o glossário",
+    "latestPosts": "Últimos artigos",
+    "seeAllPosts": "Ver todos os artigos",
+    "glossarioTeaserTitle": "Não sabe o que é xG?",
+    "glossarioTeaserBody": "Nosso glossário reúne, em linguagem clara, os principais conceitos de estatística e machine learning usados na análise esportiva moderna.",
+    "glossarioTeaserCta": "Consultar o glossário",
+    "dashboardsTeaserTitle": "Dados em movimento",
+    "dashboardsTeaserBody": "Explore visualizações interativas com métricas de desempenho — de xG por partida a comparações radar entre jogadores.",
+    "dashboardsTeaserCta": "Ver dashboards"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artigos sobre ciência de dados, estatística e machine learning no esporte.",
+    "readMore": "Ler artigo",
+    "minRead": "min de leitura",
+    "publishedOn": "Publicado em",
+    "updatedOn": "Atualizado em",
+    "by": "por",
+    "backToBlog": "Voltar ao blog",
+    "relatedTerms": "Termos relacionados no glossário",
+    "empty": "Nenhum artigo publicado ainda."
+  },
+  "glossario": {
+    "title": "Glossário",
+    "subtitle": "Os principais termos de ciência de dados esportiva, explicados sem enrolação.",
+    "searchPlaceholder": "Buscar um termo (ex: xG, PPDA, overfitting)...",
+    "noResults": "Nenhum termo encontrado.",
+    "relatedPosts": "Artigos relacionados",
+    "relatedTerms": "Termos relacionados",
+    "backToGlossario": "Voltar ao glossário",
+    "example": "Exemplo prático"
+  },
+  "dashboards": {
+    "title": "Dashboards",
+    "subtitle": "Visualizações interativas com dados de exemplo — base para plugarmos dados reais em breve.",
+    "mockDataNotice": "Os dados exibidos abaixo são fictícios (mock data), usados apenas para ilustrar o funcionamento do dashboard.",
+    "xgTitle": "xG por partida",
+    "xgBody": "Comparação entre o xG (gols esperados) e os gols realmente marcados em cada partida de uma sequência de dez jogos. Quando a barra de gols reais fica muito acima do xG, é sinal de eficiência acima do esperado (ou sorte); quando fica abaixo, indica desperdício de chances claras.",
+    "radarTitle": "Radar de comparação entre jogadores",
+    "radarBody": "Comparação multidimensional entre dois jogadores de meio-campo em métricas como passes progressivos, desarmes, xG assistido e duelos vencidos. O radar ajuda a visualizar rapidamente o perfil de cada atleta além do olho nu.",
+    "evolutionTitle": "Evolução de métrica ao longo da temporada",
+    "evolutionBody": "Série temporal mostrando a evolução do PPDA (passes por ação defensiva) de uma equipe ao longo das rodadas do campeonato, indicando o quão intensa tem sido a pressão do time nas últimas partidas."
+  },
+  "sobre": {
+    "title": "Sobre o Data10",
+    "subtitle": "Por que criamos este projeto"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Uso",
+    "madeWith": "Um projeto independente de ciência de dados esportiva."
+  },
+  "cookies": {
+    "message": "Usamos cookies para melhorar sua experiência e, futuramente, para exibir anúncios relevantes. Leia nossa",
+    "linkText": "Política de Privacidade",
+    "accept": "Aceitar",
+    "decline": "Recusar"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "body": "A página que você procura não existe ou foi movida.",
+    "cta": "Voltar para a Home"
+  },
+  "common": {
+    "translationPending": "Tradução em breve. Por enquanto, este conteúdo está disponível apenas em português.",
+    "languageSwitcher": "Idioma"
+  }
+}

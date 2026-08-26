@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'pt' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('footer.privacy')} description="Política de Privacidade do Data10." noIndex>
+  <article class="prose-article mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <div class="mb-8 rounded border border-ember-400 bg-ember-100 px-4 py-3 text-sm text-ink-900">
+      <strong>Aviso:</strong> este é um texto placeholder/genérico, gerado para deixar a estrutura do site
+      pronta. Revise com atenção (idealmente com apoio jurídico) antes de publicar o site oficialmente,
+      especialmente os trechos sobre cookies, anúncios, LGPD e GDPR.
+    </div>
+
+    <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">Política de Privacidade</h1>
+    <p class="text-sm text-ink-500">Última atualização: [preencher data ao revisar]</p>
+
+    <h2>1. Quem somos</h2>
+    <p>
+      O Data10 ("nós") é um portal editorial independente sobre ciência de dados aplicada ao esporte. Esta
+      política explica quais dados coletamos de visitantes do site, como usamos essas informações e quais são
+      os seus direitos.
+    </p>
+
+    <h2>2. Dados de navegação</h2>
+    <p>
+      Como a maioria dos sites, podemos coletar automaticamente informações técnicas de navegação, como
+      endereço IP (de forma anonimizada, quando possível), tipo de navegador, páginas visitadas, tempo de
+      permanência e origem do acesso. Esses dados são usados para entender como o site é utilizado e
+      melhorar a experiência de leitura.
+    </p>
+
+    <h2>3. Cookies</h2>
+    <p>
+      Utilizamos cookies para lembrar preferências (como o idioma escolhido) e, no futuro, para fins de
+      análise de audiência e veiculação de anúncios. Ao visitar o site pela primeira vez, você verá um aviso
+      de cookies com a opção de aceitar ou recusar o uso não essencial de cookies. Cookies estritamente
+      necessários ao funcionamento do site podem ser usados independentemente dessa escolha.
+    </p>
+
+    <h2>4. Publicidade (futuro)</h2>
+    <p>
+      Ainda não veiculamos anúncios no Data10. Caso venhamos a ativar publicidade no futuro — por exemplo,
+      através do Google AdSense — atualizaremos esta política com detalhes sobre quais dados são
+      compartilhados com redes de anúncios, incluindo o uso de cookies de terceiros para personalização de
+      anúncios, e forneceremos instruções sobre como você pode gerenciar suas preferências de anúncios
+      personalizados.
+    </p>
+
+    <h2>5. Base legal e conformidade internacional</h2>
+    <p>
+      Como o Data10 pode receber visitantes de diferentes países, buscamos observar princípios de proteção de
+      dados tanto da <strong>Lei Geral de Proteção de Dados (LGPD)</strong>, no Brasil, quanto do
+      <strong>Regulamento Geral sobre a Proteção de Dados (GDPR)</strong>, na União Europeia — incluindo
+      transparência sobre a coleta de dados, finalidade específica de uso e o direito do usuário de solicitar
+      acesso, correção ou exclusão de seus dados pessoais, quando aplicável.
+    </p>
+
+    <h2>6. Seus direitos</h2>
+    <p>
+      Você pode, a qualquer momento, solicitar informações sobre os dados que possuímos a seu respeito, pedir
+      a correção de dados incorretos ou solicitar a exclusão de dados pessoais, dentro dos limites técnicos e
+      legais aplicáveis. [Preencher: canal de contato oficial para esse tipo de solicitação.]
+    </p>
+
+    <h2>7. Alterações nesta política</h2>
+    <p>
+      Esta política pode ser atualizada periodicamente, especialmente à medida que novas funcionalidades
+      (como publicidade) forem ativadas no site. Recomendamos revisitar esta página com regularidade.
+    </p>
+
+    <h2>8. Contato</h2>
+    <p>
+      Dúvidas sobre esta política podem ser enviadas para [preencher e-mail de contato ao revisar esta
+      página].
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,82 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const terms = await getCollection('glossario');
+  return terms.map((term) => ({
+    params: { slug: term.id },
+    props: { term },
+  }));
+}
+
+const { term } = Astro.props;
+const { Content } = await render(term);
+
+const lang = 'pt' as const;
+const t = useTranslations(lang);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const relatedPosts = term.data.relatedPosts.length
+  ? await getCollection('blog', ({ id }) => term.data.relatedPosts.includes(id))
+  : [];
+
+const relatedTerms = term.data.relatedTerms.length
+  ? (await Promise.all(term.data.relatedTerms.map((id) => getEntry('glossario', id)))).filter(Boolean)
+  : [];
+---
+
+<BaseLayout lang={lang} title={term.data.term} description={term.data.shortDefinition}>
+  <article class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <a href={`${base}/${lang}/glossario/`} class="text-sm font-medium text-ember-600 hover:underline">
+      ← {t('glossario.backToGlossario')}
+    </a>
+
+    <header class="mb-8 mt-4">
+      <p class="text-xs font-semibold uppercase tracking-wider text-ember-600">{term.data.category}</p>
+      <h1 class="mt-2 font-serif-editorial text-3xl font-bold leading-tight text-ink-950 sm:text-4xl">
+        {term.data.term}
+      </h1>
+      <p class="mt-3 text-lg text-ink-700">{term.data.shortDefinition}</p>
+    </header>
+
+    <div class="prose-article">
+      <Content />
+    </div>
+
+    {(relatedPosts.length > 0 || relatedTerms.length > 0) && (
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {relatedPosts.length > 0 && (
+          <div class="rounded-lg border border-ink-100 bg-ink-50 p-5">
+            <h2 class="font-serif-editorial text-lg font-bold text-ink-950">{t('glossario.relatedPosts')}</h2>
+            <ul class="mt-3 space-y-2">
+              {relatedPosts.map((post) => (
+                <li>
+                  <a href={`${base}/${lang}/blog/${post.id}/`} class="text-sm text-ember-600 hover:underline">
+                    {post.data.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {relatedTerms.length > 0 && (
+          <div class="rounded-lg border border-ink-100 bg-ink-50 p-5">
+            <h2 class="font-serif-editorial text-lg font-bold text-ink-950">{t('glossario.relatedTerms')}</h2>
+            <ul class="mt-3 space-y-2">
+              {relatedTerms.map((related) => related && (
+                <li>
+                  <a href={`${base}/${lang}/glossario/${related.id}/`} class="text-sm text-ember-600 hover:underline">
+                    {related.data.term}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    )}
+  </article>
+</BaseLayout>
