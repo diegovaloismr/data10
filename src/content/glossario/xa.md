@@ -2,7 +2,7 @@
 term: "xA (Expected Assists)"
 shortDefinition: "Probabilidade estimada de que um passe específico resulte em gol, medindo a qualidade da chance criada por quem o deu."
 category: "Estatística"
-relatedPosts: ["alem-do-xg-metricas-avancadas"]
+relatedPosts: ["alem-do-xg-metricas-avancadas", "analise-desempenho-por-linha"]
 relatedTerms: ["xg"]
 ---
 

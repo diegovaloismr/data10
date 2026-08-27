@@ -2,7 +2,7 @@
 term: "PPDA (Passes por Ação Defensiva)"
 shortDefinition: "Número médio de passes que o adversário consegue dar antes de sofrer uma ação defensiva — quanto menor, mais intensa a pressão."
 category: "Táticas"
-relatedPosts: ["ppda-intensidade-pressao", "alem-do-xg-metricas-avancadas"]
+relatedPosts: ["ppda-intensidade-pressao", "alem-do-xg-metricas-avancadas", "analise-desempenho-por-linha"]
 relatedTerms: ["machine-learning"]
 ---
 

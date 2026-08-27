@@ -2,7 +2,7 @@
 term: "Machine Learning aplicado ao esporte"
 shortDefinition: "Conjunto de técnicas estatísticas que permitem a um sistema identificar padrões em dados esportivos e fazer previsões sem regras explicitamente programadas."
 category: "Ciência de Dados"
-relatedPosts: ["machine-learning-scouting"]
+relatedPosts: ["machine-learning-scouting", "modelos-preditivos-win-probability"]
 relatedTerms: ["overfitting", "scouting-orientado-por-dados"]
 ---
 

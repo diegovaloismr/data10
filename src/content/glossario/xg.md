@@ -2,7 +2,7 @@
 term: "xG (Expected Goals)"
 shortDefinition: "Probabilidade estimada de que uma finalização resulte em gol, com base em características do lance."
 category: "Estatística"
-relatedPosts: ["o-que-e-xg", "alem-do-xg-metricas-avancadas"]
+relatedPosts: ["o-que-e-xg", "alem-do-xg-metricas-avancadas", "analise-desempenho-por-linha", "modelos-preditivos-win-probability"]
 relatedTerms: ["xa", "machine-learning"]
 ---
 
