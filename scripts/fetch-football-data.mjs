@@ -5,6 +5,7 @@
  *   - src/data/brasileirao-serie-a.json        (tabela — mesmo formato usado
  *     pelo BrasileiraoTable.astro, populado também pelo fetch-brasileirao.mjs)
  *   - src/data/brasileirao-serie-a-extra.json  (casa x fora + sequência/forma)
+ *   - src/data/brasileirao-serie-a-race.json   (evolução de pontos por rodada)
  *   - src/data/brasileirao-artilheiros.json    (ranking de artilheiros)
  *
  * O plano gratuito da football-data.org só cobre a Série A (não a Série B),
@@ -100,6 +101,51 @@ function computeHomeAwayAndStreaks(matches, teamNames) {
     }
   }
 
+  return stats;
+}
+
+/**
+ * Evolução acumulada de pontos por rodada (matchday), para o gráfico de
+ * "corrida pelo título". Usa a rodada (matchday) retornada pela API — como
+ * o Brasileirão é turno único de todos contra todos por rodada, cada time
+ * joga exatamente uma vez por rodada.
+ */
+function computePointsRace(matches, teamNames) {
+  const finished = matches.filter((m) => m.status === 'FINISHED' && m.matchday != null);
+  const matchdays = [...new Set(finished.map((m) => m.matchday))].sort((a, b) => a - b);
+
+  const running = new Map(teamNames.map((name) => [name, 0]));
+  const series = new Map(teamNames.map((name) => [name, []]));
+
+  for (const matchday of matchdays) {
+    const roundMatches = finished.filter((m) => m.matchday === matchday);
+    for (const match of roundMatches) {
+      const homeName = match.homeTeam?.name;
+      const awayName = match.awayTeam?.name;
+      const homeGoals = match.score?.fullTime?.home;
+      const awayGoals = match.score?.fullTime?.away;
+      if (homeGoals == null || awayGoals == null) continue;
+      if (!running.has(homeName) || !running.has(awayName)) continue;
+
+      if (homeGoals > awayGoals) running.set(homeName, running.get(homeName) + 3);
+      else if (homeGoals < awayGoals) running.set(awayName, running.get(awayName) + 3);
+      else {
+        running.set(homeName, running.get(homeName) + 1);
+        running.set(awayName, running.get(awayName) + 1);
+      }
+    }
+    for (const name of teamNames) {
+      series.get(name).push(running.get(name));
+    }
+  }
+
+  return {
+    matchdays,
+    series: Object.fromEntries(series),
+  };
+}
+
+function finalizeHomeAwayAndStreaks(stats) {
   return Array.from(stats.values()).map((s) => {
     const last5 = s.resultsSequence.slice(-5);
     let unbeatenStreak = 0;
@@ -167,9 +213,11 @@ async function main() {
       console.log(`[football-data] Série A: ${payload.standings.length} times gravados (tabela).`);
 
       const teamNames = payload.standings.map((row) => row.team);
-
       const matchesData = await apiFetch(`/competitions/${COMPETITION}/matches?status=FINISHED`);
-      const extra = computeHomeAwayAndStreaks(matchesData.matches ?? [], teamNames);
+      const matches = matchesData.matches ?? [];
+
+      const stats = computeHomeAwayAndStreaks(matches, teamNames);
+      const extra = finalizeHomeAwayAndStreaks(stats);
       await writeFile(
         path.join(outDir, 'brasileirao-serie-a-extra.json'),
         JSON.stringify(
@@ -180,6 +228,18 @@ async function main() {
         'utf-8'
       );
       console.log(`[football-data] Série A: casa/fora e sequência calculados para ${extra.length} times.`);
+
+      const race = computePointsRace(matches, teamNames);
+      await writeFile(
+        path.join(outDir, 'brasileirao-serie-a-race.json'),
+        JSON.stringify(
+          { season: payload.season, lastUpdated: payload.lastUpdated, isMockData: false, ...race },
+          null,
+          2
+        ) + '\n',
+        'utf-8'
+      );
+      console.log(`[football-data] Série A: corrida pelo título com ${race.matchdays.length} rodadas.`);
     } else {
       console.warn('[football-data] Standings da Série A vieram vazios — mantendo dados existentes.');
     }

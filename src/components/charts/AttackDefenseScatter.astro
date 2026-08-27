@@ -1,0 +1,85 @@
+---
+interface StandingRow {
+  team: string;
+  played: number;
+  goalsFor: number;
+  goalsAgainst: number;
+}
+
+interface Props {
+  standings: StandingRow[];
+}
+
+const { standings } = Astro.props;
+
+const points = standings
+  .filter((row) => row.played > 0)
+  .map((row) => ({
+    team: row.team,
+    x: Number((row.goalsFor / row.played).toFixed(2)),
+    y: Number((row.goalsAgainst / row.played).toFixed(2)),
+  }));
+
+const chartData = JSON.stringify(points);
+---
+
+<div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="attack-defense" data-chart-payload={chartData}>
+  <canvas height="340" role="img" aria-label="Gráfico de dispersão comparando gols marcados e sofridos por jogo de cada time"></canvas>
+</div>
+
+<script>
+  import Chart from 'chart.js/auto';
+
+  const wrappers = document.querySelectorAll<HTMLElement>('[data-chart="attack-defense"]');
+
+  for (const wrapper of wrappers) {
+    const canvas = wrapper.querySelector('canvas');
+    const payload = wrapper.dataset.chartPayload;
+    if (!canvas || !payload) continue;
+
+    const points: { team: string; x: number; y: number }[] = JSON.parse(payload);
+    if (points.length === 0) continue;
+
+    new Chart(canvas, {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Times',
+            data: points,
+            backgroundColor: '#d1590f',
+            pointRadius: 5,
+            pointHoverRadius: 7,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const p = points[ctx.dataIndex];
+                return `${p.team}: ${p.x} gols marcados/jogo, ${p.y} sofridos/jogo`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Gols marcados por jogo', color: '#3d517d' },
+            ticks: { color: '#3d517d' },
+            grid: { color: '#e6eaf3' },
+          },
+          y: {
+            title: { display: true, text: 'Gols sofridos por jogo', color: '#3d517d' },
+            ticks: { color: '#3d517d' },
+            grid: { color: '#e6eaf3' },
+          },
+        },
+      },
+    });
+  }
+</script>

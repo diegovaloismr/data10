@@ -1,0 +1,75 @@
+---
+interface Props {
+  matchdays: number[];
+  series: Record<string, number[]>;
+  /** Times a destacar (ex: os 6 primeiros colocados atuais), na ordem desejada. */
+  highlightTeams: string[];
+}
+
+const { matchdays, series, highlightTeams } = Astro.props;
+
+const colors = ['#d1590f', '#1b2947', '#7686a8', '#b3450c', '#3d517d', '#e57426'];
+
+const datasets = highlightTeams
+  .filter((team) => series[team])
+  .map((team, index) => ({
+    team,
+    data: series[team],
+    color: colors[index % colors.length],
+  }));
+
+const chartData = JSON.stringify({ matchdays, datasets });
+---
+
+<div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="points-race" data-chart-payload={chartData}>
+  <canvas height="340" role="img" aria-label="Gráfico de linha mostrando a evolução acumulada de pontos dos times mais bem colocados ao longo das rodadas"></canvas>
+</div>
+
+<script>
+  import Chart from 'chart.js/auto';
+
+  const wrappers = document.querySelectorAll<HTMLElement>('[data-chart="points-race"]');
+
+  for (const wrapper of wrappers) {
+    const canvas = wrapper.querySelector('canvas');
+    const payload = wrapper.dataset.chartPayload;
+    if (!canvas || !payload) continue;
+
+    const { matchdays, datasets } = JSON.parse(payload) as {
+      matchdays: number[];
+      datasets: { team: string; data: number[]; color: string }[];
+    };
+    if (matchdays.length === 0 || datasets.length === 0) continue;
+
+    new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: matchdays.map((m) => `R${m}`),
+        datasets: datasets.map((d) => ({
+          label: d.team,
+          data: d.data,
+          borderColor: d.color,
+          backgroundColor: d.color,
+          tension: 0.25,
+          pointRadius: 2,
+          borderWidth: 2,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#101a30', font: { family: 'Inter' }, boxWidth: 12 } },
+        },
+        scales: {
+          x: { ticks: { color: '#3d517d' }, grid: { display: false } },
+          y: {
+            ticks: { color: '#3d517d' },
+            grid: { color: '#e6eaf3' },
+            title: { display: true, text: 'Pontos acumulados', color: '#3d517d' },
+          },
+        },
+      },
+    });
+  }
+</script>

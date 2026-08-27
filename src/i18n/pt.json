@@ -94,7 +94,11 @@
     "streaksSubtitle": "Times ordenados pela maior sequência sem perder (invencibilidade) na Série A.",
     "unbeatenStreak": "Invencibilidade",
     "matches": "jogos",
-    "last5": "Últimos 5"
+    "last5": "Últimos 5",
+    "attackDefenseTitle": "Ataque x Defesa",
+    "attackDefenseSubtitle": "Gols marcados x gols sofridos por jogo de cada time da Série A — times no canto inferior direito atacam bem e sofrem pouco; no canto superior esquerdo, o oposto.",
+    "raceTitle": "Corrida pelo título",
+    "raceSubtitle": "Evolução acumulada de pontos dos 6 primeiros colocados atuais, rodada a rodada."
   },
   "sobre": {
     "title": "Sobre o Data10",
