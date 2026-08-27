@@ -6,6 +6,8 @@ author: "Redação Data10"
 category: "Táticas"
 tags: ["PPDA", "Pressão", "Análise Tática"]
 readingTime: 5
+cover: "./covers/ppda.svg"
+coverAlt: "Ilustração abstrata de anéis se fechando em direção ao centro, sugerindo pressão coletiva"
 ---
 
 "Time pressiona bem" é uma das frases mais repetidas na cobertura esportiva — e uma das mais difíceis de sustentar apenas com a observação visual de uma partida. O **PPDA (Passes per Defensive Action)**, ou "passes por ação defensiva", nasceu justamente para colocar um número nessa sensação.

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="24%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- anéis de pressão se fechando em direção ao centro -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="800" cy="450" r="360" stroke="#7686a8" stroke-opacity="0.18" stroke-width="2"/>
+    <circle cx="800" cy="450" r="270" stroke="#7686a8" stroke-opacity="0.25" stroke-width="2"/>
+    <circle cx="800" cy="450" r="180" stroke="#e57426" stroke-opacity="0.5" stroke-width="3"/>
+    <circle cx="800" cy="450" r="90" stroke="#e57426" stroke-opacity="0.85" stroke-width="4"/>
+  </g>
+
+  <!-- setas convergindo, sugerindo marcação por todos os lados -->
+  <g stroke="#e57426" stroke-opacity="0.75" stroke-width="5" stroke-linecap="round">
+    <line x1="800" y1="120" x2="800" y2="255"/>
+    <path d="M 780 235 L 800 260 L 820 235" fill="none"/>
+
+    <line x1="800" y1="780" x2="800" y2="645"/>
+    <path d="M 780 665 L 800 640 L 820 665" fill="none"/>
+
+    <line x1="420" y1="450" x2="555" y2="450"/>
+    <path d="M 535 430 L 560 450 L 535 470" fill="none"/>
+
+    <line x1="1180" y1="450" x2="1045" y2="450"/>
+    <path d="M 1065 430 L 1040 450 L 1065 470" fill="none"/>
+  </g>
+
+  <circle cx="800" cy="450" r="14" fill="#f4f6fa"/>
+
+  <line x1="0" y1="820" x2="1600" y2="820" stroke="#e6eaf3" stroke-opacity="0.08" stroke-width="2"/>
+</svg>

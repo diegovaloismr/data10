@@ -33,6 +33,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
             pubDate={post.data.pubDate}
             category={post.data.category}
             readingTime={post.data.readingTime}
+            cover={post.data.cover}
+            coverAlt={post.data.coverAlt}
           />
         ))}
       </div>

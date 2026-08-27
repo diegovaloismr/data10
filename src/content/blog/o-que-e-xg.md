@@ -6,6 +6,8 @@ author: "Redação Data10"
 category: "Estatística"
 tags: ["xG", "Análise de Jogo", "Futebol"]
 readingTime: 6
+cover: "./covers/xg.svg"
+coverAlt: "Ilustração abstrata de um gráfico de barras com uma barra em destaque e um arco marcando o gol esperado"
 ---
 
 Há dez anos, "xG" era um termo restrito a departamentos de análise de clubes e a um punhado de blogs especializados. Hoje aparece no placar da transmissão, nas manchetes do dia seguinte e nas discussões de bar. Mas o que essa sigla realmente significa — e por que ela conquistou tanto espaço?

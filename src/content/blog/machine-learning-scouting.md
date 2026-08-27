@@ -6,6 +6,8 @@ author: "Redação Data10"
 category: "Scouting"
 tags: ["Machine Learning", "Scouting", "Data Science"]
 readingTime: 7
+cover: "./covers/scouting.svg"
+coverAlt: "Ilustração abstrata de uma rede de pontos conectados, representando um mapa de talentos"
 ---
 
 Durante décadas, encontrar um jogador foi trabalho quase exclusivo de olheiros: pessoas que viajavam o mundo assistindo partidas ao vivo, anotando impressões em cadernos e confiando na própria experiência para identificar talento. Esse processo continua essencial — mas hoje ele é complementado, cada vez mais, por modelos de **machine learning** que ajudam a filtrar, comparar e priorizar milhares de jogadores antes mesmo que um olheiro humano entre em campo.

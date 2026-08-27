@@ -6,6 +6,8 @@ author: "Redação Data10"
 category: "Gestão Esportiva"
 tags: ["SAF", "Gestão de Dados", "Governança", "Futebol"]
 readingTime: 6
+cover: "./covers/saf.svg"
+coverAlt: "Ilustração abstrata de blocos corporativos ascendentes conectados, representando estrutura societária"
 ---
 
 Por mais de um século, a imensa maioria dos clubes de futebol brasileiros funcionou sob o modelo associativo: entidades sem fins lucrativos, geridas por dirigentes eleitos por sócios, com mandatos curtos e pouca obrigação de transparência financeira. A partir de 2021, com a Lei 14.193 (Lei da SAF), esse cenário começou a mudar — e as consequências vão muito além do campo jurídico.

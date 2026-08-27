@@ -6,6 +6,8 @@ author: "Redação Data10"
 category: "Estatística Avançada"
 tags: ["xA", "PPDA", "Análise Tática", "Machine Learning"]
 readingTime: 6
+cover: "./covers/metricas-avancadas.svg"
+coverAlt: "Ilustração abstrata de dois perfis radar sobrepostos, representando comparação de métricas"
 ---
 
 O xG se tornou tão popular que, para boa parte do público, virou sinônimo de "análise de dados no futebol". Mas o campo é bem mais amplo. Reunimos aqui um panorama de outras métricas que já fazem parte do vocabulário de analistas e departamentos de dados de clubes — e que ajudam a contar partes da história que o xG, sozinho, não conta.

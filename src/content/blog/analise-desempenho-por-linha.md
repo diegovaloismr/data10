@@ -6,6 +6,8 @@ author: "Redação Data10"
 category: "Análise Tática"
 tags: ["Defesa", "Meio-campo", "Ataque", "Métricas"]
 readingTime: 7
+cover: "./covers/desempenho-por-linha.svg"
+coverAlt: "Ilustração abstrata de um campo de futebol dividido em três zonas: defesa, meio-campo e ataque"
 ---
 
 Um erro comum de quem está começando a usar dados para analisar futebol é aplicar o mesmo conjunto de métricas para todos os jogadores, independente da posição. Comparar um zagueiro e um atacante pelo número de finalizações, por exemplo, não diz quase nada sobre a qualidade de nenhum dos dois — porque suas funções em campo são completamente diferentes. Análises maduras de desempenho separam as métricas por linha: defesa, meio-campo e ataque.

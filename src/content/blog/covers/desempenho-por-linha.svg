@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- campo com três zonas -->
+  <g stroke="#e6eaf3" stroke-opacity="0.12" stroke-width="2" fill="none">
+    <rect x="260" y="200" width="1080" height="560"/>
+    <line x1="620" y1="200" x2="620" y2="760"/>
+    <line x1="980" y1="200" x2="980" y2="760"/>
+    <circle cx="800" cy="480" r="90"/>
+  </g>
+
+  <!-- marcações por zona: defesa (esq), meio (centro), ataque (dir) -->
+  <g>
+    <circle cx="360" cy="360" r="16" fill="#7686a8" fill-opacity="0.75"/>
+    <circle cx="420" cy="560" r="16" fill="#7686a8" fill-opacity="0.75"/>
+    <circle cx="330" cy="480" r="16" fill="#7686a8" fill-opacity="0.75"/>
+
+    <circle cx="740" cy="330" r="16" fill="#c7d0e2" fill-opacity="0.8"/>
+    <circle cx="800" cy="620" r="16" fill="#c7d0e2" fill-opacity="0.8"/>
+    <circle cx="860" cy="450" r="16" fill="#c7d0e2" fill-opacity="0.8"/>
+
+    <circle cx="1140" cy="380" r="18" fill="#e57426" fill-opacity="0.95"/>
+    <circle cx="1220" cy="560" r="18" fill="#e57426" fill-opacity="0.95"/>
+  </g>
+
+  <line x1="0" y1="820" x2="1600" y2="820" stroke="#e6eaf3" stroke-opacity="0.08" stroke-width="2"/>
+</svg>

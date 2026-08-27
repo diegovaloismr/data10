@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- linha de base -->
+  <line x1="0" y1="700" x2="1600" y2="700" stroke="#e6eaf3" stroke-opacity="0.1" stroke-width="2"/>
+
+  <!-- silhueta de blocos corporativos ascendentes -->
+  <g>
+    <rect x="380" y="560" width="120" height="140" rx="4" fill="#3d517d" fill-opacity="0.5"/>
+    <rect x="520" y="480" width="120" height="220" rx="4" fill="#3d517d" fill-opacity="0.55"/>
+    <rect x="660" y="380" width="130" height="320" rx="4" fill="#e57426" fill-opacity="0.9"/>
+    <rect x="810" y="440" width="120" height="260" rx="4" fill="#3d517d" fill-opacity="0.55"/>
+    <rect x="950" y="500" width="120" height="200" rx="4" fill="#3d517d" fill-opacity="0.5"/>
+  </g>
+
+  <!-- janelinhas discretas, sugerindo prédios/estrutura -->
+  <g fill="#f4f6fa" fill-opacity="0.12">
+    <rect x="700" y="420" width="16" height="16"/>
+    <rect x="740" y="420" width="16" height="16"/>
+    <rect x="700" y="460" width="16" height="16"/>
+    <rect x="740" y="460" width="16" height="16"/>
+    <rect x="700" y="500" width="16" height="16"/>
+    <rect x="740" y="500" width="16" height="16"/>
+  </g>
+
+  <!-- conexão pontilhada, sugerindo governança/ligação entre partes -->
+  <g stroke="#e57426" stroke-opacity="0.5" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round">
+    <path d="M 440 560 Q 725 300 1010 500" fill="none"/>
+  </g>
+
+  <line x1="0" y1="820" x2="1600" y2="820" stroke="#e6eaf3" stroke-opacity="0.08" stroke-width="2"/>
+</svg>

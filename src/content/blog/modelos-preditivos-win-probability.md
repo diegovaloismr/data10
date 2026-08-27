@@ -6,6 +6,8 @@ author: "Redação Data10"
 category: "Machine Learning"
 tags: ["Modelos Preditivos", "Win Probability", "Machine Learning"]
 readingTime: 7
+cover: "./covers/win-probability.svg"
+coverAlt: "Ilustração abstrata de uma curva de probabilidade se destacando entre caminhos possíveis"
 ---
 
 Você já deve ter visto, em transmissões mais analíticas ou em sites de estatística, um gráfico mostrando a "probabilidade de vitória" de cada equipe mudando ao longo da partida — subindo depois de um gol, caindo depois de uma expulsão, oscilando a cada chance clara criada. Esses são os **modelos de win probability** (probabilidade de vitória), uma das aplicações mais visuais de machine learning no futebol.

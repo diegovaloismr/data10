@@ -39,7 +39,7 @@
   "glossario": {
     "title": "Glossary",
     "subtitle": "The core terms of sports data science, explained clearly.",
-    "searchPlaceholder": "Search a term (e.g. xG, PPDA, overfitting)...",
+    "searchPlaceholder": "Search a term (e.g. xG, PPDA)...",
     "noResults": "No terms found.",
     "relatedPosts": "Related articles",
     "relatedTerms": "Related terms",

@@ -39,7 +39,7 @@
   "glossario": {
     "title": "Glossário",
     "subtitle": "Os principais termos de ciência de dados esportiva, explicados sem enrolação.",
-    "searchPlaceholder": "Buscar um termo (ex: xG, PPDA, overfitting)...",
+    "searchPlaceholder": "Buscar um termo (ex: xG, PPDA)...",
     "noResults": "Nenhum termo encontrado.",
     "relatedPosts": "Artigos relacionados",
     "relatedTerms": "Termos relacionados",

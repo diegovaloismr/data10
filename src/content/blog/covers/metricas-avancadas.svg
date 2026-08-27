@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="76%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- grades do radar -->
+  <g fill="none" stroke="#7686a8" stroke-opacity="0.22" stroke-width="2">
+    <polygon points="800,220 1040,340 1040,590 800,710 560,590 560,340"/>
+    <polygon points="800,300 960,390 960,560 800,650 640,560 640,390"/>
+    <polygon points="800,380 880,440 880,530 800,590 720,530 720,440"/>
+  </g>
+  <g stroke="#7686a8" stroke-opacity="0.18" stroke-width="1.5">
+    <line x1="800" y1="220" x2="800" y2="710"/>
+    <line x1="560" y1="340" x2="1040" y2="590"/>
+    <line x1="1040" y1="340" x2="560" y2="590"/>
+  </g>
+
+  <!-- dois perfis sobrepostos -->
+  <polygon points="800,260 1000,370 980,560 800,640 620,540 640,380" fill="#e57426" fill-opacity="0.28" stroke="#e57426" stroke-opacity="0.85" stroke-width="3"/>
+  <polygon points="800,340 920,410 900,540 800,600 690,520 700,410" fill="#7686a8" fill-opacity="0.2" stroke="#c7d0e2" stroke-opacity="0.6" stroke-width="2.5"/>
+
+  <line x1="0" y1="820" x2="1600" y2="820" stroke="#e6eaf3" stroke-opacity="0.08" stroke-width="2"/>
+</svg>

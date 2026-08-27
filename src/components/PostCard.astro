@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import { useTranslations, type Lang } from '../i18n/utils';
 
 interface Props {
@@ -9,9 +11,11 @@ interface Props {
   pubDate: Date;
   category: string;
   readingTime?: number;
+  cover?: ImageMetadata;
+  coverAlt?: string;
 }
 
-const { lang, slug, title, description, pubDate, category, readingTime } = Astro.props;
+const { lang, slug, title, description, pubDate, category, readingTime, cover, coverAlt } = Astro.props;
 const t = useTranslations(lang);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -23,20 +27,33 @@ const dateFormatter = new Intl.DateTimeFormat(lang === 'pt' ? 'pt-BR' : lang, {
 ---
 
 <article class="group border-b border-ink-100 py-6 first:pt-0 last:border-0">
-  <a href={`${base}/${lang}/blog/${slug}/`} class="block">
-    <p class="text-xs font-semibold uppercase tracking-wider text-ember-600">{category}</p>
-    <h3 class="mt-1 font-serif-editorial text-xl font-bold text-ink-950 group-hover:text-ember-600 sm:text-2xl">
-      {title}
-    </h3>
-    <p class="mt-2 text-ink-700">{description}</p>
-    <div class="mt-3 flex items-center gap-2 text-xs text-ink-400">
-      <time datetime={pubDate.toISOString()}>{dateFormatter.format(pubDate)}</time>
-      {readingTime && (
-        <>
-          <span aria-hidden="true">·</span>
-          <span>{readingTime} {t('blog.minRead')}</span>
-        </>
-      )}
+  <a href={`${base}/${lang}/blog/${slug}/`} class="flex flex-col gap-4 sm:flex-row sm:items-start">
+    {cover && (
+      <div class="aspect-[16/9] w-full shrink-0 overflow-hidden rounded-md bg-ink-950 sm:aspect-[4/3] sm:w-40">
+        <Image
+          src={cover}
+          alt={coverAlt ?? ''}
+          width={320}
+          height={240}
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+    )}
+    <div class="min-w-0 flex-1">
+      <p class="text-xs font-semibold uppercase tracking-wider text-ember-600">{category}</p>
+      <h3 class="mt-1 font-serif-editorial text-xl font-bold text-ink-950 group-hover:text-ember-600 sm:text-2xl">
+        {title}
+      </h3>
+      <p class="mt-2 text-ink-700">{description}</p>
+      <div class="mt-3 flex items-center gap-2 text-xs text-ink-400">
+        <time datetime={pubDate.toISOString()}>{dateFormatter.format(pubDate)}</time>
+        {readingTime && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>{readingTime} {t('blog.minRead')}</span>
+          </>
+        )}
+      </div>
     </div>
   </a>
 </article>
