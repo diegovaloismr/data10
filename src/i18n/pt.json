@@ -79,7 +79,22 @@
     "goalDiff": "SG",
     "qualification": "Classificação para torneios internacionais",
     "relegation": "Zona de rebaixamento",
-    "dataSource": "Dados fornecidos por"
+    "dataSource": "Dados fornecidos por",
+    "extrasNotice": "Casa x fora, sequência e artilheiros são calculados só para a Série A por enquanto (fonte de dados gratuita cobre apenas a primeira divisão).",
+    "scorersTitle": "Artilheiros",
+    "scorersSubtitle": "Ranking de goleadores da Série A na temporada atual.",
+    "goals": "Gols",
+    "assists": "Assist.",
+    "homeAwayTitle": "Casa x Fora",
+    "homeAwaySubtitle": "Aproveitamento de cada time como mandante e como visitante — mostra o quanto o desempenho depende do fator casa.",
+    "home": "Casa",
+    "away": "Fora",
+    "ptsPerGame": "Pts/jogo",
+    "streaksTitle": "Sequência atual",
+    "streaksSubtitle": "Times ordenados pela maior sequência sem perder (invencibilidade) na Série A.",
+    "unbeatenStreak": "Invencibilidade",
+    "matches": "jogos",
+    "last5": "Últimos 5"
   },
   "sobre": {
     "title": "Sobre o Data10",

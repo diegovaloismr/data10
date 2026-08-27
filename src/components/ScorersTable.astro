@@ -1,0 +1,51 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface ScorerRow {
+  rank: number;
+  player: string;
+  team: string;
+  crest: string | null;
+  goals: number;
+  assists: number | null;
+}
+
+interface Props {
+  lang: Lang;
+  scorers: ScorerRow[];
+}
+
+const { lang, scorers } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full min-w-[420px] border-collapse text-sm">
+    <thead>
+      <tr class="border-b border-ink-200 text-left text-xs uppercase tracking-wide text-ink-500">
+        <th class="py-2 pr-2 font-medium">{t('brasileirao.position')}</th>
+        <th class="py-2 pr-2 font-medium">{t('brasileirao.team')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.goals')}</th>
+        <th class="py-2 pl-2 text-center font-medium">{t('brasileirao.assists')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {scorers.slice(0, 10).map((row) => (
+        <tr class="border-b border-ink-100 text-ink-800">
+          <td class="py-2 pr-2 pl-3 font-medium text-ink-500">{row.rank}</td>
+          <td class="py-2 pr-2">
+            <div class="flex items-center gap-2">
+              {row.crest && <img src={row.crest} alt="" width="18" height="18" loading="lazy" class="h-[18px] w-[18px] object-contain" />}
+              <div>
+                <p class="font-medium text-ink-950">{row.player}</p>
+                <p class="text-xs text-ink-500">{row.team}</p>
+              </div>
+            </div>
+          </td>
+          <td class="py-2 px-2 text-center font-bold text-ink-950">{row.goals}</td>
+          <td class="py-2 pl-2 text-center text-ink-600">{row.assists ?? '—'}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

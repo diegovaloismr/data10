@@ -1,10 +1,15 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrasileiraoTable from '../../../components/BrasileiraoTable.astro';
+import ScorersTable from '../../../components/ScorersTable.astro';
+import HomeAwayTable from '../../../components/HomeAwayTable.astro';
+import StreaksTable from '../../../components/StreaksTable.astro';
 import AdSlot from '../../../components/AdSlot.astro';
 import { useTranslations } from '../../../i18n/utils';
 import serieA from '../../../data/brasileirao-serie-a.json';
 import serieB from '../../../data/brasileirao-serie-b.json';
+import serieAExtra from '../../../data/brasileirao-serie-a-extra.json';
+import artilheiros from '../../../data/brasileirao-artilheiros.json';
 
 const lang = 'pt' as const;
 const t = useTranslations(lang);
@@ -61,10 +66,41 @@ const lastUpdated = serieA.lastUpdated ? dateFormatter.format(new Date(serieA.la
       <BrasileiraoTable lang={lang} standings={serieB.standings} hidden />
     </div>
 
+    <p class="mt-6 mb-8 rounded border border-ink-200 bg-ink-50 px-4 py-3 text-sm text-ink-600">
+      {t('brasileirao.extrasNotice')}
+    </p>
+
+    <section class="mb-10">
+      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.scorersTitle')}</h2>
+      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.scorersSubtitle')}</p>
+      <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+        <ScorersTable lang={lang} scorers={artilheiros.scorers} />
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.homeAwayTitle')}</h2>
+      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.homeAwaySubtitle')}</p>
+      <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+        <HomeAwayTable lang={lang} teams={serieAExtra.teams} />
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.streaksTitle')}</h2>
+      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.streaksSubtitle')}</p>
+      <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+        <StreaksTable lang={lang} teams={serieAExtra.teams} />
+      </div>
+    </section>
+
     <AdSlot placement="in-article" class="mt-10" />
 
     <p class="mt-6 text-xs text-ink-400">
-      {t('brasileirao.dataSource')} <a href="https://www.api-football.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-ember-600">API-FOOTBALL</a>.
+      {t('brasileirao.dataSource')}
+      <a href="https://www.api-football.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-ember-600">API-FOOTBALL</a>
+      {' '}e{' '}
+      <a href="https://www.football-data.org/" target="_blank" rel="noopener noreferrer" class="underline hover:text-ember-600">football-data.org</a>.
     </p>
   </div>
 </BaseLayout>

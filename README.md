@@ -138,14 +138,18 @@ Nenhum script de anúncio real está ativo. A estrutura já está pronta para qu
 
 ## Tabela do Brasileirão (dados reais)
 
-A página `/pt/dashboards/brasileirao/` mostra a classificação real de Série A e Série B, usando a [API-FOOTBALL](https://www.api-football.com/) (plano gratuito, 100 requisições/dia).
+A página `/pt/dashboards/brasileirao/` mostra dados reais do Campeonato Brasileiro, combinando duas fontes:
+
+- **[API-FOOTBALL](https://www.api-football.com/)** (`scripts/fetch-brasileirao.mjs`, secret `API_FOOTBALL_KEY`): tabela de classificação de Série A e Série B. ⚠️ O plano gratuito dessa API **não dá acesso à temporada atual** (só 2022-2024) — por isso, enquanto não decidirmos por um plano pago, essas tabelas continuam com dados de exemplo (`isMockData: true`).
+- **[football-data.org](https://www.football-data.org/)** (`scripts/fetch-football-data.mjs`, secret `FOOTBALL_DATA_KEY`): tabela real da Série A (o plano gratuito dessa cobre a temporada atual, mas só a primeira divisão), além de casa x fora, sequência/invencibilidade e artilheiros — todos calculados a partir dos resultados de partidas retornados pela API.
 
 Como funciona:
 
-- **`scripts/fetch-brasileirao.mjs`**: script Node que busca a tabela na API e grava em `src/data/brasileirao-serie-a.json` / `-serie-b.json`. Roda automaticamente como um passo do workflow (`.github/workflows/deploy.yml`), **antes** do `astro build` — como o site é estático, os dados já saem "assados" no HTML publicado.
-- O workflow tem um gatilho `schedule` (cron diário, 11:00 UTC ≈ 08:00 em Brasília) além do `push` normal, então a tabela se atualiza sozinha todo dia, mesmo sem nenhum commit novo.
-- A chave da API fica no secret do repositório `API_FOOTBALL_KEY` (Settings → Secrets and variables → Actions). Sem essa variável definida, o script não falha o build — só mantém os dados já existentes em `src/data/` (inclusive localmente, para quem for rodar `npm run build` sem a chave).
-- Os arquivos JSON em `src/data/` começam com dados de exemplo zerados (`isMockData: true`); a página mostra um aviso disso até a primeira busca real acontecer.
+- Os dois scripts rodam como passos do workflow (`.github/workflows/deploy.yml`), **antes** do `astro build` — como o site é estático, os dados já saem "assados" no HTML publicado.
+- O workflow tem um gatilho `schedule` (cron diário, 11:00 UTC ≈ 08:00 em Brasília) além do `push` normal, então os dados se atualizam sozinhos todo dia, mesmo sem nenhum commit novo.
+- As chaves ficam nos secrets do repositório `API_FOOTBALL_KEY` e `FOOTBALL_DATA_KEY` (Settings → Secrets and variables → Actions). Sem alguma dessas variáveis definida, o script correspondente não falha o build — só mantém os dados já existentes em `src/data/` (inclusive localmente, para quem for rodar `npm run build` sem as chaves).
+- Os arquivos JSON em `src/data/` começam com dados de exemplo zerados (`isMockData: true`); a página mostra avisos disso até a primeira busca real de cada fonte acontecer.
+- A Série B fica sem casa x fora/sequência/artilheiros por enquanto — o plano gratuito da football-data.org cobre só a Série A.
 
 Para trocar o horário do cron, edite a linha `cron:` em `.github/workflows/deploy.yml` (formato padrão do cron, sempre em UTC).
 
