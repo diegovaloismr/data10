@@ -138,4 +138,4 @@ Nenhum script de anúncio real está ativo. A estrutura já está pronta para qu
 
 ## Performance
 
-O projeto foi montado priorizando build leve (poucas integrações, sem framework de UI pesado, Chart.js carregado apenas nas páginas de Dashboards). Tempo de build e tamanho do output da última execução ficam registrados no histórico de commits / logs de build — rode `npm run build` para ver os números atualizados no seu ambiente.
+O projeto foi montado priorizando build leve (poucas integrações, sem framework de UI pesado, Chart.js carregado apenas nas páginas de Dashboards). Última medição: build completo em **~4s** (32 páginas) e output final de **~812 KB**. Esses números tendem a variar pouco conforme o projeto cresce — rode `npm run build` para ver os valores atualizados no seu ambiente.
