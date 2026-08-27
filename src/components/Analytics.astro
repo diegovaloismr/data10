@@ -1,0 +1,28 @@
+---
+// Google Analytics 4 (GA4).
+// O Measurement ID não é secreto (fica exposto no HTML de qualquer site com
+// GA4), então é seguro deixá-lo aqui hardcoded. O script só é injetado
+// depois que o visitante aceita cookies no CookieConsent (evento
+// `data10:cookies-accepted`) — nunca carrega antes disso, conforme
+// prometido na Política de Privacidade.
+const GA_MEASUREMENT_ID = 'G-011YM3Q0J2';
+---
+
+<script define:vars={{ GA_MEASUREMENT_ID }} is:inline>
+  document.addEventListener('data10:cookies-accepted', function loadGoogleAnalytics() {
+    document.removeEventListener('data10:cookies-accepted', loadGoogleAnalytics);
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID);
+  });
+</script>
