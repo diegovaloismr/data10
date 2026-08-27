@@ -48,11 +48,11 @@ const t = useTranslations(lang);
   const acceptBtn = document.getElementById('cookie-accept');
   const declineBtn = document.getElementById('cookie-decline');
 
-  function hasConsentDecision(): boolean {
+  function getStoredConsent(): string | null {
     try {
-      return localStorage.getItem(STORAGE_KEY) !== null;
+      return localStorage.getItem(STORAGE_KEY);
     } catch {
-      return true; // se localStorage estiver bloqueado, não insiste no banner
+      return null; // localStorage indisponível (modo privado etc.)
     }
   }
 
@@ -64,13 +64,26 @@ const t = useTranslations(lang);
     }
   }
 
-  if (banner && !hasConsentDecision()) {
+  // Dispara um evento customizado quando o visitante aceita cookies (agora ou
+  // em uma visita anterior). Scripts de analytics/anúncios (ex: GA4, AdSense)
+  // devem só ser carregados dentro de um listener deste evento, nunca antes:
+  //   document.addEventListener('data10:cookies-accepted', () => { ... });
+  function notifyAccepted() {
+    document.dispatchEvent(new CustomEvent('data10:cookies-accepted'));
+  }
+
+  const storedConsent = getStoredConsent();
+
+  if (banner && storedConsent === null) {
     banner.hidden = false;
+  } else if (storedConsent === 'accepted') {
+    notifyAccepted();
   }
 
   acceptBtn?.addEventListener('click', () => {
     saveConsent('accepted');
     if (banner) banner.hidden = true;
+    notifyAccepted();
   });
 
   declineBtn?.addEventListener('click', () => {
