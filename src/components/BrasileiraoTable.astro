@@ -1,0 +1,91 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface StandingRow {
+  position: number;
+  team: string;
+  crest: string | null;
+  points: number;
+  played: number;
+  win: number;
+  draw: number;
+  lose: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDiff: number;
+  form: string;
+}
+
+interface Props {
+  lang: Lang;
+  standings: StandingRow[];
+  hidden?: boolean;
+}
+
+const { lang, standings, hidden = false } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class:list={['overflow-x-auto', { hidden }]} data-brasileirao-table>
+  <table class="w-full min-w-[640px] border-collapse text-sm">
+    <thead>
+      <tr class="border-b border-ink-200 text-left text-xs uppercase tracking-wide text-ink-500">
+        <th class="py-2 pr-2 font-medium">{t('brasileirao.position')}</th>
+        <th class="py-2 pr-2 font-medium">{t('brasileirao.team')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.points')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.played')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.win')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.draw')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.lose')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.goalsFor')}</th>
+        <th class="py-2 px-2 text-center font-medium">{t('brasileirao.goalsAgainst')}</th>
+        <th class="py-2 pl-2 text-center font-medium">{t('brasileirao.goalDiff')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {standings.map((row) => {
+        const isQualification = row.position <= 4;
+        const isRelegation = row.position > standings.length - 4;
+        return (
+          <tr
+            class:list={[
+              'border-b border-ink-100 text-ink-800',
+              { 'border-l-4 border-l-emerald-700/60': isQualification },
+              { 'border-l-4 border-l-red-800/50': isRelegation },
+            ]}
+            title={isQualification ? t('brasileirao.qualification') : isRelegation ? t('brasileirao.relegation') : undefined}
+          >
+            <td class="py-2 pr-2 pl-3 font-medium text-ink-500">{row.position}</td>
+            <td class="py-2 pr-2">
+              <div class="flex items-center gap-2">
+                {row.crest && (
+                  <img src={row.crest} alt="" width="20" height="20" loading="lazy" class="h-5 w-5 object-contain" />
+                )}
+                <span class="font-medium text-ink-950">{row.team}</span>
+              </div>
+            </td>
+            <td class="py-2 px-2 text-center font-bold text-ink-950">{row.points}</td>
+            <td class="py-2 px-2 text-center text-ink-600">{row.played}</td>
+            <td class="py-2 px-2 text-center text-ink-600">{row.win}</td>
+            <td class="py-2 px-2 text-center text-ink-600">{row.draw}</td>
+            <td class="py-2 px-2 text-center text-ink-600">{row.lose}</td>
+            <td class="py-2 px-2 text-center text-ink-600">{row.goalsFor}</td>
+            <td class="py-2 px-2 text-center text-ink-600">{row.goalsAgainst}</td>
+            <td class="py-2 pl-2 text-center text-ink-600">{row.goalDiff > 0 ? `+${row.goalDiff}` : row.goalDiff}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+
+  <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-ink-500">
+    <span class="flex items-center gap-1.5">
+      <span class="inline-block h-2.5 w-2.5 rounded-sm bg-emerald-700/60"></span>
+      {t('brasileirao.qualification')}
+    </span>
+    <span class="flex items-center gap-1.5">
+      <span class="inline-block h-2.5 w-2.5 rounded-sm bg-red-800/50"></span>
+      {t('brasileirao.relegation')}
+    </span>
+  </div>
+</div>

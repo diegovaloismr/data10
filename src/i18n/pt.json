@@ -55,7 +55,31 @@
     "radarTitle": "Radar de comparação entre jogadores",
     "radarBody": "Comparação multidimensional entre dois jogadores de meio-campo em métricas como passes progressivos, desarmes, xG assistido e duelos vencidos. O radar ajuda a visualizar rapidamente o perfil de cada atleta além do olho nu.",
     "evolutionTitle": "Evolução de métrica ao longo da temporada",
-    "evolutionBody": "Série temporal mostrando a evolução do PPDA (passes por ação defensiva) de uma equipe ao longo das rodadas do campeonato, indicando o quão intensa tem sido a pressão do time nas últimas partidas."
+    "evolutionBody": "Série temporal mostrando a evolução do PPDA (passes por ação defensiva) de uma equipe ao longo das rodadas do campeonato, indicando o quão intensa tem sido a pressão do time nas últimas partidas.",
+    "brasileiraoTitle": "Tabela do Brasileirão",
+    "brasileiraoBody": "Classificação real de Série A e Série B, atualizada automaticamente todo dia.",
+    "brasileiraoCta": "Ver tabela completa"
+  },
+  "brasileirao": {
+    "title": "Tabela do Brasileirão",
+    "subtitle": "Classificação em tempo real da Série A e da Série B do Campeonato Brasileiro.",
+    "serieA": "Série A",
+    "serieB": "Série B",
+    "mockDataNotice": "Ainda não recebemos a primeira atualização automática de dados reais — os números abaixo são apenas de exemplo (zerados). A tabela real deve aparecer em até 24h, atualizada automaticamente todo dia.",
+    "lastUpdated": "Atualizado em",
+    "position": "Pos",
+    "team": "Time",
+    "points": "P",
+    "played": "J",
+    "win": "V",
+    "draw": "E",
+    "lose": "D",
+    "goalsFor": "GP",
+    "goalsAgainst": "GC",
+    "goalDiff": "SG",
+    "qualification": "Classificação para torneios internacionais",
+    "relegation": "Zona de rebaixamento",
+    "dataSource": "Dados fornecidos por"
   },
   "sobre": {
     "title": "Sobre o Data10",

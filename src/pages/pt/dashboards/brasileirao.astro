@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrasileiraoTable from '../../../components/BrasileiraoTable.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import { useTranslations } from '../../../i18n/utils';
+import serieA from '../../../data/brasileirao-serie-a.json';
+import serieB from '../../../data/brasileirao-serie-b.json';
+
+const lang = 'pt' as const;
+const t = useTranslations(lang);
+
+const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
+const isMock = serieA.isMockData || serieB.isMockData;
+const lastUpdated = serieA.lastUpdated ? dateFormatter.format(new Date(serieA.lastUpdated)) : null;
+---
+
+<BaseLayout lang={lang} title={t('brasileirao.title')} description={t('brasileirao.subtitle')}>
+  <div class="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
+    <header class="mb-6">
+      <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">{t('brasileirao.title')}</h1>
+      <p class="mt-2 text-ink-700">{t('brasileirao.subtitle')}</p>
+      {lastUpdated && !isMock && (
+        <p class="mt-2 text-xs text-ink-400">{t('brasileirao.lastUpdated')} {lastUpdated}</p>
+      )}
+    </header>
+
+    {isMock && (
+      <p class="mb-8 rounded border border-ink-200 bg-ink-50 px-4 py-3 text-sm text-ink-600">
+        {t('brasileirao.mockDataNotice')}
+      </p>
+    )}
+
+    <div class="mb-6 flex gap-2 border-b border-ink-100">
+      <button
+        type="button"
+        id="tab-serie-a"
+        class="tab-button border-b-2 border-ember-500 px-4 py-2 text-sm font-semibold text-ink-950"
+        aria-pressed="true"
+      >
+        {t('brasileirao.serieA')}
+      </button>
+      <button
+        type="button"
+        id="tab-serie-b"
+        class="tab-button border-b-2 border-transparent px-4 py-2 text-sm font-semibold text-ink-500 hover:text-ink-800"
+        aria-pressed="false"
+      >
+        {t('brasileirao.serieB')}
+      </button>
+    </div>
+
+    <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+      <BrasileiraoTable lang={lang} standings={serieA.standings} />
+      <BrasileiraoTable lang={lang} standings={serieB.standings} hidden />
+    </div>
+
+    <AdSlot placement="in-article" class="mt-10" />
+
+    <p class="mt-6 text-xs text-ink-400">
+      {t('brasileirao.dataSource')} <a href="https://www.api-football.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-ember-600">API-FOOTBALL</a>.
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  const tabA = document.getElementById('tab-serie-a');
+  const tabB = document.getElementById('tab-serie-b');
+  const tables = document.querySelectorAll<HTMLElement>('[data-brasileirao-table]');
+
+  function activate(tab: HTMLElement | null, index: number) {
+    tabA?.classList.toggle('border-ember-500', index === 0);
+    tabA?.classList.toggle('text-ink-950', index === 0);
+    tabA?.classList.toggle('border-transparent', index !== 0);
+    tabA?.classList.toggle('text-ink-500', index !== 0);
+    tabA?.setAttribute('aria-pressed', String(index === 0));
+
+    tabB?.classList.toggle('border-ember-500', index === 1);
+    tabB?.classList.toggle('text-ink-950', index === 1);
+    tabB?.classList.toggle('border-transparent', index !== 1);
+    tabB?.classList.toggle('text-ink-500', index !== 1);
+    tabB?.setAttribute('aria-pressed', String(index === 1));
+
+    tables.forEach((table, i) => {
+      table.classList.toggle('hidden', i !== index);
+    });
+  }
+
+  tabA?.addEventListener('click', () => activate(tabA, 0));
+  tabB?.addEventListener('click', () => activate(tabB, 1));
+</script>

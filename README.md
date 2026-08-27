@@ -136,6 +136,19 @@ Nenhum script de anúncio real está ativo. A estrutura já está pronta para qu
 - **`src/pages/pt/termos.astro`** (e as versões `en`/`es`): Termos de Uso com texto placeholder, mesma recomendação de revisão acima.
 - **`src/components/CookieConsent.astro`**: banner de consentimento de cookies em JS vanilla (sem biblioteca externa), que salva a preferência em `localStorage`. Aparece automaticamente em toda página até que o visitante aceite ou recuse.
 
+## Tabela do Brasileirão (dados reais)
+
+A página `/pt/dashboards/brasileirao/` mostra a classificação real de Série A e Série B, usando a [API-FOOTBALL](https://www.api-football.com/) (plano gratuito, 100 requisições/dia).
+
+Como funciona:
+
+- **`scripts/fetch-brasileirao.mjs`**: script Node que busca a tabela na API e grava em `src/data/brasileirao-serie-a.json` / `-serie-b.json`. Roda automaticamente como um passo do workflow (`.github/workflows/deploy.yml`), **antes** do `astro build` — como o site é estático, os dados já saem "assados" no HTML publicado.
+- O workflow tem um gatilho `schedule` (cron diário, 11:00 UTC ≈ 08:00 em Brasília) além do `push` normal, então a tabela se atualiza sozinha todo dia, mesmo sem nenhum commit novo.
+- A chave da API fica no secret do repositório `API_FOOTBALL_KEY` (Settings → Secrets and variables → Actions). Sem essa variável definida, o script não falha o build — só mantém os dados já existentes em `src/data/` (inclusive localmente, para quem for rodar `npm run build` sem a chave).
+- Os arquivos JSON em `src/data/` começam com dados de exemplo zerados (`isMockData: true`); a página mostra um aviso disso até a primeira busca real acontecer.
+
+Para trocar o horário do cron, edite a linha `cron:` em `.github/workflows/deploy.yml` (formato padrão do cron, sempre em UTC).
+
 ## Performance
 
 O projeto foi montado priorizando build leve (poucas integrações, sem framework de UI pesado, Chart.js carregado apenas nas páginas de Dashboards). Última medição: build completo em **~4s** (32 páginas) e output final de **~812 KB**. Esses números tendem a variar pouco conforme o projeto cresce — rode `npm run build` para ver os valores atualizados no seu ambiente.
