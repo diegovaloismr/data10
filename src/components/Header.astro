@@ -26,7 +26,7 @@ const nav = [
     </a>
 
     <nav class="hidden gap-6 md:flex" aria-label="Navegação principal">
-      {nav.slice(1).map((item) => (
+      {nav.map((item) => (
         <a href={item.href} class="text-sm font-medium text-ink-700 transition-colors hover:text-ember-600">
           {item.label}
         </a>
@@ -49,7 +49,7 @@ const nav = [
   </div>
 
   <nav id="mobile-menu" class="hidden flex-col gap-1 border-t border-ink-100 px-4 pb-4 md:hidden" aria-label="Navegação móvel">
-    {nav.slice(1).map((item) => (
+    {nav.map((item) => (
       <a href={item.href} class="rounded px-2 py-2 text-sm font-medium text-ink-700 hover:bg-ink-50">
         {item.label}
       </a>
