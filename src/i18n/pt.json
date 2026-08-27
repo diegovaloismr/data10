@@ -65,7 +65,7 @@
     "subtitle": "Classificação em tempo real da Série A e da Série B do Campeonato Brasileiro.",
     "serieA": "Série A",
     "serieB": "Série B",
-    "mockDataNotice": "Ainda não recebemos a primeira atualização automática de dados reais — os números abaixo são apenas de exemplo (zerados). A tabela real deve aparecer em até 24h, atualizada automaticamente todo dia.",
+    "mockDataNotice": "Os números abaixo são apenas de exemplo (zerados) — a tabela com dados reais será ativada em breve.",
     "lastUpdated": "Atualizado em",
     "position": "Pos",
     "team": "Time",

@@ -40,7 +40,7 @@ async function apiFetch(path) {
 /** Resolve o ID da liga por nome/país, com fallback para o ID conhecido. */
 async function resolveLeagueId(league) {
   try {
-    const data = await apiFetch(`/leagues?country=Brazil&search=${encodeURIComponent(league.apiName)}`);
+    const data = await apiFetch(`/leagues?country=Brazil&name=${encodeURIComponent(league.apiName)}`);
     const match = data.response?.find((entry) => entry.league?.name === league.apiName);
     if (match?.league?.id) return match.league.id;
   } catch (err) {
