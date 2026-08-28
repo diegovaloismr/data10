@@ -19,7 +19,6 @@ interface StandingRow {
 interface Props {
   lang: Lang;
   standings: StandingRow[];
-  hidden?: boolean;
   /** Quantas posições do topo destacar (ex: vagas de torneio internacional). */
   topZoneCount?: number;
   /** Quantas posições do fim destacar (ex: rebaixamento/eliminação). */
@@ -28,15 +27,14 @@ interface Props {
   bottomZoneLabel?: string;
 }
 
-const { lang, standings, hidden = false, topZoneCount = 4, bottomZoneCount = 4, topZoneLabel, bottomZoneLabel } =
-  Astro.props;
+const { lang, standings, topZoneCount = 4, bottomZoneCount = 4, topZoneLabel, bottomZoneLabel } = Astro.props;
 const t = useTranslations(lang);
 
 const qualificationLabel = topZoneLabel ?? t('brasileirao.qualification');
 const relegationLabel = bottomZoneLabel ?? t('brasileirao.relegation');
 ---
 
-<div class:list={['overflow-x-auto', { hidden }]} data-brasileirao-table>
+<div class="overflow-x-auto">
   <table class="w-full min-w-[640px] border-collapse text-sm">
     <thead>
       <tr class="border-b border-ink-200 text-left text-xs uppercase tracking-wide text-ink-500">

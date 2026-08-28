@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # Atualiza a tabela do Brasileirão (Série A/B) automaticamente todo dia.
+    # Atualiza a tabela do Brasileirão e das ligas internacionais automaticamente todo dia.
     # Horário em UTC; 11:00 UTC ≈ 08:00 no horário de Brasília (UTC-3).
     - cron: '0 11 * * *'
 
@@ -34,12 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Fetch tabela do Brasileirão (API-FOOTBALL)
-        env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
-        run: node scripts/fetch-brasileirao.mjs
-
-      - name: Fetch casa/fora, sequência e artilheiros (football-data.org)
+      - name: Fetch tabela, casa/fora, sequência e artilheiros (football-data.org)
         env:
           FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
         run: node scripts/fetch-football-data.mjs
