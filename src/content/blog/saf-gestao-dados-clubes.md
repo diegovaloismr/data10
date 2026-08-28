@@ -41,6 +41,6 @@ Um efeito interessante da profissionalização via SAF é que dados deixam de se
 
 Vale o alerta: transformar-se em SAF não cria, por si só, um departamento de dados maduro — é a mudança de incentivos que empurra nessa direção, mas a execução ainda depende de investimento real em pessoas, ferramentas e cultura de decisão orientada a dados. Muitos clubes que viraram SAF ainda estão no início dessa jornada, migrando de planilhas soltas para estruturas mais robustas.
 
-De qualquer forma, é um movimento que vale acompanhar: à medida que mais clubes brasileiros adotam esse modelo, a expectativa é que a demanda por profissionais de dados no futebol nacional — hoje concentrada majoritariamente em ligas europeias — cresça de forma consistente.
+De qualquer forma, é um movimento que vale acompanhar: à medida que mais clubes brasileiros adotam esse modelo, a expectativa é que a demanda por profissionais de dados no futebol nacional — hoje concentrada majoritariamente em ligas europeias — cresça de forma consistente. Para ver o quão à frente algumas ligas europeias já estão nesse investimento, veja nosso artigo sobre o [relatório Tech Powerhouse 2026 da LaLiga](/pt/blog/ia-no-futebol-relatorio-laliga-2026/).
 
 Para entender os fundamentos técnicos que esses departamentos de dados costumam usar no dia a dia, veja nosso [glossário de ciência de dados esportiva](/pt/glossario/).

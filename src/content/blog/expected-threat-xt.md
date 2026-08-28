@@ -50,7 +50,7 @@ O xT não é perfeito. Alguns pontos valem menção:
 - **Não considera o contexto do lance diretamente.** O modelo clássico de xT olha só a posição da bola — não leva em conta pressão defensiva, número de adversários próximos ou o placar do jogo no momento da ação (fatores que modelos mais avançados de "valor de posse", construídos sobre dados de rastreamento, começam a incorporar).
 - **Funciona melhor com dados de eventos completos.** Times e ligas com cobertura de dados mais pobre têm modelos de xT menos confiáveis.
 
-Ainda assim, mesmo com essas ressalvas, o xT é hoje uma das ferramentas mais usadas por analistas para ir além do resultado final e entender **onde**, no campo, um time realmente constrói perigo.
+Ainda assim, mesmo com essas ressalvas, o xT é hoje uma das ferramentas mais usadas por analistas para ir além do resultado final e entender **onde**, no campo, um time realmente constrói perigo. Uma alternativa mais simples e direta, usada com sucesso na Bundesliga, é o [packing](/pt/blog/packing-jogadores-ultrapassados/) — em vez de um modelo probabilístico, ele conta literalmente quantos adversários cada ação deixa para trás.
 
 ## Onde ver isso na prática
 

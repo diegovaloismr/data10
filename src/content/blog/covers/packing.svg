@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- duas linhas de marcação adversária (defensores) -->
+  <g fill="#7686a8" fill-opacity="0.55">
+    <circle cx="560" cy="230" r="16"/>
+    <circle cx="560" cy="360" r="16"/>
+    <circle cx="560" cy="490" r="16"/>
+    <circle cx="560" cy="620" r="16"/>
+    <circle cx="560" cy="750" r="16"/>
+
+    <circle cx="900" cy="290" r="16"/>
+    <circle cx="900" cy="420" r="16"/>
+    <circle cx="900" cy="550" r="16"/>
+    <circle cx="900" cy="680" r="16"/>
+  </g>
+
+  <!-- linhas de marcação, sutis -->
+  <g stroke="#e6eaf3" stroke-opacity="0.08" stroke-width="2">
+    <line x1="560" y1="150" x2="560" y2="800"/>
+    <line x1="900" y1="200" x2="900" y2="760"/>
+  </g>
+
+  <!-- trajeto do passe atravessando as duas linhas -->
+  <path d="M 260 560 C 420 560, 480 500, 560 460 C 700 400, 800 380, 900 340 C 1050 290, 1200 250, 1360 210"
+        fill="none" stroke="#f4f6fa" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="260" cy="560" r="14" fill="#7686a8"/>
+  <circle cx="1360" cy="210" r="16" fill="#e57426"/>
+
+  <!-- destaque nos defensores ultrapassados -->
+  <g fill="none" stroke="#d1590f" stroke-width="3">
+    <circle cx="560" cy="490" r="24"/>
+    <circle cx="900" cy="420" r="24"/>
+  </g>
+</svg>
