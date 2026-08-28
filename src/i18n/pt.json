@@ -56,9 +56,8 @@
     "radarBody": "Comparação multidimensional entre dois jogadores de meio-campo em métricas como passes progressivos, desarmes, xG assistido e duelos vencidos. O radar ajuda a visualizar rapidamente o perfil de cada atleta além do olho nu.",
     "evolutionTitle": "Evolução de métrica ao longo da temporada",
     "evolutionBody": "Série temporal mostrando a evolução do PPDA (passes por ação defensiva) de uma equipe ao longo das rodadas do campeonato, indicando o quão intensa tem sido a pressão do time nas últimas partidas.",
-    "brasileiraoTitle": "Brasileirão e Ligas Internacionais",
-    "brasileiraoBody": "Classificação real do Brasileirão, Premier League, La Liga, Serie A, Bundesliga, Ligue 1 e Champions League, atualizada automaticamente todo dia.",
-    "brasileiraoCta": "Ver tabelas completas"
+    "realDataBody": "Classificação, artilheiros e outras análises reais, atualizadas automaticamente todo dia.",
+    "brasileiraoCta": "Ver tabela completa"
   },
   "brasileirao": {
     "title": "Brasileirão e Ligas Internacionais",

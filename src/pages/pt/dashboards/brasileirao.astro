@@ -82,7 +82,9 @@ const panels = competitions.map((competition, index) => {
               'tab-button shrink-0 border-b-2 px-3 py-2 text-sm font-semibold',
               index === 0 ? 'border-ember-500 text-ink-950' : 'border-transparent text-ink-500 hover:text-ink-800',
             ]}
+            id={competition.slug}
             data-tab-index={index}
+            data-slug={competition.slug}
             aria-pressed={index === 0 ? 'true' : 'false'}
           >
             {competition.tabLabel}
@@ -191,6 +193,19 @@ const panels = competitions.map((competition, index) => {
   }
 
   tabs.forEach((tab) => {
-    tab.addEventListener('click', () => activate(Number(tab.dataset.tabIndex)));
+    tab.addEventListener('click', () => {
+      activate(Number(tab.dataset.tabIndex));
+      history.replaceState(null, '', `#${tab.dataset.slug}`);
+    });
   });
+
+  function activateFromHash() {
+    const slug = window.location.hash.replace('#', '');
+    if (!slug) return;
+    const match = Array.from(tabs).find((tab) => tab.dataset.slug === slug);
+    if (match) activate(Number(match.dataset.tabIndex));
+  }
+
+  activateFromHash();
+  window.addEventListener('hashchange', activateFromHash);
 </script>
