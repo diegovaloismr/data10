@@ -1,7 +1,7 @@
 ---
 title: "Expected Threat (xT): a métrica que veio depois do xG"
 description: "Entenda o xT (Expected Threat), a métrica que mede o valor ofensivo de cada ação com a bola em campo — e por que ela é o passo natural depois do xG e do xA."
-pubDate: 2026-08-28
+pubDate: 2026-08-28T13:00:00Z
 author: "Redação Data10"
 category: "Estatística Avançada"
 tags: ["xT", "Expected Threat", "Análise Tática", "Estatística"]

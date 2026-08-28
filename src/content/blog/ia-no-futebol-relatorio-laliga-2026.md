@@ -1,7 +1,7 @@
 ---
 title: "O que o relatório Tech Powerhouse 2026 da LaLiga revela sobre o futuro dos dados no futebol"
 description: "A LaLiga lançou um observatório sobre tecnologia e IA no futebol com base em 50+ estudos e 22 entrevistas com especialistas. Resumimos as principais tendências para a próxima década."
-pubDate: 2026-08-28
+pubDate: 2026-08-28T22:45:00Z
 author: "Redação Data10"
 category: "Tecnologia e Dados"
 tags: ["Inteligência Artificial", "LaLiga", "Tecnologia", "Dados"]

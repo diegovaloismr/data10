@@ -1,7 +1,7 @@
 ---
 title: "O que os dados nos ensinaram sobre a Copa do Mundo 2026"
 description: "Da defesa mais sólida da história a avatares 3D no impedimento semiautomático: uma leitura orientada por dados do Mundial dos EUA, México e Canadá."
-pubDate: 2026-08-28
+pubDate: 2026-08-28T13:30:00Z
 author: "Redação Data10"
 category: "Grandes Eventos"
 tags: ["Copa do Mundo 2026", "xG", "Estatística", "Seleções"]

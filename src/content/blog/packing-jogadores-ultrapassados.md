@@ -1,7 +1,7 @@
 ---
 title: "Packing: a métrica que mede quantos adversários um passe elimina"
 description: "Conheça o packing, métrica criada na Bundesliga que conta quantos defensores adversários um passe ou drible deixa para trás — e por que ela virou referência na análise tática moderna."
-pubDate: 2026-08-28
+pubDate: 2026-08-28T22:30:00Z
 author: "Redação Data10"
 category: "Estatística Avançada"
 tags: ["Packing", "Análise Tática", "Bundesliga", "Estatística"]

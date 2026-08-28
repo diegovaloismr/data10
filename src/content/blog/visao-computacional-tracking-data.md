@@ -1,7 +1,7 @@
 ---
 title: "Visão computacional e tracking data: como a IA passou a enxergar o futebol"
 description: "Câmeras que capturam 50 posições por segundo, chips dentro da bola e avatares 3D de jogadores: entenda o tracking data, a nova fronteira da coleta de dados no futebol."
-pubDate: 2026-08-28
+pubDate: 2026-08-28T13:15:00Z
 author: "Redação Data10"
 category: "Tecnologia e Dados"
 tags: ["Tracking Data", "Inteligência Artificial", "Visão Computacional", "Machine Learning"]
