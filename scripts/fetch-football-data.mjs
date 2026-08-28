@@ -191,6 +191,8 @@ async function fetchCompetition(code, displayName) {
     throw new Error('standings vazio (sem tabela do tipo TOTAL)');
   }
 
+  console.log(`[DEBUG SEASON] ${displayName}: ${JSON.stringify(standingsData.season)}`);
+
   const standingsPayload = {
     league: displayName,
     season: standingsData.season?.startDate?.slice(0, 4) ?? null,
@@ -272,6 +274,14 @@ async function main() {
     );
   } catch (err) {
     console.warn(`[football-data] Falha ao buscar Brasileirão Série A: ${err.message} — mantendo dados existentes.`);
+  }
+
+  // DEBUG temporário: comparar temporada padrão x temporada explícita 2026.
+  try {
+    const explicitCL = await apiFetch('/competitions/CL/standings?season=2026');
+    console.log(`[DEBUG SEASON] CL season=2026 explicit: ${JSON.stringify(explicitCL.season)}`);
+  } catch (err) {
+    console.log(`[DEBUG SEASON] CL season=2026 explicit falhou: ${err.message}`);
   }
 
   // As 6 competições internacionais.
