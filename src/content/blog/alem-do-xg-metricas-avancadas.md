@@ -28,7 +28,7 @@ Uma fronteira mais recente da análise esportiva é o uso de **dados posicionais
 
 Isso permite responder perguntas mais sofisticadas: quanto valor um jogador adiciona ao simplesmente se movimentar para abrir espaço, mesmo sem tocar na bola? Qual a probabilidade de gol aumentar ou diminuir a cada segundo de posse, dado o posicionamento coletivo da equipe?
 
-Esse tipo de análise ainda é predominantemente usado internamente por clubes com acesso a dados de rastreamento (que são caros e não amplamente públicos), mas tende a se popularizar nos próximos anos, à medida que mais provedores de dados abrem esse tipo de informação.
+Esse tipo de análise ainda é predominantemente usado internamente por clubes com acesso a dados de rastreamento (que são caros e não amplamente públicos), mas tende a se popularizar nos próximos anos, à medida que mais provedores de dados abrem esse tipo de informação. Detalhamos esse modelo de valor posicional — e batizamos ele pelo nome que a comunidade de análise usa, **xT (Expected Threat)** — no artigo [Expected Threat (xT): a métrica que veio depois do xG](/pt/blog/expected-threat-xt/).
 
 ## Modelos de machine learning para previsão de resultado
 

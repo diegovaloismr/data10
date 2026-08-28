@@ -98,4 +98,23 @@
     border-radius: 0.25rem;
     font-size: 0.875em;
   }
+
+  .prose-article table {
+    width: 100%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .prose-article th, .prose-article td {
+    border: 1px solid var(--color-ink-200);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .prose-article th {
+    background-color: var(--color-ink-50);
+    font-weight: 600;
+  }
 }

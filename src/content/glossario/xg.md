@@ -2,8 +2,8 @@
 term: "xG (Expected Goals)"
 shortDefinition: "Probabilidade estimada de que uma finalização resulte em gol, com base em características do lance."
 category: "Estatística"
-relatedPosts: ["o-que-e-xg", "alem-do-xg-metricas-avancadas", "analise-desempenho-por-linha", "modelos-preditivos-win-probability"]
-relatedTerms: ["xa", "machine-learning"]
+relatedPosts: ["o-que-e-xg", "alem-do-xg-metricas-avancadas", "analise-desempenho-por-linha", "modelos-preditivos-win-probability", "expected-threat-xt"]
+relatedTerms: ["xa", "xt", "machine-learning"]
 ---
 
 **xG (Expected Goals)**, ou "gols esperados", é uma métrica que atribui a cada finalização um valor entre 0 e 1, representando a probabilidade estimada de que aquele chute específico resulte em gol.
