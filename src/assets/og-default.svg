@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#101a30"/>
   <text x="80" y="330" font-family="Georgia, serif" font-size="120" font-weight="700" fill="#ffffff">Data<tspan fill="#d1590f">10</tspan></text>
-  <text x="80" y="400" font-family="Arial, sans-serif" font-size="34" fill="#c7d0e2">Ciência de dados aplicada ao esporte</text>
+  <text x="80" y="400" font-family="DejaVu Sans Mono, Liberation Mono, monospace" font-size="30" fill="#c7d0e2"><tspan fill="#d1590f">&gt;</tspan> ciência de dados aplicada ao esporte<tspan fill="#d1590f">_</tspan></text>
 </svg>

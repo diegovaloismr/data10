@@ -1,10 +1,12 @@
 ---
 import '../styles/global.css';
+import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import Analytics from '../components/Analytics.astro';
 import { languages, type Lang } from '../i18n/utils';
+import ogDefaultSvg from '../assets/og-default.svg';
 
 interface Props {
   lang: Lang;
@@ -41,7 +43,11 @@ const pathWithoutLangAndBase = currentPath
   .replace(new RegExp(`^/(${Object.keys(languages).join('|')})`), '');
 
 const canonicalURL = new URL(currentPath, Astro.site);
-const ogImage = image ? new URL(image, Astro.site).toString() : new URL(`${base}/og-default.png`, Astro.site).toString();
+// X/Twitter (e outros crawlers de card social) não aceitam SVG como imagem
+// de preview — geramos uma versão PNG da imagem padrão a partir do SVG
+// autoral, só para essa finalidade.
+const ogDefaultPng = await getImage({ src: ogDefaultSvg, format: 'png', width: 1200, height: 630 });
+const ogImage = image ? new URL(image, Astro.site).toString() : new URL(ogDefaultPng.src, Astro.site).toString();
 ---
 
 <!doctype html>
