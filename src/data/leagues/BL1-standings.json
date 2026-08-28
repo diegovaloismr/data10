@@ -1,6 +1,8 @@
 {
   "league": "Bundesliga",
   "season": null,
+  "seasonLabel": null,
+  "seasonEnded": false,
   "lastUpdated": null,
   "isMockData": true,
   "source": "football-data.org",

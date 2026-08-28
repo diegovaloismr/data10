@@ -8,12 +8,34 @@ import AttackDefenseScatter from '../../../components/charts/AttackDefenseScatte
 import PointsRaceChart from '../../../components/charts/PointsRaceChart.astro';
 import AdSlot from '../../../components/AdSlot.astro';
 import { useTranslations } from '../../../i18n/utils';
-import serieA from '../../../data/brasileirao-serie-a.json';
-import serieAExtra from '../../../data/brasileirao-serie-a-extra.json';
-import serieARace from '../../../data/brasileirao-serie-a-race.json';
-import artilheiros from '../../../data/brasileirao-artilheiros.json';
+import leaguesConfig from '../../../data/leagues-config.json';
 
-const top6 = serieA.standings.slice(0, 6).map((row) => row.team);
+interface CompetitionConfig {
+  code: string;
+  slug: string;
+  name: string;
+  tabLabel: string;
+  country: string;
+  teamCount: number;
+  topZoneCount: number;
+  bottomZoneCount: number;
+  topZoneLabel: string;
+  bottomZoneLabel: string;
+}
+
+const competitions = leaguesConfig as CompetitionConfig[];
+
+const standingsModules = import.meta.glob<{ default: any }>('../../../data/leagues/*-standings.json', {
+  eager: true,
+});
+const extraModules = import.meta.glob<{ default: any }>('../../../data/leagues/*-extra.json', { eager: true });
+const raceModules = import.meta.glob<{ default: any }>('../../../data/leagues/*-race.json', { eager: true });
+const scorersModules = import.meta.glob<{ default: any }>('../../../data/leagues/*-scorers.json', { eager: true });
+
+function findModule(modules: Record<string, { default: any }>, code: string, suffix: string) {
+  const key = Object.keys(modules).find((k) => k.endsWith(`/${code}-${suffix}.json`));
+  return key ? modules[key].default : null;
+}
 
 const lang = 'pt' as const;
 const t = useTranslations(lang);
@@ -26,8 +48,22 @@ const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
   minute: '2-digit',
 });
 
-const isMock = serieA.isMockData;
-const lastUpdated = serieA.lastUpdated ? dateFormatter.format(new Date(serieA.lastUpdated)) : null;
+const panels = competitions.map((competition, index) => {
+  const standingsData = findModule(standingsModules, competition.code, 'standings');
+  const extraData = findModule(extraModules, competition.code, 'extra');
+  const raceData = findModule(raceModules, competition.code, 'race');
+  const scorersData = findModule(scorersModules, competition.code, 'scorers');
+
+  const isMock = standingsData?.isMockData ?? true;
+  const lastUpdated = standingsData?.lastUpdated ? dateFormatter.format(new Date(standingsData.lastUpdated)) : null;
+  const top6 = (standingsData?.standings ?? []).slice(0, 6).map((row: { team: string }) => row.team);
+  const seasonEndedNotice =
+    !isMock && standingsData?.seasonEnded
+      ? `Mostrando a temporada ${standingsData.seasonLabel} (a mais recente encerrada) — nossa fonte de dados ainda não publicou a temporada seguinte. Assim que estiver disponível, a página atualiza sozinha.`
+      : null;
+
+  return { competition, index, standingsData, extraData, raceData, scorersData, isMock, lastUpdated, seasonEndedNotice, top6 };
+});
 ---
 
 <BaseLayout lang={lang} title={t('brasileirao.title')} description={t('brasileirao.subtitle')}>
@@ -35,62 +71,126 @@ const lastUpdated = serieA.lastUpdated ? dateFormatter.format(new Date(serieA.la
     <header class="mb-6">
       <h1 class="font-serif-editorial text-3xl font-bold text-ink-950 sm:text-4xl">{t('brasileirao.title')}</h1>
       <p class="mt-2 text-ink-700">{t('brasileirao.subtitle')}</p>
-      {lastUpdated && !isMock && (
-        <p class="mt-2 text-xs text-ink-400">{t('brasileirao.lastUpdated')} {lastUpdated}</p>
-      )}
     </header>
 
-    {isMock && (
-      <p class="mb-8 rounded border border-ink-200 bg-ink-50 px-4 py-3 text-sm text-ink-600">
-        {t('brasileirao.mockDataNotice')}
-      </p>
-    )}
-
-    <div class="mb-10 rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
-      <BrasileiraoTable lang={lang} standings={serieA.standings} />
+    <div class="mb-8 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+      <div class="flex gap-1 border-b border-ink-100 whitespace-nowrap">
+        {panels.map(({ competition, index }) => (
+          <button
+            type="button"
+            class:list={[
+              'tab-button shrink-0 border-b-2 px-3 py-2 text-sm font-semibold',
+              index === 0 ? 'border-ember-500 text-ink-950' : 'border-transparent text-ink-500 hover:text-ink-800',
+            ]}
+            data-tab-index={index}
+            aria-pressed={index === 0 ? 'true' : 'false'}
+          >
+            {competition.tabLabel}
+          </button>
+        ))}
+      </div>
     </div>
 
-    <section class="mb-10">
-      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.scorersTitle')}</h2>
-      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.scorersSubtitle')}</p>
-      <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
-        <ScorersTable lang={lang} scorers={artilheiros.scorers} />
+    {panels.map(({ competition, index, standingsData, extraData, raceData, scorersData, isMock, lastUpdated, seasonEndedNotice, top6 }) => (
+      <div class:list={['competition-panel', { hidden: index !== 0 }]} data-competition-panel data-panel-index={index}>
+        {lastUpdated && !isMock && (
+          <p class="mb-4 text-xs text-ink-400">{t('brasileirao.lastUpdated')} {lastUpdated}</p>
+        )}
+
+        {isMock && (
+          <p class="mb-8 rounded border border-ink-200 bg-ink-50 px-4 py-3 text-sm text-ink-600">
+            {t('brasileirao.mockDataNotice')}
+          </p>
+        )}
+
+        {seasonEndedNotice && (
+          <p class="mb-8 rounded border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {seasonEndedNotice}
+          </p>
+        )}
+
+        <div class="mb-10 rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+          <BrasileiraoTable
+            lang={lang}
+            standings={standingsData?.standings ?? []}
+            topZoneCount={competition.topZoneCount}
+            bottomZoneCount={competition.bottomZoneCount}
+            topZoneLabel={competition.topZoneLabel}
+            bottomZoneLabel={competition.bottomZoneLabel}
+          />
+        </div>
+
+        <section class="mb-10">
+          <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.scorersTitle')}</h2>
+          <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.scorersSubtitle')}</p>
+          <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+            <ScorersTable lang={lang} scorers={scorersData?.scorers ?? []} />
+          </div>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.homeAwayTitle')}</h2>
+          <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.homeAwaySubtitle')}</p>
+          <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+            <HomeAwayTable lang={lang} teams={extraData?.teams ?? []} />
+          </div>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.streaksTitle')}</h2>
+          <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.streaksSubtitle')}</p>
+          <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
+            <StreaksTable lang={lang} teams={extraData?.teams ?? []} />
+          </div>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.attackDefenseTitle')}</h2>
+          <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.attackDefenseSubtitle')}</p>
+          <AttackDefenseScatter standings={standingsData?.standings ?? []} />
+        </section>
+
+        {index === 0 && <AdSlot placement="in-article" class="mb-10" />}
+
+        <section class="mb-10">
+          <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.raceTitle')}</h2>
+          <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.raceSubtitle')}</p>
+          <PointsRaceChart matchdays={raceData?.matchdays ?? []} series={raceData?.series ?? {}} highlightTeams={top6} />
+        </section>
+
+        <p class="text-xs text-ink-400">
+          {t('brasileirao.dataSource')}
+          <a href="https://www.football-data.org/" target="_blank" rel="noopener noreferrer" class="underline hover:text-ember-600">football-data.org</a>.
+        </p>
       </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.homeAwayTitle')}</h2>
-      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.homeAwaySubtitle')}</p>
-      <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
-        <HomeAwayTable lang={lang} teams={serieAExtra.teams} />
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.streaksTitle')}</h2>
-      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.streaksSubtitle')}</p>
-      <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6">
-        <StreaksTable lang={lang} teams={serieAExtra.teams} />
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.attackDefenseTitle')}</h2>
-      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.attackDefenseSubtitle')}</p>
-      <AttackDefenseScatter standings={serieA.standings} />
-    </section>
-
-    <AdSlot placement="in-article" class="mb-10" />
-
-    <section class="mb-10">
-      <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.raceTitle')}</h2>
-      <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.raceSubtitle')}</p>
-      <PointsRaceChart matchdays={serieARace.matchdays} series={serieARace.series} highlightTeams={top6} />
-    </section>
-
-    <p class="mt-6 text-xs text-ink-400">
-      {t('brasileirao.dataSource')}
-      <a href="https://www.football-data.org/" target="_blank" rel="noopener noreferrer" class="underline hover:text-ember-600">football-data.org</a>.
-    </p>
+    ))}
   </div>
 </BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab-index]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-competition-panel]');
+
+  function activate(index: number) {
+    tabs.forEach((tab) => {
+      const isActive = Number(tab.dataset.tabIndex) === index;
+      tab.classList.toggle('border-ember-500', isActive);
+      tab.classList.toggle('text-ink-950', isActive);
+      tab.classList.toggle('border-transparent', !isActive);
+      tab.classList.toggle('text-ink-500', !isActive);
+      tab.setAttribute('aria-pressed', String(isActive));
+    });
+
+    panels.forEach((panel) => {
+      const isActive = Number(panel.dataset.panelIndex) === index;
+      panel.classList.toggle('hidden', !isActive);
+      if (isActive) {
+        panel.dispatchEvent(new CustomEvent('data10:panel-shown', { bubbles: true }));
+      }
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => activate(Number(tab.dataset.tabIndex)));
+  });
+</script>

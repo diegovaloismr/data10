@@ -1,8 +1,11 @@
 {
-  "league": "Série A",
+  "league": "Brasileirão Série A",
   "season": null,
+  "seasonLabel": null,
+  "seasonEnded": false,
   "lastUpdated": null,
   "isMockData": true,
+  "source": "football-data.org",
   "standings": [
     {
       "position": 1,

@@ -1,6 +1,8 @@
 {
   "league": "Ligue 1",
   "season": null,
+  "seasonLabel": null,
+  "seasonEnded": false,
   "lastUpdated": null,
   "isMockData": true,
   "source": "football-data.org",

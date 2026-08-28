@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 /**
- * Busca dados reais de futebol na football-data.org (plano gratuito) para:
- *   - Brasileirão Série A (BSA) — grava em src/data/brasileirao-serie-a*.json
- *     e src/data/brasileirao-artilheiros.json (nomes mantidos por
- *     compatibilidade com a página /pt/dashboards/brasileirao/).
- *   - As 6 competições internacionais listadas em src/data/leagues-config.json
- *     (Premier League, La Liga, Serie A da Itália, Bundesliga, Ligue 1,
- *     Champions League) — grava em src/data/leagues/{code}-*.json.
+ * Busca dados reais de futebol na football-data.org (plano gratuito) para as
+ * 7 competições listadas em src/data/leagues-config.json (Brasileirão Série A,
+ * Premier League, La Liga, Serie A da Itália, Bundesliga, Ligue 1 e Champions
+ * League) — grava tudo em src/data/leagues/{code}-*.json.
  *
  * Para cada competição: tabela de classificação, casa x fora + sequência,
  * evolução de pontos por rodada (corrida) e artilheiros.
@@ -191,11 +188,24 @@ async function fetchCompetition(code, displayName) {
     throw new Error('standings vazio (sem tabela do tipo TOTAL)');
   }
 
-  console.log(`[DEBUG SEASON] ${displayName}: ${JSON.stringify(standingsData.season)}`);
+  const seasonStart = standingsData.season?.startDate ?? null;
+  const seasonEnd = standingsData.season?.endDate ?? null;
+  const startYear = seasonStart?.slice(0, 4) ?? null;
+  const endYear = seasonEnd?.slice(0, 4) ?? null;
+  // Temporada europeia (cruza o ano civil, ex: "2026/27") x temporada em ano
+  // único (Brasileirão, ex: "2026").
+  const seasonLabel =
+    startYear && endYear && startYear !== endYear ? `${startYear}/${endYear.slice(2)}` : startYear;
+  // Se a temporada "atual" retornada pela API já terminou, é porque a API
+  // ainda não publicou a próxima temporada — mostramos isso na página em vez
+  // de fingir que os dados são do momento presente.
+  const seasonEnded = seasonEnd ? new Date(seasonEnd) < new Date() : false;
 
   const standingsPayload = {
     league: displayName,
-    season: standingsData.season?.startDate?.slice(0, 4) ?? null,
+    season: startYear,
+    seasonLabel,
+    seasonEnded,
     lastUpdated: new Date().toISOString(),
     isMockData: false,
     source: 'football-data.org',
@@ -257,34 +267,8 @@ async function main() {
   const leaguesDir = path.join(dataDir, 'leagues');
   await mkdir(leaguesDir, { recursive: true });
 
-  // Brasileirão Série A — mantém os nomes de arquivo usados pela página
-  // /pt/dashboards/brasileirao/.
-  try {
-    const { standingsPayload, extraPayload, racePayload, scorersPayload } = await fetchCompetition(
-      'BSA',
-      'Série A'
-    );
-    await writeJson(path.join(dataDir, 'brasileirao-serie-a.json'), standingsPayload);
-    await writeJson(path.join(dataDir, 'brasileirao-serie-a-extra.json'), extraPayload);
-    await writeJson(path.join(dataDir, 'brasileirao-serie-a-race.json'), racePayload);
-    await writeJson(path.join(dataDir, 'brasileirao-artilheiros.json'), scorersPayload);
-    console.log(
-      `[football-data] Brasileirão Série A: ${standingsPayload.standings.length} times, ` +
-        `${racePayload.matchdays.length} rodadas, ${scorersPayload.scorers.length} artilheiros.`
-    );
-  } catch (err) {
-    console.warn(`[football-data] Falha ao buscar Brasileirão Série A: ${err.message} — mantendo dados existentes.`);
-  }
-
-  // DEBUG temporário: comparar temporada padrão x temporada explícita 2026.
-  try {
-    const explicitCL = await apiFetch('/competitions/CL/standings?season=2026');
-    console.log(`[DEBUG SEASON] CL season=2026 explicit: ${JSON.stringify(explicitCL.season)}`);
-  } catch (err) {
-    console.log(`[DEBUG SEASON] CL season=2026 explicit falhou: ${err.message}`);
-  }
-
-  // As 6 competições internacionais.
+  // Brasileirão + as 6 competições internacionais, todas gravadas em
+  // src/data/leagues/{code}-*.json a partir da mesma config.
   const configRaw = await readFile(path.join(dataDir, 'leagues-config.json'), 'utf-8');
   const leagues = JSON.parse(configRaw);
 
@@ -300,7 +284,8 @@ async function main() {
       await writeJson(path.join(leaguesDir, `${league.code}-scorers.json`), scorersPayload);
       console.log(
         `[football-data] ${league.name}: ${standingsPayload.standings.length} times, ` +
-          `${racePayload.matchdays.length} rodadas, ${scorersPayload.scorers.length} artilheiros.`
+          `${racePayload.matchdays.length} rodadas, ${scorersPayload.scorers.length} artilheiros ` +
+          `(temporada ${standingsPayload.seasonLabel}${standingsPayload.seasonEnded ? ', já encerrada — fonte ainda não publicou a próxima' : ''}).`
       );
     } catch (err) {
       console.warn(`[football-data] Falha ao buscar ${league.name}: ${err.message} — mantendo dados existentes.`);

@@ -28,18 +28,19 @@ const chartData = JSON.stringify({ matchdays, datasets });
 <script>
   import Chart from 'chart.js/auto';
 
-  const wrappers = document.querySelectorAll<HTMLElement>('[data-chart="points-race"]');
-
-  for (const wrapper of wrappers) {
+  function initWrapper(wrapper: HTMLElement) {
+    if (wrapper.dataset.chartInitialized === 'true') return;
     const canvas = wrapper.querySelector('canvas');
     const payload = wrapper.dataset.chartPayload;
-    if (!canvas || !payload) continue;
+    if (!canvas || !payload) return;
 
     const { matchdays, datasets } = JSON.parse(payload) as {
       matchdays: number[];
       datasets: { team: string; data: number[]; color: string }[];
     };
-    if (matchdays.length === 0 || datasets.length === 0) continue;
+    if (matchdays.length === 0 || datasets.length === 0) return;
+
+    wrapper.dataset.chartInitialized = 'true';
 
     new Chart(canvas, {
       type: 'line',
@@ -72,4 +73,14 @@ const chartData = JSON.stringify({ matchdays, datasets });
       },
     });
   }
+
+  const wrappers = document.querySelectorAll<HTMLElement>('[data-chart="points-race"]');
+  for (const wrapper of wrappers) {
+    if (wrapper.offsetParent !== null) initWrapper(wrapper);
+  }
+
+  document.addEventListener('data10:panel-shown', (event) => {
+    const panel = event.target as HTMLElement;
+    panel.querySelectorAll<HTMLElement>('[data-chart="points-race"]').forEach(initWrapper);
+  });
 </script>

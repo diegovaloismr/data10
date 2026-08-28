@@ -136,27 +136,24 @@ Nenhum script de anúncio real está ativo. A estrutura já está pronta para qu
 - **`src/pages/pt/termos.astro`** (e as versões `en`/`es`): Termos de Uso com texto placeholder, mesma recomendação de revisão acima.
 - **`src/components/CookieConsent.astro`**: banner de consentimento de cookies em JS vanilla (sem biblioteca externa), que salva a preferência em `localStorage`. Aparece automaticamente em toda página até que o visitante aceite ou recuse.
 
-## Tabela do Brasileirão (dados reais)
+## Tabela do Brasileirão e Ligas Internacionais (dados reais)
 
-A página `/pt/dashboards/brasileirao/` mostra dados reais da Série A do Campeonato Brasileiro via **[football-data.org](https://www.football-data.org/)** (`scripts/fetch-football-data.mjs`, secret `FOOTBALL_DATA_KEY`): tabela de classificação, artilheiros, casa x fora, sequência/invencibilidade, ataque x defesa e corrida pelo título — todos calculados a partir dos resultados de partidas retornados pela API.
+A página `/pt/dashboards/brasileirao/` mostra dados reais de 7 competições — **Brasileirão Série A, Premier League, La Liga, Serie A (Itália), Bundesliga, Ligue 1 e Champions League** — como abas de uma única página (tabela de classificação, artilheiros, casa x fora, sequência/invencibilidade, ataque x defesa e corrida pelo título, todos calculados a partir dos resultados de partidas). Fonte: **[football-data.org](https://www.football-data.org/)** (`scripts/fetch-football-data.mjs`, secret `FOOTBALL_DATA_KEY`), plano gratuito (confirmado via API: `plan: TIER_ONE` em todas as 7).
 
-⚠️ **Só a Série A está disponível.** Avaliamos duas fontes gratuitas: a API-FOOTBALL dava acesso à Série B, mas seu plano gratuito **não cobre a temporada atual** (só 2022-2024); a football-data.org cobre a temporada atual, mas seu plano gratuito só inclui a primeira divisão. Sem uma fonte gratuita que cubra a Série B com dados atuais, ela foi removida do site — plugar de volta exigiria um plano pago em alguma das duas.
+- `src/data/leagues-config.json`: lista as 7 competições (código da API, slug, nome, tab label, zonas de classificação/rebaixamento). Adicionar uma nova competição é só adicionar uma entrada aqui + rodar o fetch — a aba e os dados em `src/data/leagues/` são gerados automaticamente a partir dessa config.
+- A Champions League tem zonas diferentes das ligas nacionais (sem rebaixamento — usa "classificação direta às oitavas" nos 8 primeiros e "eliminado na fase de liga" nos 12 últimos, refletindo o formato atual de liga única de 36 times); isso é configurável por competição via `topZoneCount`/`bottomZoneCount`/`topZoneLabel`/`bottomZoneLabel` no `leagues-config.json`.
+- A **Copa Libertadores** não está incluída: confirmamos via API que ela está em `plan: TIER_FOUR` (pago) na football-data.org — precisaria de um plano pago (ou outra fonte) para entrar.
+- A **Série B** também não está incluída: avaliamos duas fontes gratuitas (API-FOOTBALL dá acesso à Série B, mas seu plano gratuito não cobre a temporada atual; football-data.org cobre a temporada atual, mas só a primeira divisão) e nenhuma cobre a Série B com dados atuais de graça.
+- Os gráficos (Chart.js) só são inicializados quando a aba correspondente é aberta pela primeira vez (evita canvas com tamanho zero em abas escondidas e evita construir 7x os gráficos à toa).
 
 Como funciona:
 
 - O script roda como um passo do workflow (`.github/workflows/deploy.yml`), **antes** do `astro build` — como o site é estático, os dados já saem "assados" no HTML publicado.
 - O workflow tem um gatilho `schedule` (cron diário, 11:00 UTC ≈ 08:00 em Brasília) além do `push` normal, então os dados se atualizam sozinhos todo dia, mesmo sem nenhum commit novo.
-- A chave fica no secret do repositório `FOOTBALL_DATA_KEY` (Settings → Secrets and variables → Actions). Sem essa variável definida, o script não falha o build — só mantém os dados já existentes em `src/data/` (inclusive localmente, para quem for rodar `npm run build` sem a chave).
-- Os arquivos JSON em `src/data/` começam com dados de exemplo zerados (`isMockData: true`); a página mostra um aviso disso até a primeira busca real acontecer.
-
-### Ligas internacionais
-
-`/pt/dashboards/ligas/` reúne o mesmo tipo de análise (tabela, artilheiros, casa x fora, sequência, ataque x defesa, corrida pelo título) para **Premier League, La Liga, Serie A (Itália), Bundesliga, Ligue 1 e Champions League** — todas no plano gratuito da football-data.org (confirmado via API: `plan: TIER_ONE`).
-
-- `src/data/leagues-config.json`: lista as 6 competições (código da API, slug da URL, nome, zonas de classificação/rebaixamento). Adicionar uma nova liga é só adicionar uma entrada aqui + rodar o fetch — a rota `/pt/dashboards/ligas/[slug].astro` e os dados em `src/data/leagues/` são gerados automaticamente a partir dessa config.
-- A Champions League tem zonas diferentes das ligas nacionais (sem rebaixamento — usa "classificação direta às oitavas" nos 8 primeiros e "eliminado na fase de liga" nos 12 últimos, refletindo o formato atual de liga única de 36 times); isso é configurável por competição via `topZoneCount`/`bottomZoneCount`/`topZoneLabel`/`bottomZoneLabel` no `leagues-config.json`.
-- A **Copa Libertadores** não está incluída: confirmamos via API que ela está em `plan: TIER_FOUR` (pago) na football-data.org — precisaria de um plano pago (ou outra fonte) para entrar.
-- `scripts/fetch-football-data.mjs` busca Brasileirão + as 6 ligas com espaçamento de ~6,5s entre chamadas para respeitar o limite de 10 requisições/minuto do plano gratuito — o passo de fetch no workflow leva um pouco mais de tempo por causa disso (normal, é só custo de build, não afeta o site publicado).
+- A chave fica no secret do repositório `FOOTBALL_DATA_KEY` (Settings → Secrets and variables → Actions). Sem essa variável definida, o script não falha o build — só mantém os dados já existentes em `src/data/leagues/` (inclusive localmente, para quem for rodar `npm run build` sem a chave).
+- Os arquivos JSON em `src/data/leagues/` começam com dados de exemplo zerados (`isMockData: true`); a página mostra um aviso disso até a primeira busca real de cada competição acontecer.
+- `scripts/fetch-football-data.mjs` busca as 7 competições com espaçamento de ~6,5s entre chamadas para respeitar o limite de 10 requisições/minuto do plano gratuito — o passo de fetch no workflow leva um pouco mais de tempo por causa disso (normal, é só custo de build, não afeta o site publicado).
+- Quando a API retorna uma temporada já encerrada como "atual" (ex: a Champions League 2026/27 ainda não existia na base da football-data.org quando testamos, então ela retorna a 2025/26 já finalizada), a página mostra um aviso avisando que aquela é a temporada mais recente disponível — sem código adicional, o aviso some sozinho assim que a fonte publicar a temporada nova.
 
 Para trocar o horário do cron, edite a linha `cron:` em `.github/workflows/deploy.yml` (formato padrão do cron, sempre em UTC).
 

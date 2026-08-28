@@ -17,7 +17,7 @@ const t = useTranslations(lang);
       <p class="mt-2 text-ink-700">{t('dashboards.subtitle')}</p>
     </header>
 
-    <div class="mb-10 grid gap-4 sm:grid-cols-2">
+    <div class="mb-10">
       <a
         href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/pt/dashboards/brasileirao/`}
         class="flex flex-col gap-1 rounded-lg border border-ink-200 bg-ink-950 px-5 py-4 text-white transition-colors hover:border-ember-500"
@@ -26,16 +26,6 @@ const t = useTranslations(lang);
         <h2 class="mt-1 font-serif-editorial text-xl font-bold">{t('dashboards.brasileiraoTitle')}</h2>
         <p class="mt-1 text-sm text-ink-200">{t('dashboards.brasileiraoBody')}</p>
         <span class="mt-3 text-sm font-medium text-ember-400">{t('dashboards.brasileiraoCta')} →</span>
-      </a>
-
-      <a
-        href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/pt/dashboards/ligas/`}
-        class="flex flex-col gap-1 rounded-lg border border-ink-200 bg-ink-950 px-5 py-4 text-white transition-colors hover:border-ember-500"
-      >
-        <p class="text-xs font-semibold uppercase tracking-wider text-ember-400">Dados reais</p>
-        <h2 class="mt-1 font-serif-editorial text-xl font-bold">{t('dashboards.liguesTitle')}</h2>
-        <p class="mt-1 text-sm text-ink-200">{t('dashboards.liguesBody')}</p>
-        <span class="mt-3 text-sm font-medium text-ember-400">{t('dashboards.liguesCta')} →</span>
       </a>
     </div>
 
