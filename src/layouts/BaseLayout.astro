@@ -41,7 +41,7 @@ const pathWithoutLangAndBase = currentPath
   .replace(new RegExp(`^/(${Object.keys(languages).join('|')})`), '');
 
 const canonicalURL = new URL(currentPath, Astro.site);
-const ogImage = image ? new URL(image, Astro.site).toString() : new URL(`${base}/og-default.svg`, Astro.site).toString();
+const ogImage = image ? new URL(image, Astro.site).toString() : new URL(`${base}/og-default.png`, Astro.site).toString();
 ---
 
 <!doctype html>

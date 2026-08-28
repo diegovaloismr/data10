@@ -34,6 +34,14 @@ export default defineConfig({
 
   integrations: [mdx(), sitemap()],
 
+  image: {
+    // As capas dos posts são SVG autorais (não vêm de usuários/fontes
+    // externas), então é seguro rasterizá-las — usado para gerar versões
+    // PNG das capas para og:image/twitter:image (X/Twitter não aceita SVG
+    // em preview de link).
+    dangerouslyProcessSVG: true,
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
