@@ -1,0 +1,68 @@
+[
+  {
+    "code": "PL",
+    "slug": "premier-league",
+    "name": "Premier League",
+    "country": "Inglaterra",
+    "teamCount": 20,
+    "topZoneCount": 4,
+    "bottomZoneCount": 3,
+    "topZoneLabel": "Classificação para a Champions League",
+    "bottomZoneLabel": "Zona de rebaixamento"
+  },
+  {
+    "code": "PD",
+    "slug": "la-liga",
+    "name": "La Liga",
+    "country": "Espanha",
+    "teamCount": 20,
+    "topZoneCount": 4,
+    "bottomZoneCount": 3,
+    "topZoneLabel": "Classificação para a Champions League",
+    "bottomZoneLabel": "Zona de rebaixamento"
+  },
+  {
+    "code": "SA",
+    "slug": "serie-a-italia",
+    "name": "Serie A",
+    "country": "Itália",
+    "teamCount": 20,
+    "topZoneCount": 4,
+    "bottomZoneCount": 3,
+    "topZoneLabel": "Classificação para a Champions League",
+    "bottomZoneLabel": "Zona de rebaixamento"
+  },
+  {
+    "code": "BL1",
+    "slug": "bundesliga",
+    "name": "Bundesliga",
+    "country": "Alemanha",
+    "teamCount": 18,
+    "topZoneCount": 4,
+    "bottomZoneCount": 3,
+    "topZoneLabel": "Classificação para a Champions League",
+    "bottomZoneLabel": "Zona de rebaixamento (inclui repescagem)"
+  },
+  {
+    "code": "FL1",
+    "slug": "ligue-1",
+    "name": "Ligue 1",
+    "country": "França",
+    "teamCount": 18,
+    "topZoneCount": 4,
+    "bottomZoneCount": 3,
+    "topZoneLabel": "Classificação para a Champions League",
+    "bottomZoneLabel": "Zona de rebaixamento (inclui repescagem)"
+  },
+  {
+    "code": "CL",
+    "slug": "champions-league",
+    "name": "Champions League",
+    "country": "Europa",
+    "teamCount": 36,
+    "topZoneCount": 8,
+    "bottomZoneCount": 12,
+    "topZoneLabel": "Classificação direta para as oitavas de final",
+    "bottomZoneLabel": "Eliminado na fase de liga"
+  }
+]

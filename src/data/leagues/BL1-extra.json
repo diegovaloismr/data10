@@ -1,0 +1,349 @@
+{
+  "season": null,
+  "lastUpdated": null,
+  "isMockData": true,
+  "teams": [
+    {
+      "team": "Time 1",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 2",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 3",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 4",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 5",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 6",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 7",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 8",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 9",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 10",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 11",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 12",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 13",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 14",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 15",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 16",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 17",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    },
+    {
+      "team": "Time 18",
+      "home": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "away": {
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "points": 0
+      },
+      "form": "",
+      "unbeatenStreak": 0
+    }
+  ]
+}

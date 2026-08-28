@@ -58,7 +58,10 @@
     "evolutionBody": "Série temporal mostrando a evolução do PPDA (passes por ação defensiva) de uma equipe ao longo das rodadas do campeonato, indicando o quão intensa tem sido a pressão do time nas últimas partidas.",
     "brasileiraoTitle": "Tabela do Brasileirão",
     "brasileiraoBody": "Classificação real de Série A e Série B, atualizada automaticamente todo dia.",
-    "brasileiraoCta": "Ver tabela completa"
+    "brasileiraoCta": "Ver tabela completa",
+    "liguesTitle": "Ligas Internacionais",
+    "liguesBody": "Premier League, La Liga, Serie A, Bundesliga, Ligue 1 e Champions League — classificação e artilheiros atualizados todo dia.",
+    "liguesCta": "Ver ligas internacionais"
   },
   "brasileirao": {
     "title": "Tabela do Brasileirão",
@@ -98,6 +101,17 @@
     "attackDefenseTitle": "Ataque x Defesa",
     "attackDefenseSubtitle": "Gols marcados x gols sofridos por jogo de cada time da Série A — times no canto inferior direito atacam bem e sofrem pouco; no canto superior esquerdo, o oposto.",
     "raceTitle": "Corrida pelo título",
+    "raceSubtitle": "Evolução acumulada de pontos dos 6 primeiros colocados atuais, rodada a rodada."
+  },
+  "ligas": {
+    "hubTitle": "Ligas Internacionais",
+    "hubSubtitle": "Classificação, artilheiros e outras análises das principais ligas do mundo, atualizadas automaticamente todo dia.",
+    "backToHub": "← Voltar para Ligas Internacionais",
+    "mockDataNotice": "Ainda não recebemos a primeira atualização automática de dados reais desta competição — os números abaixo são apenas de exemplo (zerados).",
+    "scorersSubtitle": "Ranking de goleadores na temporada atual.",
+    "homeAwaySubtitle": "Aproveitamento de cada time como mandante e como visitante — mostra o quanto o desempenho depende do fator casa.",
+    "streaksSubtitle": "Times ordenados pela maior sequência sem perder (invencibilidade).",
+    "attackDefenseSubtitle": "Gols marcados x gols sofridos por jogo de cada time — times no canto inferior direito atacam bem e sofrem pouco; no canto superior esquerdo, o oposto.",
     "raceSubtitle": "Evolução acumulada de pontos dos 6 primeiros colocados atuais, rodada a rodada."
   },
   "sobre": {

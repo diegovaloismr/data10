@@ -1,28 +1,41 @@
 #!/usr/bin/env node
 /**
- * Busca dados reais do Brasileirão Série A na football-data.org (plano
- * gratuito) e grava:
- *   - src/data/brasileirao-serie-a.json        (tabela — mesmo formato usado
- *     pelo BrasileiraoTable.astro, populado também pelo fetch-brasileirao.mjs)
- *   - src/data/brasileirao-serie-a-extra.json  (casa x fora + sequência/forma)
- *   - src/data/brasileirao-serie-a-race.json   (evolução de pontos por rodada)
- *   - src/data/brasileirao-artilheiros.json    (ranking de artilheiros)
+ * Busca dados reais de futebol na football-data.org (plano gratuito) para:
+ *   - Brasileirão Série A (BSA) — grava em src/data/brasileirao-serie-a*.json
+ *     e src/data/brasileirao-artilheiros.json (nomes mantidos por
+ *     compatibilidade com a página /pt/dashboards/brasileirao/).
+ *   - As 6 competições internacionais listadas em src/data/leagues-config.json
+ *     (Premier League, La Liga, Serie A da Itália, Bundesliga, Ligue 1,
+ *     Champions League) — grava em src/data/leagues/{code}-*.json.
  *
- * O plano gratuito da football-data.org só cobre a Série A (não a Série B),
- * então brasileirao-serie-b.json continua vindo do fetch-brasileirao.mjs
- * (API-FOOTBALL) — hoje com dados de exemplo, até decidirmos sobre um plano
- * pago para a Série B.
+ * Para cada competição: tabela de classificação, casa x fora + sequência,
+ * evolução de pontos por rodada (corrida) e artilheiros.
  *
- * Roda antes do `astro build`, junto com fetch-brasileirao.mjs. Se
- * FOOTBALL_DATA_KEY não estiver definida, não falha o build — só mantém os
- * arquivos JSON existentes.
+ * O plano gratuito tem limite de 10 requisições/minuto — este script pausa
+ * entre chamadas para nunca estourar esse limite.
+ *
+ * Roda antes do `astro build`. Se FOOTBALL_DATA_KEY não estiver definida,
+ * não falha o build — só mantém os arquivos JSON existentes.
  */
 
 const API_KEY = process.env.FOOTBALL_DATA_KEY;
 const API_BASE = 'https://api.football-data.org/v4';
-const COMPETITION = 'BSA'; // Campeonato Brasileiro Série A
+
+// Espaçamento entre chamadas para respeitar o limite de 10 req/min do plano
+// gratuito (6.5s entre chamadas ≈ 9.2 req/min, com margem de segurança).
+const RATE_LIMIT_DELAY_MS = 6500;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+let lastCallAt = 0;
 
 async function apiFetch(path) {
+  const waitFor = lastCallAt ? Math.max(0, RATE_LIMIT_DELAY_MS - (Date.now() - lastCallAt)) : 0;
+  if (waitFor > 0) await sleep(waitFor);
+  lastCallAt = Date.now();
+
   const res = await fetch(`${API_BASE}${path}`, {
     headers: { 'X-Auth-Token': API_KEY },
   });
@@ -104,11 +117,27 @@ function computeHomeAwayAndStreaks(matches, teamNames) {
   return stats;
 }
 
+function finalizeHomeAwayAndStreaks(stats) {
+  return Array.from(stats.values()).map((s) => {
+    const last5 = s.resultsSequence.slice(-5);
+    let unbeatenStreak = 0;
+    for (let i = s.resultsSequence.length - 1; i >= 0; i--) {
+      if (s.resultsSequence[i] === 'D') break;
+      unbeatenStreak++;
+    }
+    return {
+      team: s.team,
+      home: s.home,
+      away: s.away,
+      form: last5.join(''),
+      unbeatenStreak,
+    };
+  });
+}
+
 /**
  * Evolução acumulada de pontos por rodada (matchday), para o gráfico de
- * "corrida pelo título". Usa a rodada (matchday) retornada pela API — como
- * o Brasileirão é turno único de todos contra todos por rodada, cada time
- * joga exatamente uma vez por rodada.
+ * "corrida pelo título".
  */
 function computePointsRace(matches, teamNames) {
   const finished = matches.filter((m) => m.status === 'FINISHED' && m.matchday != null);
@@ -139,28 +168,7 @@ function computePointsRace(matches, teamNames) {
     }
   }
 
-  return {
-    matchdays,
-    series: Object.fromEntries(series),
-  };
-}
-
-function finalizeHomeAwayAndStreaks(stats) {
-  return Array.from(stats.values()).map((s) => {
-    const last5 = s.resultsSequence.slice(-5);
-    let unbeatenStreak = 0;
-    for (let i = s.resultsSequence.length - 1; i >= 0; i--) {
-      if (s.resultsSequence[i] === 'D') break;
-      unbeatenStreak++;
-    }
-    return {
-      team: s.team,
-      home: s.home,
-      away: s.away,
-      form: last5.join(''),
-      unbeatenStreak,
-    };
-  });
+  return { matchdays, series: Object.fromEntries(series) };
 }
 
 function normalizeScorers(scorers) {
@@ -175,6 +183,60 @@ function normalizeScorers(scorers) {
   }));
 }
 
+/** Busca tabela, casa/fora+sequência, corrida e artilheiros de uma competição. */
+async function fetchCompetition(code, displayName) {
+  const standingsData = await apiFetch(`/competitions/${code}/standings`);
+  const totalTable = standingsData.standings?.find((s) => s.type === 'TOTAL')?.table;
+  if (!totalTable) {
+    throw new Error('standings vazio (sem tabela do tipo TOTAL)');
+  }
+
+  const standingsPayload = {
+    league: displayName,
+    season: standingsData.season?.startDate?.slice(0, 4) ?? null,
+    lastUpdated: new Date().toISOString(),
+    isMockData: false,
+    source: 'football-data.org',
+    standings: normalizeStandings(totalTable),
+  };
+
+  const teamNames = standingsPayload.standings.map((row) => row.team);
+  const matchesData = await apiFetch(`/competitions/${code}/matches?status=FINISHED`);
+  const matches = matchesData.matches ?? [];
+
+  const stats = computeHomeAwayAndStreaks(matches, teamNames);
+  const extraPayload = {
+    season: standingsPayload.season,
+    lastUpdated: standingsPayload.lastUpdated,
+    isMockData: false,
+    teams: finalizeHomeAwayAndStreaks(stats),
+  };
+
+  const race = computePointsRace(matches, teamNames);
+  const racePayload = {
+    season: standingsPayload.season,
+    lastUpdated: standingsPayload.lastUpdated,
+    isMockData: false,
+    ...race,
+  };
+
+  const scorersData = await apiFetch(`/competitions/${code}/scorers?limit=20`);
+  const scorersPayload = {
+    season: standingsPayload.season,
+    lastUpdated: standingsPayload.lastUpdated,
+    isMockData: false,
+    source: 'football-data.org',
+    scorers: normalizeScorers(scorersData.scorers ?? []),
+  };
+
+  return { standingsPayload, extraPayload, racePayload, scorersPayload };
+}
+
+async function writeJson(filePath, data) {
+  const { writeFile } = await import('node:fs/promises');
+  await writeFile(filePath, JSON.stringify(data, null, 2) + '\n', 'utf-8');
+}
+
 async function main() {
   if (!API_KEY) {
     console.warn(
@@ -184,86 +246,55 @@ async function main() {
     return;
   }
 
-  const { writeFile, mkdir } = await import('node:fs/promises');
+  const { mkdir, readFile } = await import('node:fs/promises');
   const { fileURLToPath } = await import('node:url');
   const path = await import('node:path');
 
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  const outDir = path.join(__dirname, '..', 'src', 'data');
-  await mkdir(outDir, { recursive: true });
+  const dataDir = path.join(__dirname, '..', 'src', 'data');
+  const leaguesDir = path.join(dataDir, 'leagues');
+  await mkdir(leaguesDir, { recursive: true });
 
+  // Brasileirão Série A — mantém os nomes de arquivo usados pela página
+  // /pt/dashboards/brasileirao/.
   try {
-    const standingsData = await apiFetch(`/competitions/${COMPETITION}/standings`);
-    const totalTable = standingsData.standings?.find((s) => s.type === 'TOTAL')?.table;
-
-    if (totalTable) {
-      const payload = {
-        league: 'Série A',
-        season: standingsData.season?.startDate?.slice(0, 4) ?? null,
-        lastUpdated: new Date().toISOString(),
-        isMockData: false,
-        source: 'football-data.org',
-        standings: normalizeStandings(totalTable),
-      };
-      await writeFile(
-        path.join(outDir, 'brasileirao-serie-a.json'),
-        JSON.stringify(payload, null, 2) + '\n',
-        'utf-8'
-      );
-      console.log(`[football-data] Série A: ${payload.standings.length} times gravados (tabela).`);
-
-      const teamNames = payload.standings.map((row) => row.team);
-      const matchesData = await apiFetch(`/competitions/${COMPETITION}/matches?status=FINISHED`);
-      const matches = matchesData.matches ?? [];
-
-      const stats = computeHomeAwayAndStreaks(matches, teamNames);
-      const extra = finalizeHomeAwayAndStreaks(stats);
-      await writeFile(
-        path.join(outDir, 'brasileirao-serie-a-extra.json'),
-        JSON.stringify(
-          { season: payload.season, lastUpdated: payload.lastUpdated, isMockData: false, teams: extra },
-          null,
-          2
-        ) + '\n',
-        'utf-8'
-      );
-      console.log(`[football-data] Série A: casa/fora e sequência calculados para ${extra.length} times.`);
-
-      const race = computePointsRace(matches, teamNames);
-      await writeFile(
-        path.join(outDir, 'brasileirao-serie-a-race.json'),
-        JSON.stringify(
-          { season: payload.season, lastUpdated: payload.lastUpdated, isMockData: false, ...race },
-          null,
-          2
-        ) + '\n',
-        'utf-8'
-      );
-      console.log(`[football-data] Série A: corrida pelo título com ${race.matchdays.length} rodadas.`);
-    } else {
-      console.warn('[football-data] Standings da Série A vieram vazios — mantendo dados existentes.');
-    }
+    const { standingsPayload, extraPayload, racePayload, scorersPayload } = await fetchCompetition(
+      'BSA',
+      'Série A'
+    );
+    await writeJson(path.join(dataDir, 'brasileirao-serie-a.json'), standingsPayload);
+    await writeJson(path.join(dataDir, 'brasileirao-serie-a-extra.json'), extraPayload);
+    await writeJson(path.join(dataDir, 'brasileirao-serie-a-race.json'), racePayload);
+    await writeJson(path.join(dataDir, 'brasileirao-artilheiros.json'), scorersPayload);
+    console.log(
+      `[football-data] Brasileirão Série A: ${standingsPayload.standings.length} times, ` +
+        `${racePayload.matchdays.length} rodadas, ${scorersPayload.scorers.length} artilheiros.`
+    );
   } catch (err) {
-    console.warn(`[football-data] Falha ao buscar tabela/casa-fora da Série A: ${err.message} — mantendo dados existentes.`);
+    console.warn(`[football-data] Falha ao buscar Brasileirão Série A: ${err.message} — mantendo dados existentes.`);
   }
 
-  try {
-    const scorersData = await apiFetch(`/competitions/${COMPETITION}/scorers?limit=20`);
-    const payload = {
-      season: scorersData.season?.startDate?.slice(0, 4) ?? null,
-      lastUpdated: new Date().toISOString(),
-      isMockData: false,
-      source: 'football-data.org',
-      scorers: normalizeScorers(scorersData.scorers ?? []),
-    };
-    await writeFile(
-      path.join(outDir, 'brasileirao-artilheiros.json'),
-      JSON.stringify(payload, null, 2) + '\n',
-      'utf-8'
-    );
-    console.log(`[football-data] Artilheiros: ${payload.scorers.length} jogadores gravados.`);
-  } catch (err) {
-    console.warn(`[football-data] Falha ao buscar artilheiros: ${err.message} — mantendo dados existentes.`);
+  // As 6 competições internacionais.
+  const configRaw = await readFile(path.join(dataDir, 'leagues-config.json'), 'utf-8');
+  const leagues = JSON.parse(configRaw);
+
+  for (const league of leagues) {
+    try {
+      const { standingsPayload, extraPayload, racePayload, scorersPayload } = await fetchCompetition(
+        league.code,
+        league.name
+      );
+      await writeJson(path.join(leaguesDir, `${league.code}-standings.json`), standingsPayload);
+      await writeJson(path.join(leaguesDir, `${league.code}-extra.json`), extraPayload);
+      await writeJson(path.join(leaguesDir, `${league.code}-race.json`), racePayload);
+      await writeJson(path.join(leaguesDir, `${league.code}-scorers.json`), scorersPayload);
+      console.log(
+        `[football-data] ${league.name}: ${standingsPayload.standings.length} times, ` +
+          `${racePayload.matchdays.length} rodadas, ${scorersPayload.scorers.length} artilheiros.`
+      );
+    } catch (err) {
+      console.warn(`[football-data] Falha ao buscar ${league.name}: ${err.message} — mantendo dados existentes.`);
+    }
   }
 }
 

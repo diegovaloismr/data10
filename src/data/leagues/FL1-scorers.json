@@ -1,0 +1,188 @@
+{
+  "season": null,
+  "lastUpdated": null,
+  "isMockData": true,
+  "source": "football-data.org",
+  "scorers": [
+    {
+      "rank": 1,
+      "player": "Jogador 1",
+      "team": "Time 1",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 2,
+      "player": "Jogador 2",
+      "team": "Time 2",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 3,
+      "player": "Jogador 3",
+      "team": "Time 3",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 4,
+      "player": "Jogador 4",
+      "team": "Time 4",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 5,
+      "player": "Jogador 5",
+      "team": "Time 5",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 6,
+      "player": "Jogador 6",
+      "team": "Time 6",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 7,
+      "player": "Jogador 7",
+      "team": "Time 7",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 8,
+      "player": "Jogador 8",
+      "team": "Time 8",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 9,
+      "player": "Jogador 9",
+      "team": "Time 9",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 10,
+      "player": "Jogador 10",
+      "team": "Time 10",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 11,
+      "player": "Jogador 11",
+      "team": "Time 11",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 12,
+      "player": "Jogador 12",
+      "team": "Time 12",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 13,
+      "player": "Jogador 13",
+      "team": "Time 13",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 14,
+      "player": "Jogador 14",
+      "team": "Time 14",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 15,
+      "player": "Jogador 15",
+      "team": "Time 15",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 16,
+      "player": "Jogador 16",
+      "team": "Time 16",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 17,
+      "player": "Jogador 17",
+      "team": "Time 17",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 18,
+      "player": "Jogador 18",
+      "team": "Time 18",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 19,
+      "player": "Jogador 19",
+      "team": "Time 19",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    },
+    {
+      "rank": 20,
+      "player": "Jogador 20",
+      "team": "Time 20",
+      "crest": null,
+      "goals": 0,
+      "assists": null,
+      "playedMatches": null
+    }
+  ]
+}

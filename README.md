@@ -151,6 +151,15 @@ Como funciona:
 - Os arquivos JSON em `src/data/` começam com dados de exemplo zerados (`isMockData: true`); a página mostra avisos disso até a primeira busca real de cada fonte acontecer.
 - A Série B fica sem casa x fora/sequência/artilheiros por enquanto — o plano gratuito da football-data.org cobre só a Série A.
 
+### Ligas internacionais
+
+`/pt/dashboards/ligas/` reúne o mesmo tipo de análise (tabela, artilheiros, casa x fora, sequência, ataque x defesa, corrida pelo título) para **Premier League, La Liga, Serie A (Itália), Bundesliga, Ligue 1 e Champions League** — todas no plano gratuito da football-data.org (confirmado via API: `plan: TIER_ONE`).
+
+- `src/data/leagues-config.json`: lista as 6 competições (código da API, slug da URL, nome, zonas de classificação/rebaixamento). Adicionar uma nova liga é só adicionar uma entrada aqui + rodar o fetch — a rota `/pt/dashboards/ligas/[slug].astro` e os dados em `src/data/leagues/` são gerados automaticamente a partir dessa config.
+- A Champions League tem zonas diferentes das ligas nacionais (sem rebaixamento — usa "classificação direta às oitavas" nos 8 primeiros e "eliminado na fase de liga" nos 12 últimos, refletindo o formato atual de liga única de 36 times); isso é configurável por competição via `topZoneCount`/`bottomZoneCount`/`topZoneLabel`/`bottomZoneLabel` no `leagues-config.json`.
+- A **Copa Libertadores** não está incluída: confirmamos via API que ela está em `plan: TIER_FOUR` (pago) na football-data.org — precisaria de um plano pago (ou outra fonte) para entrar.
+- `scripts/fetch-football-data.mjs` busca Brasileirão + as 6 ligas com espaçamento de ~6,5s entre chamadas para respeitar o limite de 10 requisições/minuto do plano gratuito — o passo de fetch no workflow leva um pouco mais de tempo por causa disso (normal, é só custo de build, não afeta o site publicado).
+
 Para trocar o horário do cron, edite a linha `cron:` em `.github/workflows/deploy.yml` (formato padrão do cron, sempre em UTC).
 
 ## Performance
