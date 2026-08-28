@@ -4,13 +4,17 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Site hospedado como GitHub Project Page: https://diegovaloismr.github.io/data10/
-// Ajuste `site` e `base` aqui caso o repositório mude de nome ou vire uma User Page
-// (usuario.github.io), caso em que `base` deve virar '/'.
-const base = '/data10';
+// Site hospedado no domínio próprio https://data10.app.br, via GitHub Pages
+// (CNAME em public/CNAME). Como o domínio serve a raiz diretamente, `base`
+// fica em '/' — se o site voltar a ser servido a partir de um subcaminho
+// (ex: usuario.github.io/data10/), ajuste `base` de volta para '/data10'.
+const base = '/';
+// Concatenar `${base}/pt/` com base = '/' geraria "//pt/" (barra dupla);
+// normalizamos para '' nesse caso só para montar os destinos abaixo.
+const baseForPaths = base === '/' ? '' : base;
 
 export default defineConfig({
-  site: 'https://diegovaloismr.github.io',
+  site: 'https://data10.app.br',
   base,
   trailingSlash: 'always',
 
@@ -25,7 +29,7 @@ export default defineConfig({
   // A raiz "/" redireciona para "/pt/". Astro NÃO prefixa `base`
   // automaticamente nos destinos de `redirects`, então incluímos aqui.
   redirects: {
-    '/': `${base}/pt/`,
+    '/': `${baseForPaths}/pt/`,
   },
 
   integrations: [mdx(), sitemap()],

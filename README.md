@@ -104,7 +104,34 @@ Para publicar conteúdo real em outro idioma no futuro, o caminho recomendado é
 
 O deploy é automático via GitHub Actions (`.github/workflows/deploy.yml`): a cada push na branch `main`, o site é buildado e publicado no GitHub Pages.
 
-### Passo a passo para conectar ao GitHub
+### Domínio próprio (configuração atual)
+
+O site é servido em **[data10.app.br](https://data10.app.br)**, um domínio próprio apontado para o GitHub Pages deste repositório. Isso é configurado em duas partes:
+
+- **`public/CNAME`**: contém só o domínio (`data10.app.br`). O GitHub Pages lê esse arquivo a cada deploy e aplica a configuração de domínio automaticamente — não precisa mexer nas configurações do repositório toda vez.
+- **DNS no registrador** (registro.br, nesse caso): como é um domínio raiz (sem `www`), aponta por registros **A** para os 4 IPs do GitHub Pages:
+
+  ```
+  185.199.108.153
+  185.199.109.153
+  185.199.110.153
+  185.199.111.153
+  ```
+
+  Opcionalmente, registros **AAAA** (IPv6) para os mesmos hosts:
+
+  ```
+  2606:50c0:8000::153
+  2606:50c0:8001::153
+  2606:50c0:8002::153
+  2606:50c0:8003::153
+  ```
+
+Como o domínio serve a raiz diretamente (sem subcaminho), `base` em `astro.config.mjs` fica `'/'`. Depois que o DNS propaga (pode levar de minutos a algumas horas) e o GitHub confirma a propriedade do domínio, o HTTPS é emitido automaticamente — confira em **Settings → Pages** do repositório se "Enforce HTTPS" está marcado; se não estiver disponível ainda, é só esperar a propagação e voltar a checar.
+
+O endereço antigo (`https://SEU_USUARIO.github.io/data10/`) continua funcionando e redireciona automaticamente para o domínio próprio.
+
+### Passo a passo para conectar ao GitHub (do zero, sem domínio próprio)
 
 1. Crie um repositório no GitHub chamado `data10` (ou ajuste `site`/`base` em `astro.config.mjs` caso use outro nome — veja a nota abaixo).
 2. Conecte este projeto local ao repositório remoto e envie o código:
@@ -118,14 +145,14 @@ O deploy é automático via GitHub Actions (`.github/workflows/deploy.yml`): a c
 3. No GitHub, vá em **Settings → Pages** do repositório e, em **Build and deployment → Source**, selecione **GitHub Actions**.
 4. O workflow `deploy.yml` vai rodar automaticamente. Acompanhe em **Actions** — quando concluído, o site estará em `https://SEU_USUARIO.github.io/data10/`.
 
-### Se o repositório tiver outro nome (ou for uma User/Organization Page)
+### Se o repositório tiver outro nome, não usar domínio próprio, ou for uma User/Organization Page
 
 Em `astro.config.mjs`, ajuste:
 
-- `site`: sempre `https://SEU_USUARIO.github.io`
-- `base`: `/NOME_DO_REPOSITORIO` (ex: `/data10`) para Project Pages, ou `/` se o repositório for `SEU_USUARIO.github.io` (User Page).
+- `site`: o domínio final do site (`https://SEU_USUARIO.github.io` se não usar domínio próprio).
+- `base`: `/NOME_DO_REPOSITORIO` (ex: `/data10`) para Project Pages sem domínio próprio, ou `/` para domínio próprio ou User Page (`SEU_USUARIO.github.io`).
 
-Depois de alterar, rode `npm run build` novamente para confirmar que tudo continua funcionando.
+Sem domínio próprio, também remova (ou deixe vazio) o arquivo `public/CNAME`. Depois de alterar, rode `npm run build` novamente para confirmar que tudo continua funcionando.
 
 ## Monetização (preparação, ainda não ativa)
 
