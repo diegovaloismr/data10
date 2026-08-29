@@ -33,8 +33,11 @@ const chartData = JSON.stringify(points);
   import Chart from 'chart.js/auto';
 
   const FALLBACK_COLOR = '#d1590f';
-  const CREST_RADIUS = 15;
-  const CREST_HOVER_RADIUS = 19;
+  // Miniatura do escudo do tamanho do ponto que ela substitui — só um pouco
+  // maior para o escudo continuar reconhecível como ícone, sem virar uma
+  // mancha grande que sobrepõe pontos vizinhos.
+  const CREST_RADIUS = 6;
+  const CREST_HOVER_RADIUS = 9;
   const DOT_RADIUS = 5;
   const DOT_HOVER_RADIUS = 7;
 
@@ -46,6 +49,11 @@ const chartData = JSON.stringify(points);
       const timeout = setTimeout(() => resolve(null), 1200);
       img.onload = () => {
         clearTimeout(timeout);
+        // Chart.js desenha pointStyle de imagem no tamanho de img.width/height
+        // (não respeita pointRadius) — redimensiona aqui para o escudo
+        // realmente nascer do tamanho do ponto, e não do tamanho original do arquivo.
+        img.width = CREST_RADIUS * 2;
+        img.height = CREST_RADIUS * 2;
         resolve(img);
       };
       img.onerror = () => {

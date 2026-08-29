@@ -56,9 +56,7 @@ const panels = competitions.map((competition, index) => {
 
   const isMock = standingsData?.isMockData ?? true;
   const lastUpdated = standingsData?.lastUpdated ? dateFormatter.format(new Date(standingsData.lastUpdated)) : null;
-  const top10 = (standingsData?.standings ?? [])
-    .slice(0, 10)
-    .map((row: { team: string; crest: string | null }) => ({ team: row.team, crest: row.crest }));
+  const top10 = (standingsData?.standings ?? []).slice(0, 10).map((row: { team: string }) => row.team);
   const seasonEndedNotice =
     !isMock && standingsData?.seasonEnded
       ? `Mostrando a temporada ${standingsData.seasonLabel} (a mais recente encerrada) — nossa fonte de dados ainda não publicou a temporada seguinte. Assim que estiver disponível, a página atualiza sozinha.`

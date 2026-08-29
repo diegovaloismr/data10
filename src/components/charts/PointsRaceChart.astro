@@ -1,16 +1,16 @@
 ---
+import { lookupTeamColor, pickDistinctColors } from '../../lib/team-color';
+
 interface Props {
   matchdays: number[];
   series: Record<string, number[]>;
   /** Times a destacar (ex: os 10 primeiros colocados atuais), na ordem desejada. */
-  highlightTeams: { team: string; crest: string | null }[];
+  highlightTeams: string[];
 }
 
 const { matchdays, series, highlightTeams } = Astro.props;
 
-// Paleta usada enquanto a cor real do time (extraída do escudo) ainda não
-// carregou, e como fallback para times sem escudo ou cuja cor não dá pra
-// estimar (ex: bloqueio de CORS no navegador).
+// Paleta usada como fallback para times sem cor de identidade conhecida.
 const FALLBACK_COLORS = [
   '#d1590f',
   '#1b2947',
@@ -24,14 +24,25 @@ const FALLBACK_COLORS = [
   '#2b6b7a',
 ];
 
-const datasets = highlightTeams
-  .filter((entry) => series[entry.team])
-  .map((entry, index) => ({
-    team: entry.team,
-    crest: entry.crest,
-    data: series[entry.team],
-    fallbackColor: FALLBACK_COLORS[index % FALLBACK_COLORS.length],
-  }));
+const teamsInRace = highlightTeams.filter((team) => series[team]);
+
+// Cor de cada time: tenta a cor de identidade real (torcida/uniforme) — essa
+// nunca é alterada, mesmo que fique parecida com a de outro time (times reais
+// com cores próximas, ex: dois "vermelho e preto", contam com linhas finas no
+// gráfico para dar pra distinguir numa sobreposição). Sem cor conhecida, cai
+// numa cor de fallback, aí sim afastada de qualquer cor (real ou de fallback)
+// já usada por um time acima na prioridade, pra não coincidir por acaso.
+const rawColors = teamsInRace.map((team, index) => {
+  const known = lookupTeamColor(team);
+  return { hex: known ?? FALLBACK_COLORS[index % FALLBACK_COLORS.length], protect: known !== null };
+});
+const colors = pickDistinctColors(rawColors);
+
+const datasets = teamsInRace.map((team, index) => ({
+  team,
+  data: series[team],
+  color: colors[index],
+}));
 
 const chartData = JSON.stringify({ matchdays, datasets });
 ---
@@ -42,7 +53,6 @@ const chartData = JSON.stringify({ matchdays, datasets });
 
 <script>
   import Chart from 'chart.js/auto';
-  import { getDominantColor, pickDistinctColors } from '../../lib/team-color';
 
   function initWrapper(wrapper: HTMLElement) {
     if (wrapper.dataset.chartInitialized === 'true') return;
@@ -52,26 +62,27 @@ const chartData = JSON.stringify({ matchdays, datasets });
 
     const { matchdays, datasets } = JSON.parse(payload) as {
       matchdays: number[];
-      datasets: { team: string; crest: string | null; data: number[]; fallbackColor: string }[];
+      datasets: { team: string; data: number[]; color: string }[];
     };
     if (matchdays.length === 0 || datasets.length === 0) return;
 
     wrapper.dataset.chartInitialized = 'true';
 
-    const chart = new Chart(canvas, {
+    new Chart(canvas, {
       type: 'line',
       data: {
         labels: matchdays.map((m) => `R${m}`),
         datasets: datasets.map((d) => ({
           label: d.team,
           data: d.data,
-          borderColor: d.fallbackColor,
-          backgroundColor: d.fallbackColor,
-          pointBackgroundColor: d.fallbackColor,
-          pointBorderColor: d.fallbackColor,
+          borderColor: d.color,
+          backgroundColor: d.color,
+          pointBackgroundColor: d.color,
+          pointBorderColor: d.color,
           tension: 0.25,
-          pointRadius: 2,
-          borderWidth: 2,
+          pointRadius: 1.5,
+          pointHoverRadius: 4,
+          borderWidth: 1.5,
         })),
       },
       options: {
@@ -89,23 +100,6 @@ const chartData = JSON.stringify({ matchdays, datasets });
           },
         },
       },
-    });
-
-    // Assim que as cores reais dos times (extraídas dos escudos) ficarem
-    // prontas, trocamos as cores de fallback pelas cores de identidade —
-    // afastando o matiz de qualquer par parecido demais para continuar
-    // dando pra distinguir os times no gráfico.
-    Promise.all(datasets.map((d) => getDominantColor(d.crest))).then((extracted) => {
-      const finalColors = pickDistinctColors(extracted.map((color, i) => color ?? datasets[i].fallbackColor));
-
-      finalColors.forEach((color, i) => {
-        const dataset = chart.data.datasets[i];
-        dataset.borderColor = color;
-        dataset.backgroundColor = color;
-        (dataset as { pointBackgroundColor?: string }).pointBackgroundColor = color;
-        (dataset as { pointBorderColor?: string }).pointBorderColor = color;
-      });
-      chart.update();
     });
   }
 
