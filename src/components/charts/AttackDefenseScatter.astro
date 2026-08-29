@@ -1,7 +1,8 @@
 ---
+import { lookupTeamColor, pickDistinctColors, DEFAULT_FALLBACK_COLORS } from '../../lib/team-color';
+
 interface StandingRow {
   team: string;
-  crest: string | null;
   played: number;
   goalsFor: number;
   goalsAgainst: number;
@@ -13,94 +14,67 @@ interface Props {
 
 const { standings } = Astro.props;
 
-const points = standings
-  .filter((row) => row.played > 0)
-  .map((row) => ({
-    team: row.team,
-    crest: row.crest,
-    x: Number((row.goalsFor / row.played).toFixed(2)),
-    y: Number((row.goalsAgainst / row.played).toFixed(2)),
-  }));
+const activeTeams = standings.filter((row) => row.played > 0);
+
+// Mesma lógica de cor da Corrida pelo título: cor de identidade real do time
+// quando conhecida (nunca alterada), senão uma cor de fallback afastada de
+// qualquer cor já usada por um time acima na prioridade (posição na tabela).
+const rawColors = activeTeams.map((row, index) => {
+  const known = lookupTeamColor(row.team);
+  return { hex: known ?? DEFAULT_FALLBACK_COLORS[index % DEFAULT_FALLBACK_COLORS.length], protect: known !== null };
+});
+const colors = pickDistinctColors(rawColors);
+
+const points = activeTeams.map((row, index) => ({
+  team: row.team,
+  x: Number((row.goalsFor / row.played).toFixed(2)),
+  y: Number((row.goalsAgainst / row.played).toFixed(2)),
+  color: colors[index],
+}));
 
 const chartData = JSON.stringify(points);
 ---
 
 <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="attack-defense" data-chart-payload={chartData}>
-  <canvas height="340" role="img" aria-label="Gráfico de dispersão comparando gols marcados e sofridos por jogo de cada time, identificado pelo escudo"></canvas>
+  <canvas height="340" role="img" aria-label="Gráfico de dispersão comparando gols marcados e sofridos por jogo de cada time, identificado por cor e legenda"></canvas>
 </div>
 
 <script>
   import Chart from 'chart.js/auto';
 
-  const FALLBACK_COLOR = '#d1590f';
-  // Miniatura do escudo do tamanho do ponto que ela substitui — só um pouco
-  // maior para o escudo continuar reconhecível como ícone, sem virar uma
-  // mancha grande que sobrepõe pontos vizinhos.
-  const CREST_RADIUS = 6;
-  const CREST_HOVER_RADIUS = 9;
-  const DOT_RADIUS = 5;
-  const DOT_HOVER_RADIUS = 7;
-
-  /** Pré-carrega os escudos (com timeout) para já nascerem prontos no primeiro desenho do gráfico. */
-  function preloadCrest(url: string | null): Promise<HTMLImageElement | null> {
-    if (!url) return Promise.resolve(null);
-    return new Promise((resolve) => {
-      const img = new Image();
-      const timeout = setTimeout(() => resolve(null), 1200);
-      img.onload = () => {
-        clearTimeout(timeout);
-        // Chart.js desenha pointStyle de imagem no tamanho de img.width/height
-        // (não respeita pointRadius) — redimensiona aqui para o escudo
-        // realmente nascer do tamanho do ponto, e não do tamanho original do arquivo.
-        img.width = CREST_RADIUS * 2;
-        img.height = CREST_RADIUS * 2;
-        resolve(img);
-      };
-      img.onerror = () => {
-        clearTimeout(timeout);
-        resolve(null);
-      };
-      img.src = url;
-    });
-  }
-
-  async function initWrapper(wrapper: HTMLElement) {
+  function initWrapper(wrapper: HTMLElement) {
     if (wrapper.dataset.chartInitialized === 'true') return;
     const canvas = wrapper.querySelector('canvas');
     const payload = wrapper.dataset.chartPayload;
     if (!canvas || !payload) return;
 
-    const points: { team: string; crest: string | null; x: number; y: number }[] = JSON.parse(payload);
+    const points: { team: string; x: number; y: number; color: string }[] = JSON.parse(payload);
     if (points.length === 0) return;
 
     wrapper.dataset.chartInitialized = 'true';
 
-    const crestImages = await Promise.all(points.map((p) => preloadCrest(p.crest)));
-
     new Chart(canvas, {
       type: 'scatter',
       data: {
-        datasets: [
-          {
-            label: 'Times',
-            data: points,
-            backgroundColor: FALLBACK_COLOR,
-            pointStyle: points.map((_, i) => crestImages[i] ?? 'circle'),
-            pointRadius: points.map((_, i) => (crestImages[i] ? CREST_RADIUS : DOT_RADIUS)),
-            pointHoverRadius: points.map((_, i) => (crestImages[i] ? CREST_HOVER_RADIUS : DOT_HOVER_RADIUS)),
-          },
-        ],
+        datasets: points.map((p) => ({
+          label: p.team,
+          data: [{ x: p.x, y: p.y }],
+          backgroundColor: p.color,
+          borderColor: p.color,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+        })),
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: false },
+          legend: { position: 'bottom', labels: { color: '#101a30', font: { family: 'Inter' }, boxWidth: 12 } },
           tooltip: {
             callbacks: {
               label: (ctx) => {
-                const p = points[ctx.dataIndex];
-                return `${p.team}: ${p.x} gols marcados/jogo, ${p.y} sofridos/jogo`;
+                const { x, y } = ctx.raw as { x: number; y: number };
+                return `${ctx.dataset.label}: ${x} gols marcados/jogo, ${y} sofridos/jogo`;
               },
             },
           },

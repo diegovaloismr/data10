@@ -145,6 +145,20 @@ function normalize(name: string): string {
     .replace(/[̀-ͯ]/g, ''); // remove acentos
 }
 
+/** Paleta usada como fallback para times sem cor de identidade conhecida. */
+export const DEFAULT_FALLBACK_COLORS = [
+  '#d1590f',
+  '#1b2947',
+  '#7686a8',
+  '#b3450c',
+  '#3d517d',
+  '#e57426',
+  '#8a5a2b',
+  '#4a6b5a',
+  '#6b4c8a',
+  '#2b6b7a',
+];
+
 /** Busca a cor de identidade conhecida de um time pelo nome (casa própria de
  * palavras-chave, não depende de bater o nome exato retornado pela API).
  * Retorna `null` se o time não estiver na lista — o chamador deve usar uma

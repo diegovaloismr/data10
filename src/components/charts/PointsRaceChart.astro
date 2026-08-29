@@ -1,5 +1,5 @@
 ---
-import { lookupTeamColor, pickDistinctColors } from '../../lib/team-color';
+import { lookupTeamColor, pickDistinctColors, DEFAULT_FALLBACK_COLORS } from '../../lib/team-color';
 
 interface Props {
   matchdays: number[];
@@ -9,20 +9,6 @@ interface Props {
 }
 
 const { matchdays, series, highlightTeams } = Astro.props;
-
-// Paleta usada como fallback para times sem cor de identidade conhecida.
-const FALLBACK_COLORS = [
-  '#d1590f',
-  '#1b2947',
-  '#7686a8',
-  '#b3450c',
-  '#3d517d',
-  '#e57426',
-  '#8a5a2b',
-  '#4a6b5a',
-  '#6b4c8a',
-  '#2b6b7a',
-];
 
 const teamsInRace = highlightTeams.filter((team) => series[team]);
 
@@ -34,7 +20,7 @@ const teamsInRace = highlightTeams.filter((team) => series[team]);
 // já usada por um time acima na prioridade, pra não coincidir por acaso.
 const rawColors = teamsInRace.map((team, index) => {
   const known = lookupTeamColor(team);
-  return { hex: known ?? FALLBACK_COLORS[index % FALLBACK_COLORS.length], protect: known !== null };
+  return { hex: known ?? DEFAULT_FALLBACK_COLORS[index % DEFAULT_FALLBACK_COLORS.length], protect: known !== null };
 });
 const colors = pickDistinctColors(rawColors);
 
