@@ -2,31 +2,47 @@
 interface Props {
   matchdays: number[];
   series: Record<string, number[]>;
-  /** Times a destacar (ex: os 6 primeiros colocados atuais), na ordem desejada. */
-  highlightTeams: string[];
+  /** Times a destacar (ex: os 10 primeiros colocados atuais), na ordem desejada. */
+  highlightTeams: { team: string; crest: string | null }[];
 }
 
 const { matchdays, series, highlightTeams } = Astro.props;
 
-const colors = ['#d1590f', '#1b2947', '#7686a8', '#b3450c', '#3d517d', '#e57426'];
+// Paleta usada enquanto a cor real do time (extraída do escudo) ainda não
+// carregou, e como fallback para times sem escudo ou cuja cor não dá pra
+// estimar (ex: bloqueio de CORS no navegador).
+const FALLBACK_COLORS = [
+  '#d1590f',
+  '#1b2947',
+  '#7686a8',
+  '#b3450c',
+  '#3d517d',
+  '#e57426',
+  '#8a5a2b',
+  '#4a6b5a',
+  '#6b4c8a',
+  '#2b6b7a',
+];
 
 const datasets = highlightTeams
-  .filter((team) => series[team])
-  .map((team, index) => ({
-    team,
-    data: series[team],
-    color: colors[index % colors.length],
+  .filter((entry) => series[entry.team])
+  .map((entry, index) => ({
+    team: entry.team,
+    crest: entry.crest,
+    data: series[entry.team],
+    fallbackColor: FALLBACK_COLORS[index % FALLBACK_COLORS.length],
   }));
 
 const chartData = JSON.stringify({ matchdays, datasets });
 ---
 
 <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="points-race" data-chart-payload={chartData}>
-  <canvas height="340" role="img" aria-label="Gráfico de linha mostrando a evolução acumulada de pontos dos times mais bem colocados ao longo das rodadas"></canvas>
+  <canvas height="340" role="img" aria-label="Gráfico de linha mostrando a evolução acumulada de pontos dos times mais bem colocados ao longo das rodadas, cada linha na cor do time"></canvas>
 </div>
 
 <script>
   import Chart from 'chart.js/auto';
+  import { getDominantColor, pickDistinctColors } from '../../lib/team-color';
 
   function initWrapper(wrapper: HTMLElement) {
     if (wrapper.dataset.chartInitialized === 'true') return;
@@ -36,21 +52,23 @@ const chartData = JSON.stringify({ matchdays, datasets });
 
     const { matchdays, datasets } = JSON.parse(payload) as {
       matchdays: number[];
-      datasets: { team: string; data: number[]; color: string }[];
+      datasets: { team: string; crest: string | null; data: number[]; fallbackColor: string }[];
     };
     if (matchdays.length === 0 || datasets.length === 0) return;
 
     wrapper.dataset.chartInitialized = 'true';
 
-    new Chart(canvas, {
+    const chart = new Chart(canvas, {
       type: 'line',
       data: {
         labels: matchdays.map((m) => `R${m}`),
         datasets: datasets.map((d) => ({
           label: d.team,
           data: d.data,
-          borderColor: d.color,
-          backgroundColor: d.color,
+          borderColor: d.fallbackColor,
+          backgroundColor: d.fallbackColor,
+          pointBackgroundColor: d.fallbackColor,
+          pointBorderColor: d.fallbackColor,
           tension: 0.25,
           pointRadius: 2,
           borderWidth: 2,
@@ -71,6 +89,23 @@ const chartData = JSON.stringify({ matchdays, datasets });
           },
         },
       },
+    });
+
+    // Assim que as cores reais dos times (extraídas dos escudos) ficarem
+    // prontas, trocamos as cores de fallback pelas cores de identidade —
+    // afastando o matiz de qualquer par parecido demais para continuar
+    // dando pra distinguir os times no gráfico.
+    Promise.all(datasets.map((d) => getDominantColor(d.crest))).then((extracted) => {
+      const finalColors = pickDistinctColors(extracted.map((color, i) => color ?? datasets[i].fallbackColor));
+
+      finalColors.forEach((color, i) => {
+        const dataset = chart.data.datasets[i];
+        dataset.borderColor = color;
+        dataset.backgroundColor = color;
+        (dataset as { pointBackgroundColor?: string }).pointBackgroundColor = color;
+        (dataset as { pointBorderColor?: string }).pointBorderColor = color;
+      });
+      chart.update();
     });
   }
 

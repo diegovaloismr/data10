@@ -56,13 +56,15 @@ const panels = competitions.map((competition, index) => {
 
   const isMock = standingsData?.isMockData ?? true;
   const lastUpdated = standingsData?.lastUpdated ? dateFormatter.format(new Date(standingsData.lastUpdated)) : null;
-  const top6 = (standingsData?.standings ?? []).slice(0, 6).map((row: { team: string }) => row.team);
+  const top10 = (standingsData?.standings ?? [])
+    .slice(0, 10)
+    .map((row: { team: string; crest: string | null }) => ({ team: row.team, crest: row.crest }));
   const seasonEndedNotice =
     !isMock && standingsData?.seasonEnded
       ? `Mostrando a temporada ${standingsData.seasonLabel} (a mais recente encerrada) — nossa fonte de dados ainda não publicou a temporada seguinte. Assim que estiver disponível, a página atualiza sozinha.`
       : null;
 
-  return { competition, index, standingsData, extraData, raceData, scorersData, isMock, lastUpdated, seasonEndedNotice, top6 };
+  return { competition, index, standingsData, extraData, raceData, scorersData, isMock, lastUpdated, seasonEndedNotice, top10 };
 });
 ---
 
@@ -93,7 +95,7 @@ const panels = competitions.map((competition, index) => {
       </div>
     </div>
 
-    {panels.map(({ competition, index, standingsData, extraData, raceData, scorersData, isMock, lastUpdated, seasonEndedNotice, top6 }) => (
+    {panels.map(({ competition, index, standingsData, extraData, raceData, scorersData, isMock, lastUpdated, seasonEndedNotice, top10 }) => (
       <div class:list={['competition-panel', { hidden: index !== 0 }]} data-competition-panel data-panel-index={index}>
         {lastUpdated && !isMock && (
           <p class="mb-4 text-xs text-ink-400">{t('brasileirao.lastUpdated')} {lastUpdated}</p>
@@ -157,7 +159,7 @@ const panels = competitions.map((competition, index) => {
         <section class="mb-10">
           <h2 class="font-serif-editorial text-xl font-bold text-ink-950">{t('brasileirao.raceTitle')}</h2>
           <p class="mt-1 mb-4 text-sm text-ink-700">{t('brasileirao.raceSubtitle')}</p>
-          <PointsRaceChart matchdays={raceData?.matchdays ?? []} series={raceData?.series ?? {}} highlightTeams={top6} />
+          <PointsRaceChart matchdays={raceData?.matchdays ?? []} series={raceData?.series ?? {}} highlightTeams={top10} />
         </section>
 
         <p class="text-xs text-ink-400">

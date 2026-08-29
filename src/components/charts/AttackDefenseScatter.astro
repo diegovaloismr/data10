@@ -1,6 +1,7 @@
 ---
 interface StandingRow {
   team: string;
+  crest: string | null;
   played: number;
   goalsFor: number;
   goalsAgainst: number;
@@ -16,6 +17,7 @@ const points = standings
   .filter((row) => row.played > 0)
   .map((row) => ({
     team: row.team,
+    crest: row.crest,
     x: Number((row.goalsFor / row.played).toFixed(2)),
     y: Number((row.goalsAgainst / row.played).toFixed(2)),
   }));
@@ -24,22 +26,48 @@ const chartData = JSON.stringify(points);
 ---
 
 <div class="rounded-lg border border-ink-100 bg-white p-4 sm:p-6" data-chart="attack-defense" data-chart-payload={chartData}>
-  <canvas height="340" role="img" aria-label="Gráfico de dispersão comparando gols marcados e sofridos por jogo de cada time"></canvas>
+  <canvas height="340" role="img" aria-label="Gráfico de dispersão comparando gols marcados e sofridos por jogo de cada time, identificado pelo escudo"></canvas>
 </div>
 
 <script>
   import Chart from 'chart.js/auto';
 
-  function initWrapper(wrapper: HTMLElement) {
+  const FALLBACK_COLOR = '#d1590f';
+  const CREST_RADIUS = 15;
+  const CREST_HOVER_RADIUS = 19;
+  const DOT_RADIUS = 5;
+  const DOT_HOVER_RADIUS = 7;
+
+  /** Pré-carrega os escudos (com timeout) para já nascerem prontos no primeiro desenho do gráfico. */
+  function preloadCrest(url: string | null): Promise<HTMLImageElement | null> {
+    if (!url) return Promise.resolve(null);
+    return new Promise((resolve) => {
+      const img = new Image();
+      const timeout = setTimeout(() => resolve(null), 1200);
+      img.onload = () => {
+        clearTimeout(timeout);
+        resolve(img);
+      };
+      img.onerror = () => {
+        clearTimeout(timeout);
+        resolve(null);
+      };
+      img.src = url;
+    });
+  }
+
+  async function initWrapper(wrapper: HTMLElement) {
     if (wrapper.dataset.chartInitialized === 'true') return;
     const canvas = wrapper.querySelector('canvas');
     const payload = wrapper.dataset.chartPayload;
     if (!canvas || !payload) return;
 
-    const points: { team: string; x: number; y: number }[] = JSON.parse(payload);
+    const points: { team: string; crest: string | null; x: number; y: number }[] = JSON.parse(payload);
     if (points.length === 0) return;
 
     wrapper.dataset.chartInitialized = 'true';
+
+    const crestImages = await Promise.all(points.map((p) => preloadCrest(p.crest)));
 
     new Chart(canvas, {
       type: 'scatter',
@@ -48,9 +76,10 @@ const chartData = JSON.stringify(points);
           {
             label: 'Times',
             data: points,
-            backgroundColor: '#d1590f',
-            pointRadius: 5,
-            pointHoverRadius: 7,
+            backgroundColor: FALLBACK_COLOR,
+            pointStyle: points.map((_, i) => crestImages[i] ?? 'circle'),
+            pointRadius: points.map((_, i) => (crestImages[i] ? CREST_RADIUS : DOT_RADIUS)),
+            pointHoverRadius: points.map((_, i) => (crestImages[i] ? CREST_HOVER_RADIUS : DOT_HOVER_RADIUS)),
           },
         ],
       },
