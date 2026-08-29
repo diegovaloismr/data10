@@ -2,8 +2,8 @@
 term: "Packing"
 shortDefinition: "Métrica que conta quantos adversários um passe, condução ou drible deixa para trás — quanto mais defensores ultrapassados, maior o valor."
 category: "Estatística"
-relatedPosts: ["packing-jogadores-ultrapassados", "expected-threat-xt"]
-relatedTerms: ["xt", "tracking-data"]
+relatedPosts: ["packing-jogadores-ultrapassados", "expected-threat-xt", "redes-de-passe-visualizando-estrutura-tatica"]
+relatedTerms: ["xt", "tracking-data", "redes-de-passe"]
 ---
 
 **Packing** mede quantos jogadores adversários uma ação com a bola (passe, condução ou drible) deixa para trás — ou seja, quantos defensores que estavam entre a bola e o gol adversário deixam de estar em posição de impedir a jogada depois daquela ação.

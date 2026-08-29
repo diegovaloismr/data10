@@ -46,4 +46,4 @@ A recomendação de quem trabalha com esses dados no dia a dia é simples: use o
 
 No nosso [dashboard de xG por partida](/pt/dashboards/), você pode visualizar essa comparação entre chances criadas e gols efetivamente marcados ao longo de uma sequência de dez jogos — um bom exercício para entender, na prática, quando o resultado e o desempenho andam juntos e quando eles se distanciam.
 
-Para se aprofundar nos conceitos técnicos por trás dessa métrica, veja também o verbete [xG no nosso glossário](/pt/glossario/xg/).
+Para se aprofundar nos conceitos técnicos por trás dessa métrica, veja também o verbete [xG no nosso glossário](/pt/glossario/xg/). E se você quer entender uma extensão direta do conceito — o que acontece quando se avalia a trajetória da bola depois do chute, e não só antes —, veja nosso artigo sobre [PSxG e a avaliação de goleiros](/pt/blog/psxg-goleiros-alem-do-percentual-de-defesas/).

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- arestas do grafo (linhas de passe entre jogadores) -->
+  <g stroke="#e6eaf3" stroke-opacity="0.28" stroke-width="2.5">
+    <line x1="300" y1="620" x2="560" y2="470"/>
+    <line x1="300" y1="620" x2="480" y2="740"/>
+    <line x1="560" y1="470" x2="800" y2="300"/>
+    <line x1="560" y1="470" x2="820" y2="600"/>
+    <line x1="560" y1="470" x2="480" y2="740"/>
+    <line x1="800" y1="300" x2="1080" y2="260"/>
+    <line x1="800" y1="300" x2="820" y2="600"/>
+    <line x1="820" y1="600" x2="1080" y2="260"/>
+    <line x1="820" y1="600" x2="1120" y2="640"/>
+    <line x1="1080" y1="260" x2="1320" y2="380"/>
+    <line x1="1120" y1="640" x2="1320" y2="380"/>
+    <line x1="480" y1="740" x2="820" y2="600"/>
+  </g>
+
+  <!-- arestas em destaque (eixo principal de circulação de bola) -->
+  <g stroke="#e57426" stroke-opacity="0.85" stroke-width="4" stroke-linecap="round">
+    <line x1="300" y1="620" x2="560" y2="470"/>
+    <line x1="560" y1="470" x2="800" y2="300"/>
+    <line x1="800" y1="300" x2="1080" y2="260"/>
+    <line x1="1080" y1="260" x2="1320" y2="380"/>
+  </g>
+
+  <!-- nós (jogadores), tamanho proporcional à centralidade -->
+  <g>
+    <circle cx="300" cy="620" r="20" fill="#7686a8"/>
+    <circle cx="560" cy="470" r="30" fill="#e57426"/>
+    <circle cx="480" cy="740" r="16" fill="#7686a8"/>
+    <circle cx="800" cy="300" r="24" fill="#e57426"/>
+    <circle cx="820" cy="600" r="22" fill="#7686a8"/>
+    <circle cx="1080" cy="260" r="20" fill="#e57426"/>
+    <circle cx="1120" cy="640" r="16" fill="#7686a8"/>
+    <circle cx="1320" cy="380" r="18" fill="#f4f6fa"/>
+  </g>
+</svg>

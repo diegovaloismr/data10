@@ -52,6 +52,10 @@ O xT não é perfeito. Alguns pontos valem menção:
 
 Ainda assim, mesmo com essas ressalvas, o xT é hoje uma das ferramentas mais usadas por analistas para ir além do resultado final e entender **onde**, no campo, um time realmente constrói perigo. Uma alternativa mais simples e direta, usada com sucesso na Bundesliga, é o [packing](/pt/blog/packing-jogadores-ultrapassados/) — em vez de um modelo probabilístico, ele conta literalmente quantos adversários cada ação deixa para trás.
 
+## Como isso aparece visualizado
+
+Enquanto o xT atribui um valor numérico a cada ação, as [redes de passe](/pt/blog/redes-de-passe-visualizando-estrutura-tatica/) atacam o mesmo problema por outro ângulo: em vez de medir o valor de cada ação isoladamente, elas desenham a estrutura de circulação de bola do time inteiro como um grafo — revelando quem são os jogadores mais centrais na construção, mesmo os que raramente aparecem nas estatísticas de finalização.
+
 ## Onde ver isso na prática
 
 Você pode observar uma aproximação visual desse tipo de análise nos nossos [dashboards com dados reais](/pt/dashboards/brasileirao/), comparando ataque e defesa de times do Brasileirão e das principais ligas europeias. Para entender o conjunto completo de métricas que compõem esse vocabulário, vale revisitar nosso artigo [Além do xG: outras métricas avançadas](/pt/blog/alem-do-xg-metricas-avancadas/) e conferir o [glossário completo](/pt/glossario/).

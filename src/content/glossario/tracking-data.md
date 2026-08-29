@@ -2,8 +2,8 @@
 term: "Tracking Data"
 shortDefinition: "Coordenadas de posição de todos os jogadores e da bola, capturadas várias vezes por segundo — a base dos dados posicionais no futebol."
 category: "Ciência de Dados"
-relatedPosts: ["visao-computacional-tracking-data", "expected-threat-xt"]
-relatedTerms: ["xt", "machine-learning"]
+relatedPosts: ["visao-computacional-tracking-data", "expected-threat-xt", "redes-de-passe-visualizando-estrutura-tatica", "psxg-goleiros-alem-do-percentual-de-defesas"]
+relatedTerms: ["xt", "machine-learning", "redes-de-passe", "psxg"]
 ---
 
 **Tracking data**, ou "dados de rastreamento posicional", são as coordenadas (x, y) de todos os 22 jogadores em campo e da bola, capturadas de forma contínua — normalmente entre 10 e 50 vezes por segundo, dependendo do sistema usado.

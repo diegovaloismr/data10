@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="76%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- baliza, vista de frente, dividida em sub-regiões de probabilidade -->
+  <g>
+    <rect x="1080" y="250" width="360" height="260" fill="none" stroke="#e6eaf3" stroke-opacity="0.35" stroke-width="6"/>
+    <!-- grade de probabilidade dentro do gol: mais escuro = mais difícil de defender -->
+    <rect x="1080" y="250" width="120" height="86.6" fill="#d1590f" opacity="0.55"/>
+    <rect x="1200" y="250" width="120" height="86.6" fill="#d1590f" opacity="0.75"/>
+    <rect x="1320" y="250" width="120" height="86.6" fill="#d1590f" opacity="0.5"/>
+    <rect x="1080" y="336.6" width="120" height="86.6" fill="#d1590f" opacity="0.3"/>
+    <rect x="1200" y="336.6" width="120" height="86.6" fill="#d1590f" opacity="0.4"/>
+    <rect x="1320" y="336.6" width="120" height="86.6" fill="#d1590f" opacity="0.28"/>
+    <rect x="1080" y="423.2" width="120" height="86.6" fill="#7686a8" opacity="0.25"/>
+    <rect x="1200" y="423.2" width="120" height="86.6" fill="#7686a8" opacity="0.3"/>
+    <rect x="1320" y="423.2" width="120" height="86.6" fill="#7686a8" opacity="0.2"/>
+  </g>
+
+  <!-- trajetória do chute até a bola cruzar o plano do gol -->
+  <path d="M 220 620 C 500 560, 780 460, 1010 380 C 1080 356, 1150 340, 1210 325"
+        fill="none" stroke="#f4f6fa" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="220" cy="620" r="16" fill="#7686a8"/>
+  <circle cx="1210" cy="325" r="14" fill="#f4f6fa"/>
+
+  <!-- mão do goleiro tentando alcançar o ponto final -->
+  <g stroke="#e57426" stroke-width="6" stroke-linecap="round" opacity="0.85">
+    <path d="M 1000 560 C 1080 480, 1150 400, 1195 340" fill="none"/>
+  </g>
+  <circle cx="1000" cy="560" r="18" fill="#e57426"/>
+
+  <line x1="0" y1="720" x2="1600" y2="720" stroke="#e6eaf3" stroke-opacity="0.08" stroke-width="2"/>
+</svg>
