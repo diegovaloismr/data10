@@ -13,6 +13,8 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   noIndex?: boolean;
   type?: 'website' | 'article';
   articlePublishedTime?: string;
@@ -25,6 +27,8 @@ const {
   title,
   description,
   image,
+  imageWidth,
+  imageHeight,
   noIndex = false,
   type = 'website',
   articlePublishedTime,
@@ -48,6 +52,8 @@ const canonicalURL = new URL(currentPath, Astro.site);
 // autoral, só para essa finalidade.
 const ogDefaultPng = await getImage({ src: ogDefaultSvg, format: 'png', width: 1200, height: 630 });
 const ogImage = image ? new URL(image, Astro.site).toString() : new URL(ogDefaultPng.src, Astro.site).toString();
+const ogImageWidth = image ? (imageWidth ?? 1200) : ogDefaultPng.attributes.width;
+const ogImageHeight = image ? (imageHeight ?? 630) : ogDefaultPng.attributes.height;
 ---
 
 <!doctype html>
@@ -89,6 +95,9 @@ const ogImage = image ? new URL(image, Astro.site).toString() : new URL(ogDefaul
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content={lang} />
 
