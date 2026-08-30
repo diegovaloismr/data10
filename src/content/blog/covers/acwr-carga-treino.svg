@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- zona de risco (faixa horizontal) -->
+  <rect x="200" y="560" width="1200" height="90" fill="#d1590f" opacity="0.14"/>
+  <line x1="200" y1="560" x2="1400" y2="560" stroke="#d1590f" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="2 10"/>
+  <line x1="200" y1="650" x2="1400" y2="650" stroke="#d1590f" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="2 10"/>
+
+  <!-- linha de carga crônica (média, suave) -->
+  <path d="M 220 640 C 400 620, 600 600, 800 590 C 1000 580, 1200 570, 1380 560"
+        fill="none" stroke="#7686a8" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- linha de carga aguda (volátil, sobe acima da zona de risco no fim) -->
+  <path d="M 220 680 C 320 700, 400 560, 480 620 C 560 680, 640 520, 720 560 C 800 600, 880 480, 960 500 C 1040 520, 1120 420, 1200 350 C 1280 300, 1340 260, 1380 230"
+        fill="none" stroke="#e57426" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="1380" cy="230" r="14" fill="#e57426"/>
+
+  <!-- silhueta simples de um jogador correndo, à esquerda -->
+  <g fill="#f4f6fa" opacity="0.85">
+    <circle cx="300" cy="330" r="26"/>
+    <path d="M 300 356 L 300 460 M 300 380 L 240 420 M 300 380 L 370 410 M 300 460 L 250 560 M 300 460 L 350 540" stroke="#f4f6fa" stroke-width="14" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

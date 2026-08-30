@@ -35,7 +35,7 @@ A própria bola virou fonte de dado: modelos recentes carregam um chip com senso
 
 ## Wearables e dados biométricos
 
-Paralelamente à visão computacional, cresce o uso de **wearables** — coletes com GPS e acelerômetro usados em treino (e, em algumas competições, também em jogo) — para monitorar carga física, frequência cardíaca e sinais de fadiga. Comissões técnicas usam esses dados para antecipar risco de lesão e embasar decisões de substituição, criando uma ponte entre o departamento de dados e o departamento médico que praticamente não existia há uma década.
+Paralelamente à visão computacional, cresce o uso de **wearables** — coletes com GPS e acelerômetro usados em treino (e, em algumas competições, também em jogo) — para monitorar carga física, frequência cardíaca e sinais de fadiga. Comissões técnicas usam esses dados para antecipar risco de lesão e embasar decisões de substituição, criando uma ponte entre o departamento de dados e o departamento médico que praticamente não existia há uma década. A métrica mais usada nessa ponte é o [ACWR](/pt/blog/acwr-carga-de-treino-prevencao-de-lesoes/), que compara a carga recente de um jogador com sua média de longo prazo para sinalizar risco elevado de lesão.
 
 ## Os limites de tudo isso
 
