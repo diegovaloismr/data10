@@ -2,8 +2,8 @@
 term: "Scouting orientado por dados"
 shortDefinition: "Abordagem de identificação de talentos que usa métricas estatísticas e modelos preditivos para priorizar quais jogadores merecem observação humana mais próxima."
 category: "Scouting"
-relatedPosts: ["machine-learning-scouting"]
-relatedTerms: ["machine-learning", "overfitting"]
+relatedPosts: ["machine-learning-scouting", "categorias-de-base-gestao-de-dados"]
+relatedTerms: ["machine-learning", "overfitting", "bio-banding"]
 ---
 
 **Scouting orientado por dados** (ou *data-driven scouting*) é a abordagem de identificação de talentos que combina análise estatística e modelos de machine learning com a avaliação tradicional de olheiros, em vez de depender exclusivamente da observação presencial de jogos.
