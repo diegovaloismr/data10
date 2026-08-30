@@ -184,6 +184,14 @@ Como funciona:
 
 Para trocar o horário do cron, edite a linha `cron:` em `.github/workflows/deploy.yml` (formato padrão do cron, sempre em UTC).
 
+## Visibilidade para ferramentas de IA (busca/respostas)
+
+Não existe forma de garantir que um site entre nos dados de treino de um modelo — isso depende de crawls amplos dos próprios provedores, sem inscrição possível. O que dá para otimizar é a chance de o site ser **citado como fonte** quando alguém pergunta algo a ferramentas que buscam a web em tempo real (ChatGPT com busca, Perplexity, Google AI Overviews, Copilot):
+
+- **`src/pages/llms.txt.ts`**: gera `/llms.txt` dinamicamente a partir das Content Collections (mesmo padrão do `rss.xml.js`) — um índice em Markdown de todo o glossário, blog e dashboards, seguindo a convenção [llms.txt](https://llmstxt.org/). Atualiza sozinho a cada novo post ou termo, sem manutenção manual.
+- **`public/robots.txt`**: além do `User-agent: * / Allow: /` (que já libera todo mundo), lista explicitamente os crawlers de IA mais conhecidos (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot etc.) com `Allow: /` — documentação clara e à prova de uma futura regra mais restritiva bloquear esses bots sem querer.
+- Já ajuda nisso, desde antes: JSON-LD (`BlogPosting`) em cada post, `sitemap-index.xml`, `rss.xml`, e o próprio estilo editorial do site (definição direta logo no início de cada artigo/termo) — o formato que esse tipo de ferramenta mais cita.
+
 ## Performance
 
 O projeto foi montado priorizando build leve (poucas integrações, sem framework de UI pesado, Chart.js carregado apenas nas páginas de Dashboards). Última medição: build completo em **~4s** (48 páginas) e output final de **~2,8 MB**. Esses números tendem a variar pouco conforme o projeto cresce — rode `npm run build` para ver os valores atualizados no seu ambiente.
