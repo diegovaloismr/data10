@@ -19,7 +19,7 @@ npm install
 npm run dev
 ```
 
-O site abre em `http://localhost:4321/data10/pt/` (o `base` do projeto é `/data10`, ver `astro.config.mjs`).
+O site abre em `http://localhost:4321/pt/` (o `base` do projeto é `/`, ver `astro.config.mjs` — domínio próprio, sem subcaminho).
 
 Outros comandos úteis:
 
@@ -186,4 +186,4 @@ Para trocar o horário do cron, edite a linha `cron:` em `.github/workflows/depl
 
 ## Performance
 
-O projeto foi montado priorizando build leve (poucas integrações, sem framework de UI pesado, Chart.js carregado apenas nas páginas de Dashboards). Última medição: build completo em **~4s** (32 páginas) e output final de **~812 KB**. Esses números tendem a variar pouco conforme o projeto cresce — rode `npm run build` para ver os valores atualizados no seu ambiente.
+O projeto foi montado priorizando build leve (poucas integrações, sem framework de UI pesado, Chart.js carregado apenas nas páginas de Dashboards). Última medição: build completo em **~4s** (48 páginas) e output final de **~2,8 MB**. Esses números tendem a variar pouco conforme o projeto cresce — rode `npm run build` para ver os valores atualizados no seu ambiente.
