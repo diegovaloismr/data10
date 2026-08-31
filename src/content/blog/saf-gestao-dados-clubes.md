@@ -36,6 +36,7 @@ Um efeito interessante da profissionalização via SAF é que dados deixam de se
 - **Valorização de elenco**: métricas de desempenho ajudam a justificar (ou contestar) o valor de mercado de um jogador diante de investidores e conselhos.
 - **Gestão de risco**: histórico de lesões, carga de jogos e dados físicos entram em modelos de risco para decisões de contratação e renovação de contrato.
 - **Transparência com investidores**: relatórios de desempenho esportivo, cada vez mais, acompanham relatórios financeiros — usando os mesmos princípios de clareza e rastreabilidade.
+- **Patrocínio com metas mensuráveis**: a mesma régua de dados aplicada ao elenco vem chegando ao departamento comercial — veja como em [Patrocínio esportivo: por que contar quantas vezes a marca apareceu já não é suficiente](/pt/blog/patrocinio-esportivo-dados-roi/).
 
 ## Um caminho ainda em construção
 
