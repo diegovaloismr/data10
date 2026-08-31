@@ -37,7 +37,7 @@ Isso transforma a conversa sobre "quem é o melhor goleiro" de uma discussão so
 
 ## Por que isso complementa (e não substitui) outras métricas de goleiro
 
-O PSxG-SS é poderoso, mas não é a palavra final sobre um goleiro. Ele mede especificamente a capacidade de **evitar gols em finalizações no alvo** — não captura distribuição de jogo, saídas de gol, jogo aéreo ou liderança da defesa. Comissões técnicas avançadas combinam PSxG-SS com outras camadas de dados, incluindo [tracking data](/pt/glossario/tracking-data/) para avaliar posicionamento e reação antes mesmo do chute ser batido — tema que já exploramos em [Visão computacional e tracking data](/pt/blog/visao-computacional-tracking-data/).
+O PSxG-SS é poderoso, mas não é a palavra final sobre um goleiro. Ele mede especificamente a capacidade de **evitar gols em finalizações no alvo** — não captura [distribuição de jogo](/pt/blog/goleiro-distribuicao-saida-de-bola/), saídas de gol, jogo aéreo ou liderança da defesa. Comissões técnicas avançadas combinam PSxG-SS com outras camadas de dados, incluindo [tracking data](/pt/glossario/tracking-data/) para avaliar posicionamento e reação antes mesmo do chute ser batido — tema que já exploramos em [Visão computacional e tracking data](/pt/blog/visao-computacional-tracking-data/).
 
 Vale lembrar também que, como qualquer métrica derivada de um modelo estatístico, o PSxG carrega as mesmas ressalvas que discutimos no artigo sobre [xG](/pt/blog/o-que-e-xg/): diferentes provedores calculam de formas ligeiramente distintas, e amostras pequenas (poucos jogos) tornam o número mais suscetível a variância. PSxG-SS acumulado ao longo de uma temporada inteira é muito mais confiável do que o mesmo número após três ou quatro partidas.
 

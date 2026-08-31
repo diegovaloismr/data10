@@ -54,7 +54,7 @@ Ainda assim, mesmo com essas ressalvas, o xT é hoje uma das ferramentas mais us
 
 ## Como isso aparece visualizado
 
-Enquanto o xT atribui um valor numérico a cada ação, as [redes de passe](/pt/blog/redes-de-passe-visualizando-estrutura-tatica/) atacam o mesmo problema por outro ângulo: em vez de medir o valor de cada ação isoladamente, elas desenham a estrutura de circulação de bola do time inteiro como um grafo — revelando quem são os jogadores mais centrais na construção, mesmo os que raramente aparecem nas estatísticas de finalização.
+Enquanto o xT atribui um valor numérico a cada ação, as [redes de passe](/pt/blog/redes-de-passe-visualizando-estrutura-tatica/) atacam o mesmo problema por outro ângulo: em vez de medir o valor de cada ação isoladamente, elas desenham a estrutura de circulação de bola do time inteiro como um grafo — revelando quem são os jogadores mais centrais na construção, mesmo os que raramente aparecem nas estatísticas de finalização. Já o [controle de espaço](/pt/blog/controle-de-espaco-voronoi/) ataca de um terceiro ângulo: em vez de valor ou estrutura, mede literalmente quantos metros quadrados do campo cada jogador domina a cada instante.
 
 ## Onde ver isso na prática
 

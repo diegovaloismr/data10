@@ -2,8 +2,8 @@
 term: "xT (Expected Threat)"
 shortDefinition: "Valor de ameaça ofensiva gerado por qualquer ação com a bola — passe, condução ou drible — não só por finalizações."
 category: "Estatística"
-relatedPosts: ["expected-threat-xt", "alem-do-xg-metricas-avancadas", "visao-computacional-tracking-data", "packing-jogadores-ultrapassados", "redes-de-passe-visualizando-estrutura-tatica"]
-relatedTerms: ["xg", "xa", "tracking-data", "packing", "redes-de-passe"]
+relatedPosts: ["expected-threat-xt", "alem-do-xg-metricas-avancadas", "visao-computacional-tracking-data", "packing-jogadores-ultrapassados", "redes-de-passe-visualizando-estrutura-tatica", "controle-de-espaco-voronoi"]
+relatedTerms: ["xg", "xa", "tracking-data", "packing", "redes-de-passe", "controle-de-espaco"]
 ---
 
 **xT (Expected Threat)**, ou "ameaça esperada", é uma métrica que atribui um valor a qualquer ação com a bola — um passe, uma condução, um drible — com base em quanto ela aumenta a probabilidade de o time marcar um gol nas próximas jogadas.
