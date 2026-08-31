@@ -24,6 +24,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Fixa main explicitamente: disparos por `schedule` (cron) fazem
+          # checkout da default branch do repositório, não necessariamente
+          # main — se a default branch do repo ficar desatualizada ou for
+          # outra (ex: uma branch de feature antiga), o cron diário
+          # republicaria conteúdo velho por cima do último deploy real.
+          ref: main
 
       - name: Setup Node
         uses: actions/setup-node@v4
