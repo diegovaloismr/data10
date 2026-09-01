@@ -41,7 +41,7 @@ Paralelamente à visão computacional, cresce o uso de **wearables** — coletes
 
 Vale um contraponto: tracking data de qualidade profissional ainda é **caro e proprietário**. A maior parte dos clubes com acesso a esse tipo de dado depende de contratos com poucos fornecedores especializados, o que concentra a vantagem competitiva em quem tem orçamento para pagar por ela. Há também questões abertas sobre privacidade e uso de dados biométricos dos atletas, e o simples volume de dados gerado exige capacidade de processamento e times de análise dedicados — não basta "ter o dado", é preciso saber extrair sinal dele.
 
-Ainda assim, a tendência é de democratização gradual: conforme sistemas de rastreamento se tornam padrão em competições grandes (como aconteceu na Copa do Mundo de 2026) e o custo de processamento cai, esse tipo de dado deve deixar de ser exclusividade de clubes de elite.
+Ainda assim, a tendência é de democratização gradual: conforme sistemas de rastreamento se tornam padrão em competições grandes (como aconteceu na Copa do Mundo de 2026) e o custo de processamento cai, esse tipo de dado deve deixar de ser exclusividade de clubes de elite. Essa democratização já tem um nome e um mecanismo concreto — veja como em [Tracking data sem câmera fixa no estádio: a barreira de custo que excluía clubes menores está caindo](/pt/blog/tracking-data-video-de-transmissao/).
 
 ## Para continuar explorando
 
