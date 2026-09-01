@@ -55,6 +55,10 @@ Esse último ponto conecta diretamente com algo que já mostramos em [Patrocíni
 
 Um teto sobre custo de elenco muda o cálculo de qualquer contratação cara. E é aqui que o SSF se conecta com um ponto que já expusemos em [Categorias de base: por que a gestão de dados ainda é o ponto cego dos clubes brasileiros](/pt/blog/categorias-de-base-gestao-de-dados/): atletas formados internamente entram no custo de elenco por um valor muito menor do que uma contratação de mercado equivalente, e a receita de venda de um atleta de base ainda ajuda a compor o lado positivo da equação. Um regulamento que aperta o teto de gastos é, também — mesmo que indiretamente —, um incentivo financeiro a mais para investir em formação, além do incentivo esportivo que já existia.
 
+## Um teste real da regra, já em curso
+
+Um exemplo prático de como isso já opera na prática: a SAF que Ronaldo Nazário e Roberto Carlos estão estruturando na Inter de Limeira nasce, em 2026, sob esse mesmo teto e calendário de fiscalização desde o primeiro dia — inclusive com plano explícito de pagar dívida existente logo no biênio inicial. Veja os números em [Ronaldo e Roberto Carlos na Inter de Limeira: um estudo de caso de SAF, dívida e Fair Play Financeiro ao vivo](/pt/blog/inter-de-limeira-ronaldo-roberto-carlos-saf/).
+
 ## O que fica
 
 O SSF não é só uma regra de compliance para o departamento financeiro resolver isoladamente. É um regulamento que, na prática, aproxima a gestão financeira de clubes brasileiros do mesmo tipo de disciplina analítica que a análise de desempenho em campo já vem adotando há anos: decisão apoiada em modelo e projeção contínua, não em intuição verificada só no fim do ciclo. Os clubes que já tratam dado como ativo de governança — como discutimos ao falar de [SAF](/pt/blog/saf-gestao-dados-clubes/) — largam na frente; os que ainda tratam o balanço como formalidade anual vão sentir o aperto já nas primeiras janelas de fiscalização de 2026.

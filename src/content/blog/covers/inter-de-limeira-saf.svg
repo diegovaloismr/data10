@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a30"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="26%" r="55%">
+      <stop offset="0%" stop-color="#d1590f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#d1590f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- estádio estilizado (arquibancada em arco) -->
+  <path d="M 300 560 A 340 340 0 0 1 980 560" fill="none" stroke="#e6eaf3" stroke-opacity="0.28" stroke-width="6"/>
+  <path d="M 340 590 A 300 300 0 0 1 940 590" fill="none" stroke="#e6eaf3" stroke-opacity="0.18" stroke-width="6"/>
+  <rect x="500" y="560" width="280" height="16" fill="#7686a8" fill-opacity="0.4"/>
+
+  <!-- selo/escudo simplificado no centro do campo -->
+  <path d="M 640 380 L 700 360 L 760 380 L 760 440 C 760 480 700 510 700 510 C 700 510 640 480 640 440 Z" fill="none" stroke="#e57426" stroke-width="4"/>
+
+  <!-- setas de crescimento/investimento subindo à direita, como divisões de acesso -->
+  <g fill="#e57426">
+    <rect x="980" y="500" width="50" height="60"/>
+    <rect x="1050" y="450" width="50" height="110"/>
+    <rect x="1120" y="380" width="50" height="180"/>
+    <rect x="1190" y="300" width="50" height="260"/>
+  </g>
+  <text x="980" y="595" fill="#f4f6fa" fill-opacity="0.55" font-family="Georgia, serif" font-size="22">Série C → Série A</text>
+</svg>

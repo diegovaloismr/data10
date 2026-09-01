@@ -39,6 +39,10 @@ Um efeito interessante da profissionalização via SAF é que dados deixam de se
 - **Patrocínio com metas mensuráveis**: a mesma régua de dados aplicada ao elenco vem chegando ao departamento comercial — veja como em [Patrocínio esportivo: por que contar quantas vezes a marca apareceu já não é suficiente](/pt/blog/patrocinio-esportivo-dados-roi/).
 - **Teto de custo de elenco imposto por regulamento**: a partir de 2026, o próprio Fair Play Financeiro da CBF passa a exigir esse tipo de controle contínuo por lei — veja em [Fair Play Financeiro da CBF: por que gerir elenco agora exige dado em tempo real, não balanço de fim de ano](/pt/blog/fair-play-financeiro-cbf-dados/).
 
+## Um caso real para acompanhar
+
+Se tudo isso ainda soa abstrato, vale acompanhar um caso concreto acontecendo agora: a compra de 80% da Inter de Limeira por um grupo liderado por Ronaldo Nazário e Roberto Carlos, com plano declarado de profissionalizar administração, centro de treinamento e categorias de base. Veja os números por trás do anúncio em [Ronaldo e Roberto Carlos na Inter de Limeira: um estudo de caso de SAF, dívida e Fair Play Financeiro ao vivo](/pt/blog/inter-de-limeira-ronaldo-roberto-carlos-saf/).
+
 ## Um caminho ainda em construção
 
 Vale o alerta: transformar-se em SAF não cria, por si só, um departamento de dados maduro — é a mudança de incentivos que empurra nessa direção, mas a execução ainda depende de investimento real em pessoas, ferramentas e cultura de decisão orientada a dados. Muitos clubes que viraram SAF ainda estão no início dessa jornada, migrando de planilhas soltas para estruturas mais robustas.
