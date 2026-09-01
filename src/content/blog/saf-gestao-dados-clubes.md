@@ -37,6 +37,7 @@ Um efeito interessante da profissionalização via SAF é que dados deixam de se
 - **Gestão de risco**: histórico de lesões, carga de jogos e dados físicos entram em modelos de risco para decisões de contratação e renovação de contrato.
 - **Transparência com investidores**: relatórios de desempenho esportivo, cada vez mais, acompanham relatórios financeiros — usando os mesmos princípios de clareza e rastreabilidade.
 - **Patrocínio com metas mensuráveis**: a mesma régua de dados aplicada ao elenco vem chegando ao departamento comercial — veja como em [Patrocínio esportivo: por que contar quantas vezes a marca apareceu já não é suficiente](/pt/blog/patrocinio-esportivo-dados-roi/).
+- **Teto de custo de elenco imposto por regulamento**: a partir de 2026, o próprio Fair Play Financeiro da CBF passa a exigir esse tipo de controle contínuo por lei — veja em [Fair Play Financeiro da CBF: por que gerir elenco agora exige dado em tempo real, não balanço de fim de ano](/pt/blog/fair-play-financeiro-cbf-dados/).
 
 ## Um caminho ainda em construção
 
